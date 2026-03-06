@@ -130,7 +130,7 @@ export default function Header() {
           flex-shrink: 0;
           text-decoration: none;
           min-width: 0;
-          margin-right: auto;
+          flex: 1 1 auto;
         }
         .header-logo {
           height: 38px;
@@ -196,7 +196,6 @@ export default function Header() {
           align-items: center;
           gap: 0.5rem;
           flex-shrink: 0;
-          margin-left: auto;
         }
         .header-cta {
           display: inline-flex;
@@ -235,18 +234,27 @@ export default function Header() {
         .header-menu-btn {
           display: flex;
           flex-direction: column;
+          align-items: center;
           justify-content: center;
           gap: 5px;
           width: 40px;
           height: 40px;
           padding: 0;
+          appearance: none;
+          -webkit-tap-highlight-color: transparent;
           background: none;
           border: none;
           border-radius: 6px;
           cursor: pointer;
           transition: background 0.2s;
         }
-        .header-menu-btn:hover { background: var(--slate-100); }
+        @media (hover: hover) and (pointer: fine) {
+          .header-menu-btn:hover { background: var(--slate-100); }
+        }
+        .header-menu-btn:focus-visible {
+          outline: 2px solid var(--purple-300);
+          outline-offset: 2px;
+        }
         .header-menu-icon {
           width: 20px;
           height: 2px;
