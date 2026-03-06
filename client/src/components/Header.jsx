@@ -353,10 +353,21 @@ export default function Header() {
             text-align: center;
           }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 991px) {
           .header-name {
-            font-size: 0.75rem;
-            max-width: 100px;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            line-height: 1.15;
+            max-width: none;
+          }
+        }
+        @media (max-width: 480px) {
+          .header-logo {
+            height: 34px;
+          }
+          .header-name {
+            font-size: 0.72rem;
           }
         }
       `}</style>
