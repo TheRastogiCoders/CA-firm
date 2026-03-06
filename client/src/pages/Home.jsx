@@ -6,20 +6,20 @@ const heroSlides = [
   {
     label: 'DWIVEDI GUPTA & CO.',
     tagline: 'Chartered Accountants | Advisors | Consultants',
-    title: 'Delivering Trusted Financial, Tax & Advisory Solutions Since 2003',
-    desc: 'With over two decades of professional excellence, Dwivedi Gupta & Co. provides comprehensive services in taxation, audit & assurance, financial consulting, corporate law, and advisory services to businesses across India.',
+    title: 'Chartered Accountants for Tax, Audit & Advisory',
+    desc: 'We help businesses with tax filing, audits, compliance, and financial advisory services.',
   },
   {
     label: 'DWIVEDI GUPTA & CO.',
     tagline: 'Assurance | Taxation | Advisory | Consulting',
-    title: 'Your Partner for Compliance, Growth & Financial Clarity',
-    desc: 'RBI Registered & CAG Empanelled. We serve corporates, banks, institutions, and SMEs with partner-led engagement and a client-centric approach across Varanasi, Delhi, Kolkata, and Bokaro.',
+    title: 'Compliance and Growth Support for Businesses',
+    desc: 'From statutory compliance to strategic advisory, we support corporates, SMEs, and institutions.',
   },
   {
     label: 'DWIVEDI GUPTA & CO.',
     tagline: 'Est. 2003 — 20+ Years of Excellence',
-    title: 'Strategic Insights for Sustainable Business Success',
-    desc: 'From tax planning and audit to corporate law and government schemes consultancy—we deliver customized solutions that drive growth and ensure regulatory compliance.',
+    title: 'Practical Financial and Regulatory Guidance',
+    desc: 'Our team delivers clear, partner-led support in tax, audit, corporate law, and finance.',
   },
 ];
 
@@ -179,6 +179,9 @@ export default function Home() {
                   <li>Strong client relationships built on integrity and responsiveness</li>
                 </ul>
               </div>
+              <div className="about-cta-wrap">
+                <Link to="/about-us" className="btn btn-secondary">Learn More About Us</Link>
+              </div>
             </div>
             <div className="about-images">
               <div className="about-img-main">
@@ -190,9 +193,6 @@ export default function Home() {
                 <span className="about-badge">Multi-city service network</span>
               </div>
             </div>
-          </div>
-          <div className="about-cta-wrap">
-            <Link to="/about-us" className="btn btn-secondary">Learn More About Us</Link>
           </div>
         </div>
       </section>

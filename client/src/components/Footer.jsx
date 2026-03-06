@@ -35,7 +35,8 @@ const RESOURCE_LINKS = [
 const EMAIL = 'vivek.gupta@dgc.ind.in';
 const PHONE = '+919415805906';
 const PHONE_DISPLAY = '+91 94158 05906';
-const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, '')}`;
+const WHATSAPP_MESSAGE = "Hi, I'm visiting your website and would like to know more about your CA services—tax, audit, or consultation.";
+const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const LINKEDIN_URL = 'https://www.linkedin.com/company/dwivedi-gupta-co';
 
 const SCROLL_THRESHOLD = 400;
@@ -204,6 +205,19 @@ export default function Footer() {
         </div>
       </div>
 
+      <div className="footer-whatsapp-wrap">
+        <span className="footer-whatsapp-label">Chat with us on WhatsApp</span>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-whatsapp-float"
+          aria-label="Chat with us on WhatsApp"
+          title="Chat with us on WhatsApp — Tax, Audit & Advisory"
+        >
+          <WhatsAppIcon />
+        </a>
+      </div>
       <ScrollToTop />
 
       <style>{`
@@ -419,6 +433,80 @@ export default function Footer() {
         }
         .footer-bottom-link:hover { color: #60A5FA; }
         .footer-bottom-sep { color: #475569; font-size: 0.75rem; user-select: none; }
+        .footer-whatsapp-wrap {
+          position: fixed;
+          bottom: calc(max(1.25rem, env(safe-area-inset-bottom)) + 54px + 10px);
+          right: max(1.25rem, env(safe-area-inset-right));
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          gap: 0;
+        }
+        .footer-whatsapp-label {
+          font-size: 0.8125rem;
+          font-weight: 600;
+          color: var(--slate-700);
+          background: var(--white);
+          padding: 0.5rem 0.75rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+          border: 1px solid var(--border);
+          white-space: nowrap;
+          margin-right: 0.5rem;
+          opacity: 0;
+          transform: translateX(6px);
+          pointer-events: none;
+          transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .footer-whatsapp-wrap:hover .footer-whatsapp-label {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        .footer-whatsapp-float {
+          position: relative;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 54px;
+          height: 54px;
+          padding: 0;
+          background: linear-gradient(145deg, #25d366 0%, #128c7e 100%);
+          border: none;
+          border-radius: 50%;
+          color: #fff;
+          box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+          text-decoration: none;
+          transition: transform 0.2s ease, box-shadow 0.25s ease, filter 0.2s ease;
+        }
+        .footer-whatsapp-float:hover {
+          transform: translateY(-3px) scale(1.05);
+          box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
+          filter: brightness(1.08);
+        }
+        .footer-whatsapp-float:active {
+          transform: translateY(0) scale(0.98);
+        }
+        .footer-whatsapp-float:focus-visible {
+          outline: 2px solid #25d366;
+          outline-offset: 3px;
+        }
+        .footer-whatsapp-float svg {
+          width: 28px;
+          height: 28px;
+        }
+        @media (max-width: 640px) {
+          .footer-whatsapp-wrap {
+            bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 50px + 8px);
+            right: max(1rem, env(safe-area-inset-right));
+          }
+          .footer-whatsapp-label { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
+          .footer-whatsapp-float {
+            width: 50px;
+            height: 50px;
+          }
+          .footer-whatsapp-float svg { width: 26px; height: 26px; }
+        }
         .footer-scroll-top {
           position: fixed;
           bottom: max(1.25rem, env(safe-area-inset-bottom));
