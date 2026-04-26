@@ -55,6 +55,9 @@ export default function Contact() {
   });
   const [status, setStatus] = useState({ type: null, message: '' });
   const [submitting, setSubmitting] = useState(false);
+  const mainOffice = CONTACT_OFFICES[0];
+  const branchOffices = CONTACT_OFFICES.slice(1);
+  const getEmbedMapUrl = (address) => `https://www.google.com/maps?q=${encodeURIComponent(address || '')}&output=embed`;
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -86,21 +89,47 @@ export default function Contact() {
 
   return (
     <>
-      <section className="contact-hero">
+      <section className="page-hero contact-page-hero">
         <div className="container">
           <header className="contact-hero-inner">
-            <span className="contact-eyebrow">Get in Touch</span>
-            <div className="contact-accent" aria-hidden="true" />
-            <h1 className="contact-title">Contact Us</h1>
-            <p className="contact-intro">
+            <span className="page-hero-kicker contact-eyebrow">Get in Touch</span>
+            <h1 className="page-title contact-title">Contact Our CA Experts</h1>
+            <p className="page-subtitle contact-intro">
               Whether you need tax advice, audit support, GST compliance, or company formation—our team is here to help. Reach out via the form, email, or phone. We respond to all enquiries within 24–48 hours.
             </p>
+            <div className="page-hero-actions contact-hero-actions">
+              <Link to="/schedule-consultation" className="btn btn-primary">Schedule Consultation</Link>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Chat on WhatsApp</a>
+            </div>
           </header>
+        </div>
+      </section>
+
+      <section className="home-section contact-seo-intent" aria-labelledby="contact-seo-title">
+        <div className="container">
+          <div className="contact-seo-intent-shell">
+            <h2 id="contact-seo-title">Contact our Chartered Accountant team for tax, GST, audit, and compliance advisory</h2>
+            <p>
+              Use this page to connect for immediate compliance support, consultation scheduling, service scoping, and engagement discussions.
+              You can also navigate directly to the most relevant service area below.
+            </p>
+            <div className="contact-seo-intent-links">
+              <Link to="/services/tax-compliance">Tax Advisory Contact</Link>
+              <Link to="/services/audit-assurance">Audit Support Contact</Link>
+              <Link to="/services/gst-advisory">GST Compliance Contact</Link>
+              <Link to="/schedule-consultation">Book Consultation Slot</Link>
+              <Link to="/services">View All Services</Link>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="contact-main section">
         <div className="container">
+          <div className="contact-main-head">
+            <span className="contact-main-kicker">Connect With Our Team</span>
+            <h2>Choose your preferred way to connect with us</h2>
+          </div>
           <div className="contact-grid">
             <div className="contact-sidebar">
               <div className="contact-card contact-card-details">
@@ -126,24 +155,6 @@ export default function Contact() {
                 </ul>
               </div>
 
-              <div className="contact-card contact-card-offices">
-                <h2 className="contact-card-title">Our Offices</h2>
-                <p className="contact-card-desc">Head office in Varanasi and branch offices across India. Visit by appointment.</p>
-                <div className="contact-offices-list">
-                  {CONTACT_OFFICES.map((office, i) => (
-                    <div key={i} className="contact-office-item">
-                      <div className="contact-office-icon">{office.initial}</div>
-                      <div className="contact-office-body">
-                        <span className="contact-office-label">{office.label}</span>
-                        <strong className="contact-office-city">{office.city}</strong>
-                        <p className="contact-office-address">{office.address}</p>
-                        <a href={office.mapUrl} target="_blank" rel="noopener noreferrer" className="contact-office-link">Get directions →</a>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <div className="contact-card contact-card-expect">
                 <h2 className="contact-card-title">What to Expect</h2>
                 <ul className="contact-expect-list">
@@ -151,6 +162,9 @@ export default function Contact() {
                   <li><strong>Confidentiality</strong> on all enquiries</li>
                   <li>Support in <strong>Tax, Audit, GST, Company Formation</strong>, and more</li>
                   <li>Option to <strong>schedule a consultation</strong> for detailed discussions</li>
+                  <li>Clear checklist of <strong>documents and next steps</strong> after first response</li>
+                  <li><strong>Partner-led review</strong> for complex compliance and advisory matters</li>
+                  <li>Transparent communication on <strong>timeline and scope</strong> before working on the matter.</li>
                 </ul>
                 <Link to="/schedule-consultation" className="contact-cta-link">Schedule a Consultation</Link>
               </div>
@@ -158,8 +172,8 @@ export default function Contact() {
 
             <div className="contact-form-wrap">
               <div className="contact-form-card">
-                <h2 className="contact-form-title">Send a Message</h2>
-                <p className="contact-form-desc">Fill in the form below and we’ll get back to you as soon as possible.</p>
+                <h2 className="contact-form-title">Contact Form</h2>
+                <p className="contact-form-desc">Fill in your details and we’ll get back to you as soon as possible.</p>
                 <form className="contact-form" onSubmit={handleSubmit}>
                   <label className="contact-field">
                     <span className="contact-field-label">Name <span className="required">*</span></span>
@@ -230,110 +244,223 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
+          <div className="contact-balanced-row">
+            <div className="contact-card contact-card-main-office">
+              <h2 className="contact-card-title">Main Office</h2>
+              <p className="contact-card-desc">Primary office for direct advisory, audit, and compliance support.</p>
+              <div className="contact-map-office-details">
+                <p className="contact-map-office-label">{mainOffice.label}</p>
+                <h3 className="contact-map-office-city">{mainOffice.city}</h3>
+                <p className="contact-map-office-address">{mainOffice.address}</p>
+                <a
+                  href={mainOffice.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-map-office-link"
+                >
+                  Get directions →
+                </a>
+              </div>
+              <div className="contact-map-embed-wrap">
+                <iframe
+                  title={`${mainOffice.city} main office map`}
+                  src={getEmbedMapUrl(mainOffice.address)}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="contact-map-embed contact-map-embed-main"
+                />
+              </div>
+
+              <div className="contact-main-office-highlights">
+                <article className="contact-main-office-highlight">
+                  <h4>Visit Timings</h4>
+                  <p>Mon-Sat, 10:00 AM - 7:00 PM (by appointment preferred).</p>
+                </article>
+                <article className="contact-main-office-highlight">
+                  <h4>Best For</h4>
+                  <p>Detailed consultations, document reviews, and partner meetings.</p>
+                </article>
+                <article className="contact-main-office-highlight">
+                  <h4>Before You Visit</h4>
+                  <p>Carry key documents for quicker review and actionable guidance.</p>
+                </article>
+              </div>
+            </div>
+
+            <div className="contact-branch-section">
+              <div className="contact-branch-section-head">
+                <p className="contact-branch-kicker">Regional Presence</p>
+                <h3 className="contact-branch-title">Our Branch Offices</h3>
+                <p className="contact-branch-subtitle">Each branch office is listed below with its address and map location.</p>
+              </div>
+              <div className="contact-branch-grid">
+                {branchOffices.map((office) => (
+                  <article key={office.city} className="contact-branch-card">
+                    <div className="contact-map-office-details">
+                      <p className="contact-map-office-label">Branch Office</p>
+                      <h4 className="contact-branch-city">{office.city} Office</h4>
+                      <p className="contact-map-office-address">{office.address}</p>
+                      <a
+                        href={office.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="contact-map-office-link"
+                      >
+                        Get directions →
+                      </a>
+                    </div>
+                    <div className="contact-map-embed-wrap">
+                      <iframe
+                        title={`${office.city} branch office map`}
+                        src={getEmbedMapUrl(office.address)}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="contact-map-embed contact-map-embed-branch"
+                      />
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <style>{`
-        .contact-hero {
-          position: relative;
-          overflow: hidden;
-          padding: clamp(3.75rem, 8vw, 5.25rem) 0 clamp(2.5rem, 4vw, 3.25rem);
-          border-bottom: 1px solid var(--border);
+        .contact-page-hero {
+          border-bottom: 1px solid rgba(31, 93, 150, 0.22);
           background:
-            radial-gradient(900px 320px at 50% -140px, rgba(124, 58, 237, 0.22), transparent 68%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 255, 0.9) 100%),
-            url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=85'),
-            linear-gradient(180deg, var(--slate-50) 0%, var(--white) 100%);
-          background-size: auto, auto, cover, auto;
-          background-position: center, center, center, center;
+            radial-gradient(1100px 360px at 50% -120px, rgba(31, 93, 150, 0.24), transparent 64%),
+            linear-gradient(180deg, rgba(241, 247, 255, 0.98) 0%, rgba(232, 241, 252, 0.92) 56%, rgba(255, 255, 255, 0.98) 100%);
         }
-        .contact-hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: radial-gradient(circle at 1px 1px, rgba(76, 29, 149, 0.08) 1px, transparent 0);
-          background-size: 22px 22px;
-          opacity: 0.35;
-          pointer-events: none;
+        .contact-page-hero::before {
+          background-image: radial-gradient(circle at 1px 1px, rgba(23, 59, 104, 0.1) 1px, transparent 0);
+          opacity: 0.24;
         }
-        .contact-hero .container {
-          position: relative;
-          z-index: 1;
+        .contact-page-hero::after {
+          opacity: 0.12;
+          filter: grayscale(8%) saturate(95%);
         }
+        .contact-page-hero .container { max-width: 1220px; }
         .contact-hero-inner {
           text-align: center;
-          max-width: 760px;
+          max-width: 980px;
           margin: 0 auto;
         }
-        .contact-eyebrow {
-          display: block;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          color: var(--purple-600);
-          text-transform: uppercase;
-          margin-bottom: 0.6rem;
+        .contact-title { max-width: 920px; }
+        .contact-intro { max-width: 880px; }
+        .contact-hero-actions { margin-top: 1.25rem; }
+        .contact-seo-intent {
+          padding-top: 2rem;
+          padding-bottom: 0.9rem;
         }
-        .contact-accent {
-          width: 60px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin: 0 auto 1rem;
+        .contact-seo-intent-shell {
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 14px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          box-shadow: 0 10px 24px rgba(15, 39, 71, 0.06);
+          padding: 1rem;
         }
-        .contact-title {
-          font-family: var(--font-display);
-          font-size: clamp(1.95rem, 4.5vw, 3rem);
-          font-weight: 600;
-          color: var(--slate-900);
-          margin: 0 0 0.8rem 0;
-          line-height: 1.16;
-          letter-spacing: -0.02em;
-        }
-        .contact-intro {
-          font-size: clamp(1rem, 2.2vw, 1.12rem);
-          color: var(--slate-600);
-          line-height: 1.7;
+        .contact-seo-intent-shell h2 {
           margin: 0;
+          color: var(--slate-900);
+          font-size: clamp(1.16rem, 2.3vw, 1.48rem);
+          line-height: 1.35;
         }
-        @media (max-width: 767px) {
-          .contact-hero {
-            padding: 3.4rem 0 2.25rem;
-          }
-          .contact-hero-inner {
-            text-align: left;
-          }
-          .contact-accent {
-            margin: 0 0 1rem;
-          }
+        .contact-seo-intent-shell p {
+          margin: 0.58rem 0 0;
+          color: var(--slate-600);
+          font-size: 0.93rem;
+          line-height: 1.62;
+        }
+        .contact-seo-intent-links {
+          margin-top: 0.74rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.45rem;
+        }
+        .contact-seo-intent-links a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.4rem 0.68rem;
+          border-radius: 999px;
+          border: 1px solid rgba(31, 93, 150, 0.28);
+          background: rgba(31, 93, 150, 0.08);
+          color: var(--primary);
+          font-size: 0.79rem;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+        .contact-seo-intent-links a:hover {
+          color: #173b68;
+          border-color: rgba(31, 93, 150, 0.45);
+          background: rgba(31, 93, 150, 0.12);
         }
 
+        .contact-main {
+          background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+        }
         .contact-main .container { padding: 0 1rem; }
         @media (min-width: 768px) { .contact-main .container { padding: 0 1.5rem; } }
+        .contact-main-head {
+          text-align: center;
+          max-width: 860px;
+          margin: 0 auto 1.4rem;
+        }
+        .contact-main-kicker {
+          display: inline-flex;
+          padding: 0.34rem 0.78rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.34);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.88));
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--purple-700);
+          margin-bottom: 0.55rem;
+        }
+        .contact-main-head h2 {
+          margin: 0;
+          font-size: clamp(1.7rem, 4vw, 2.45rem);
+          line-height: 1.16;
+          letter-spacing: -0.025em;
+          color: var(--slate-900);
+        }
         .contact-grid {
           display: grid;
-          gap: 2rem;
+          gap: 1.4rem;
         }
         @media (min-width: 1024px) {
           .contact-grid {
             grid-template-columns: 1fr 1.15fr;
-            gap: 2.5rem;
+            gap: 1.5rem;
             align-items: start;
           }
         }
 
         .contact-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
         .contact-card {
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 14px;
+          background: linear-gradient(180deg, #ffffff 0%, #f9fcff 100%);
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 16px;
           padding: 1.5rem 1.25rem;
-          box-shadow: 0 2px 12px rgba(30, 41, 59, 0.04);
+          box-shadow: 0 10px 28px rgba(15, 39, 71, 0.06);
           transition: box-shadow 0.25s ease, border-color 0.25s ease;
         }
         .contact-card:hover {
-          box-shadow: 0 8px 24px rgba(30, 41, 59, 0.06);
-          border-color: var(--slate-200);
+          box-shadow: 0 14px 32px rgba(15, 39, 71, 0.1);
+          border-color: rgba(31, 93, 150, 0.28);
+        }
+        .contact-card-main-office {
+          display: flex;
+          flex-direction: column;
+        }
+        .contact-card-main-office .contact-card-title,
+        .contact-card-main-office .contact-card-desc {
+          text-align: center;
         }
         .contact-card-title {
           font-family: var(--font-display);
@@ -450,27 +577,42 @@ export default function Contact() {
           background: var(--purple-500);
         }
         .contact-cta-link {
-          display: inline-block;
-          font-size: 0.9375rem;
-          font-weight: 600;
-          color: var(--purple-600);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          min-height: 48px;
+          padding: 0.78rem 1rem;
+          margin-top: 0.2rem;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #ffffff;
+          background: linear-gradient(135deg, #0f2747 0%, #173b68 52%, #1f5d96 100%);
+          border: 1px solid rgba(15, 39, 71, 0.45);
+          border-radius: 10px;
           text-decoration: none;
-          transition: color 0.2s ease;
+          box-shadow: 0 8px 18px rgba(15, 23, 42, 0.24);
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        .contact-cta-link:hover { color: var(--purple-700); }
+        .contact-cta-link:hover {
+          color: #ffffff;
+          border-color: rgba(23, 59, 104, 0.62);
+          box-shadow: 0 12px 22px rgba(15, 23, 42, 0.3);
+          transform: translateY(-1px);
+        }
 
         .contact-form-wrap { min-width: 0; }
         .contact-form-card {
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          background: linear-gradient(180deg, #ffffff 0%, #f9fcff 100%);
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 18px;
           padding: 2rem 1.5rem;
-          box-shadow: 0 4px 24px rgba(30, 41, 59, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 12px 30px rgba(15, 39, 71, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
           transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .contact-form-card:hover {
-          box-shadow: 0 12px 40px rgba(30, 41, 59, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-          border-color: var(--slate-200);
+          box-shadow: 0 16px 36px rgba(15, 39, 71, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+          border-color: rgba(31, 93, 150, 0.28);
         }
         @media (min-width: 640px) { .contact-form-card { padding: 2.5rem 2rem; } }
         .contact-form-title {
@@ -511,7 +653,7 @@ export default function Contact() {
         .contact-input:focus {
           outline: none;
           border-color: var(--purple-500);
-          box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+          box-shadow: 0 0 0 3px rgba(31, 79, 134, 0.14);
         }
         .contact-select { cursor: pointer; appearance: auto; }
         .contact-textarea { resize: vertical; min-height: 140px; }
@@ -541,15 +683,227 @@ export default function Contact() {
           border: none;
           border-radius: 10px;
           cursor: pointer;
-          box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+          box-shadow: 0 4px 14px rgba(31, 79, 134, 0.34);
           transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .contact-submit:hover:not(:disabled) {
           transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+          box-shadow: 0 6px 20px rgba(31, 79, 134, 0.42);
         }
         .contact-submit:active:not(:disabled) { transform: translateY(0); }
         .contact-submit:disabled { opacity: 0.8; cursor: not-allowed; }
+        .contact-map-card {
+          margin-top: 1rem;
+          background: linear-gradient(180deg, #ffffff 0%, #f9fcff 100%);
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 18px;
+          padding: 1.2rem 1rem;
+          box-shadow: 0 10px 28px rgba(15, 39, 71, 0.06);
+          display: flex;
+          flex-direction: column;
+          gap: 0.9rem;
+        }
+        .contact-balanced-row {
+          display: block;
+          margin-top: 0.9rem;
+        }
+        .contact-balanced-row .contact-card-main-office {
+          margin-top: 0;
+          min-width: 0;
+          width: 100%;
+          max-width: 100%;
+          padding: 1.6rem 1.4rem;
+        }
+        .contact-support-grid {
+          display: grid;
+          gap: 0.75rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 1024px) {
+          .contact-support-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        .contact-support-item {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 12px;
+          background: #ffffff;
+          padding: 0.85rem 0.8rem;
+        }
+        .contact-support-item h3 {
+          margin: 0;
+          color: var(--slate-900);
+          font-size: 0.96rem;
+          line-height: 1.3;
+        }
+        .contact-support-item p {
+          margin: 0.35rem 0 0;
+          color: var(--text-muted);
+          font-size: 0.88rem;
+          line-height: 1.56;
+        }
+        .contact-support-actions {
+          margin-top: auto;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.65rem;
+        }
+        .contact-support-actions .btn {
+          min-width: 170px;
+        }
+        .contact-map-office-details {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 12px;
+          background: #fff;
+          padding: 0.9rem;
+        }
+        .contact-map-office-label {
+          margin: 0;
+          font-size: 0.72rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          font-weight: 700;
+          color: var(--purple-700);
+        }
+        .contact-map-office-city {
+          margin: 0.3rem 0 0;
+          color: var(--slate-900);
+          font-size: 1.1rem;
+        }
+        .contact-map-office-address {
+          margin: 0.25rem 0 0;
+          color: var(--slate-700);
+          line-height: 1.5;
+        }
+        .contact-map-office-link {
+          margin-top: 0.65rem;
+          display: inline-flex;
+          text-decoration: none;
+          color: var(--purple-700);
+          font-weight: 600;
+          font-size: 0.88rem;
+        }
+        .contact-map-embed-wrap {
+          margin-top: 0.8rem;
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 12px;
+          overflow: hidden;
+          background: #eef4fb;
+        }
+        .contact-map-embed {
+          display: block;
+          width: 100%;
+          height: 320px;
+          border: 0;
+        }
+        .contact-map-embed-branch {
+          height: 250px;
+        }
+        .contact-map-embed-main {
+          height: 280px;
+        }
+        .contact-main-office-highlights {
+          margin-top: 0.85rem;
+          display: grid;
+          gap: 0.65rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 900px) {
+          .contact-main-office-highlights {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+        .contact-main-office-highlight {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 10px;
+          background: #ffffff;
+          padding: 0.72rem;
+        }
+        .contact-main-office-highlight h4 {
+          margin: 0;
+          font-size: 0.9rem;
+          color: var(--slate-900);
+        }
+        .contact-main-office-highlight p {
+          margin: 0.3rem 0 0;
+          font-size: 0.84rem;
+          color: var(--text-muted);
+          line-height: 1.5;
+        }
+        .contact-branch-section {
+          margin-top: 1rem;
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 16px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          padding: 1rem 0.9rem;
+          box-shadow: 0 10px 24px rgba(15, 39, 71, 0.05);
+        }
+        .contact-branch-section-head {
+          margin-bottom: 1.15rem;
+          text-align: center;
+        }
+        .contact-branch-kicker {
+          margin: 0;
+          font-size: 0.76rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--purple-700);
+        }
+        .contact-branch-title {
+          margin: 0.22rem 0 0;
+          font-size: 1.22rem;
+          font-weight: 700;
+          color: var(--slate-900);
+          letter-spacing: -0.01em;
+        }
+        .contact-branch-subtitle {
+          margin: 0.45rem auto 0;
+          color: var(--text-muted);
+          font-size: 0.92rem;
+          font-weight: 600;
+          line-height: 1.5;
+          max-width: 640px;
+        }
+        .contact-branch-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        @media (min-width: 1024px) {
+          .contact-branch-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+        .contact-branch-card {
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          border-radius: 14px;
+          background: #ffffff;
+          padding: 0.62rem;
+          box-shadow: 0 6px 16px rgba(15, 39, 71, 0.04);
+          display: grid;
+          gap: 0.62rem;
+        }
+        .contact-branch-city {
+          margin: 0.28rem 0 0;
+          color: var(--slate-900);
+          font-size: 1rem;
+        }
+        .contact-branch-card .contact-map-office-details {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 12px;
+          background: linear-gradient(180deg, #ffffff 0%, #f9fcff 100%);
+          padding: 0.8rem;
+          box-shadow: none;
+        }
+        .contact-branch-card .contact-map-embed-wrap {
+          margin-top: 0;
+          border-radius: 12px;
+          box-shadow: 0 6px 16px rgba(15, 39, 71, 0.05);
+        }
+        .contact-map-embed-branch {
+          height: 180px;
+        }
       `}</style>
     </>
   );

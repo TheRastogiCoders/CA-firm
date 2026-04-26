@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { CLIENT_LOGOS } from '../data/clientLogos';
 
@@ -28,31 +28,37 @@ const coreServices = [
     title: 'Tax & Regulatory Services',
     slug: 'tax-compliance',
     description: 'Strategic tax planning, compliance, and representation services to optimize tax efficiency while ensuring full regulatory compliance.',
+    image: 'https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Audit & Assurance',
     slug: 'audit-assurance',
     description: 'Comprehensive audit solutions including statutory audits, internal audits, tax audits, stock audits, and management audits to strengthen financial controls and transparency.',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Corporate Law & Compliance',
     slug: 'corporate-law',
     description: 'Company incorporation, corporate governance support, secretarial services, regulatory filings, and legal compliance assistance.',
+    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Advisory & Consulting',
     slug: 'financial-consulting',
     description: 'Business advisory services across taxation, regulatory frameworks, LLPs, trusts, and financial regulations with research-based professional insights.',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Finance & Project Consultancy',
     slug: 'project-finance',
     description: 'End-to-end financial consulting including project finance, debt syndication, banking support, and financial structuring for businesses.',
+    image: 'https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Government Schemes Consultancy',
     slug: 'government-schemes-advisory',
     description: 'Awareness, planning, and implementation support for Central and State Government schemes across multiple sectors.',
+    image: 'https://images.unsplash.com/photo-1573497491765-dccce02b29df?auto=format&fit=crop&w=1200&q=85',
   },
 ];
 
@@ -72,23 +78,129 @@ const presenceBranches = [
 ];
 
 const industries = [
-  { title: 'Manufacturing & Infrastructure', image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Banking & Financial Institutions', image: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Real Estate & Construction', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Trading & Export Businesses', image: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Government & Public Sector', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'SMEs & Startups', image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Non-Profit Organizations', image: 'https://images.unsplash.com/photo-1469571486292-b53601020e02?auto=format&fit=crop&w=1200&q=85' },
+  {
+    title: 'Manufacturing & Infrastructure',
+    image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Compliance, audit, and financial control frameworks for operationally complex businesses.',
+  },
+  {
+    title: 'Banking & Financial Institutions',
+    image: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Regulatory-ready support for governance, reporting, and assurance requirements.',
+  },
+  {
+    title: 'Real Estate & Construction',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Project-focused advisory, tax planning, and compliance support across development cycles.',
+  },
+  {
+    title: 'Trading & Export Businesses',
+    image: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Structured tax and documentation guidance for cross-border operations and growth.',
+  },
+  {
+    title: 'Government & Public Sector',
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Audit, compliance, and advisory solutions aligned with institutional accountability standards.',
+  },
+  {
+    title: 'SMEs & Startups',
+    image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Scalable financial, tax, and compliance support tailored for fast-moving growth stages.',
+  },
+  {
+    title: 'Non-Profit Organizations',
+    image: 'https://images.unsplash.com/photo-1469571486292-b53601020e02?auto=format&fit=crop&w=1200&q=85',
+    desc: 'Transparent reporting and regulatory support for mission-driven organizations.',
+  },
+];
+
+const clientResponses = [
+  {
+    quote: 'Their team is highly responsive and always delivers practical guidance on time-sensitive compliance matters.',
+    by: 'CFO, Manufacturing Group',
+  },
+  {
+    quote: 'We value their partner-led involvement and clear advisory during audits, tax planning, and strategic decisions.',
+    by: 'Director, Financial Services Firm',
+  },
+  {
+    quote: 'A dependable long-term advisor with strong domain knowledge and professional execution standards.',
+    by: 'Founder, Growth-Stage Enterprise',
+  },
+];
+
+const homeStats = [
+  { key: 'years', value: 20, suffix: '+', label: 'Years of Excellence' },
+  { key: 'partners', value: 7, suffix: '+', label: 'Partners' },
+  { key: 'offices', value: 4, suffix: '', label: 'Office Locations' },
+  { key: 'services', value: 12, suffix: '+', label: 'Service Verticals' },
 ];
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
+  const [stats, setStats] = useState(() => (
+    homeStats.reduce((acc, item) => {
+      acc[item.key] = 0;
+      return acc;
+    }, {})
+  ));
+  const statsSectionRef = useRef(null);
+  const statsAnimatedRef = useRef(false);
 
   useEffect(() => {
     const t = setInterval(() => {
       setHeroIndex((i) => (i + 1) % heroSlides.length);
     }, 5500);
     return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    if (!statsSectionRef.current) return undefined;
+
+    let rafId = null;
+    let observer = null;
+
+    const animateStats = () => {
+      const duration = 1400;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - (1 - progress) ** 3;
+
+        setStats(
+          homeStats.reduce((acc, item) => {
+            acc[item.key] = Math.round(item.value * eased);
+            return acc;
+          }, {})
+        );
+
+        if (progress < 1) {
+          rafId = window.requestAnimationFrame(tick);
+        }
+      };
+
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting && !statsAnimatedRef.current) {
+          statsAnimatedRef.current = true;
+          animateStats();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(statsSectionRef.current);
+
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   return (
@@ -109,14 +221,19 @@ export default function Home() {
                 className={`hero-slide ${i === heroIndex ? 'hero-slide-active' : ''}`}
                 aria-hidden={i !== heroIndex}
               >
-                <div className="hero-accent" />
-                <p className="hero-label">{slide.label}</p>
-                <p className="hero-tagline">{slide.tagline}</p>
-                <h1 className="hero-title">{slide.title}</h1>
-                <p className="hero-desc">{slide.desc}</p>
-                <div className="hero-cta">
-                  <Link to="/schedule-consultation" className="hero-btn hero-btn-primary">Get Consultation</Link>
-                  <Link to="/contact" className="hero-btn hero-btn-outline">Contact Us</Link>
+                <div className="hero-main">
+                  <p className="hero-tagline">{slide.tagline}</p>
+                  <h1 className="hero-title">{slide.title}</h1>
+                  <p className="hero-desc hero-desc-home-singleline">{slide.desc}</p>
+                  <div className="hero-cta">
+                    <Link to="/schedule-consultation" className="hero-btn hero-btn-primary">Get Consultation</Link>
+                    <Link to="/contact" className="hero-btn hero-btn-outline">Contact Us</Link>
+                  </div>
+                  <div className="hero-trust">
+                    <span className="hero-trust-item">20+ Years of Experience</span>
+                    <span className="hero-trust-item">RBI Registered</span>
+                    <span className="hero-trust-item">CAG Empanelled</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -137,60 +254,98 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Home Stats */}
+      <section className="home-stats" ref={statsSectionRef} aria-label="Firm highlights">
+        <div className="container">
+          <div className="home-stats-wrap">
+            {homeStats.map((item) => (
+              <article key={item.key} className="home-stat-card">
+                <p className="home-stat-value">
+                  {stats[item.key]}{item.suffix}
+                </p>
+                <p className="home-stat-label">{item.label}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section home-seo-intent" aria-labelledby="home-seo-title">
+        <div className="container">
+          <div className="home-seo-intent-shell">
+            <h2 id="home-seo-title">Chartered Accountant firm for tax, audit, GST, and compliance services in India</h2>
+            <p>
+              Dwivedi Gupta & Co. helps businesses with partner-led tax advisory, statutory and internal audit, GST compliance,
+              company law support, and financial consulting. Explore focused service pages to review scope, deliverables, and ideal fit.
+            </p>
+            <div className="home-seo-intent-links">
+              <Link to="/services/tax-compliance">Tax Compliance Services</Link>
+              <Link to="/services/audit-assurance">Audit & Assurance Services</Link>
+              <Link to="/services/gst-advisory">GST Advisory Services</Link>
+              <Link to="/services/company-formation">Company Formation Services</Link>
+              <Link to="/industries">Industry-Specific CA Support</Link>
+              <Link to="/contact">Contact Our CA Team</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About the Firm */}
       <section id="about-the-firm" className="home-section home-about">
         <div className="container">
           <div className="about-header">
-            <span className="about-eyebrow">Who We Are</span>
-            <div className="about-accent" />
+            <div className="about-header-kicker-wrap">
+              <span className="about-eyebrow">Who We Are</span>
+            </div>
             <h2 className="about-title">About the Firm</h2>
-          </div>
-          <div className="about-stats">
-            <div className="about-stat">
-              <span className="about-stat-value">2003</span>
-              <span className="about-stat-label">Established</span>
-            </div>
-            <div className="about-stat">
-              <span className="about-stat-value">4</span>
-              <span className="about-stat-label">Offices</span>
-            </div>
-            <div className="about-stat">
-              <span className="about-stat-value">20+</span>
-              <span className="about-stat-label">Years Experience</span>
-            </div>
+            <p className="about-header-subtitle">Built on trust, guided by expertise, and focused on long-term client value.</p>
           </div>
           <div className="about-grid">
             <div className="about-content">
-              <div className="about-lead">
-                <p>
-                  Founded in 2003, Dwivedi Gupta & Co. (DGC) is a Chartered Accountants firm delivering assurance, taxation, and advisory services with a partner-led approach and deep regulatory insight.
+              <div className="about-content-shell">
+                <div className="about-intro-row">
+                  <span className="about-kicker">Trusted Since 2003</span>
+                  <span className="about-kicker-dot" aria-hidden="true" />
+                  <span className="about-kicker-muted">Partner-Led Professional Services</span>
+                </div>
+                <h3 className="about-lead-title">Reliable Tax, Audit, and Advisory Support for Growing Businesses</h3>
+                <p className="about-summary">
+                  Dwivedi Gupta & Co. delivers practical, compliance-focused solutions with senior partner involvement and consistent execution standards.
                 </p>
-              </div>
-              <div className="about-rest">
-                <p>
-                  We work as long-term partners, not distant service providers. Every engagement is tailored to your business model, growth stage, and compliance requirements rather than following a one-size-fits-all process.
+                <p className="about-summary about-summary-muted">
+                  Every engagement is tailored to your growth stage, business model, and regulatory needs.
                 </p>
-                <p>
-                  Headquartered in Varanasi with branch offices in Delhi, Kolkata, and Bokaro, our team combines local accessibility with national capability. Under the direction of 7 partners and qualified professionals, we focus on practical, timely, and high-quality outcomes.
+                <p className="about-summary about-summary-muted">
+                  With a strong on-ground office presence and multidisciplinary teams, we deliver responsive support,
+                  structured execution, and decision-ready insights for businesses across sectors.
                 </p>
-                <ul className="about-highlights">
-                  <li>RBI Registered and CAG Empanelled credentials</li>
-                  <li>Comprehensive services: Tax, Audit, Compliance, Advisory, and Finance</li>
-                  <li>Strong client relationships built on integrity and responsiveness</li>
-                </ul>
-              </div>
-              <div className="about-cta-wrap">
-                <Link to="/about-us" className="btn btn-secondary">Learn More About Us</Link>
+                <p className="about-summary about-summary-muted">
+                  Our teams follow a process-driven approach covering assessment, execution, review, and post-engagement
+                  support so clients receive clarity along with consistent implementation quality.
+                </p>
+                <div className="about-highlights-grid">
+                  <article className="about-highlight-card">
+                    <p className="about-highlight-title">Credentials</p>
+                    <p className="about-highlight-text">RBI Registered and CAG Empanelled.</p>
+                  </article>
+                  <article className="about-highlight-card">
+                    <p className="about-highlight-title">Comprehensive Services</p>
+                    <p className="about-highlight-text">Tax, audit, compliance, advisory, and finance support.</p>
+                  </article>
+                  <article className="about-highlight-card">
+                    <p className="about-highlight-title">Client Commitment</p>
+                    <p className="about-highlight-text">Long-term relationships built on integrity and responsiveness.</p>
+                  </article>
+                </div>
+                <div className="about-cta-wrap">
+                  <Link to="/about-us" className="btn btn-secondary">Learn More About Us</Link>
+                  <Link to="/contact" className="btn btn-primary">Contact Our Team</Link>
+                </div>
               </div>
             </div>
             <div className="about-images">
               <div className="about-img-main">
-                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=85" alt="Professional advisory and consulting at Dwivedi Gupta & Co." />
-              </div>
-              <div className="about-badges">
-                <span className="about-badge">Partner-led engagements</span>
-                <span className="about-badge">20+ years of experience</span>
-                <span className="about-badge">Multi-city service network</span>
+                <img src="/dist/officeimage.png" alt="Dwivedi Gupta and Co office exterior and workspace" />
               </div>
             </div>
           </div>
@@ -201,19 +356,26 @@ export default function Home() {
       <section className="home-section home-services">
         <div className="container">
           <div className="services-header">
-            <span className="services-eyebrow">What We Offer</span>
-            <div className="services-accent" />
-            <h2 className="services-title">Our Core Services</h2>
-            <p className="services-intro">Comprehensive assurance, tax, advisory, and consulting solutions tailored to your business needs.</p>
+            <span className="services-eyebrow-wrap">
+              <span className="services-eyebrow">What We Offer</span>
+            </span>
+            <h2 className="services-title">Our Core Tax, Audit, GST, and Advisory Services</h2>
+            <p className="services-intro">Professional assurance, tax, and advisory solutions designed for modern business requirements.</p>
           </div>
           <div className="home-services-grid">
             {coreServices.map((s, i) => (
               <Link key={i} to={`/services/${s.slug}`} className="home-service-card home-service-card-link">
+                <div className="service-card-media">
+                  <img src={s.image} alt={s.title} loading="lazy" />
+                  <div className="service-card-media-overlay" aria-hidden="true" />
+                </div>
                 <span className="service-number">{String(i + 1).padStart(2, '0')}</span>
-                <div className="service-card-accent" />
-                <h3>{s.title}</h3>
-                <p>{s.description}</p>
-                <span className="home-service-card-read-more">Learn more →</span>
+                <div className="service-card-body">
+                  <div className="service-card-accent" />
+                  <h3>{s.title}</h3>
+                  <p>{s.description}</p>
+                  <span className="home-service-card-read-more">Learn more</span>
+                </div>
               </Link>
             ))}
           </div>
@@ -223,48 +385,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="home-section why-choose-us">
-        <div className="container">
-          <div className="why-header">
-            <span className="why-eyebrow">Our Edge</span>
-            <div className="why-accent" />
-            <h2 className="why-title">Why Choose Us</h2>
-            <p className="why-intro">Decades of experience, a client-first approach, and end-to-end CA services that drive compliance and growth.</p>
-          </div>
-          <div className="why-grid">
-            {whyChooseUs.map((item, i) => (
-              <div key={i} className="why-card">
-                <span className="why-num">{String(i + 1).padStart(2, '0')}</span>
-                <div className="why-card-bar" />
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Industries We Serve */}
       <section className="home-section home-industries">
         <div className="container">
-          <div className="industries-header">
-            <span className="industries-eyebrow">Sector Expertise</span>
-            <div className="industries-accent" />
-            <h2 className="industries-title">Industries We Serve</h2>
-            <p className="industries-intro">We provide services across multiple industries with sector-specific knowledge and compliance support.</p>
-          </div>
-          <div className="industries-scroll-wrap">
-            <div className="industries-track" role="region" aria-label="Industries we serve">
-              {[...industries, ...industries].map((ind, i) => (
-                <div key={i} className="industries-card">
-                  <div className="industries-card-img">
-                    <img src={ind.image} alt="" />
-                    <div className="industries-card-overlay" />
-                  </div>
-                  <h3>{ind.title}</h3>
-                </div>
-              ))}
+          <div className="industries-shell">
+            <header className="industries-header">
+              <span className="industries-eyebrow-wrap">
+                <span className="industries-eyebrow">Sector Expertise</span>
+              </span>
+              <h2 className="industries-title">Industries We Serve</h2>
+              <p className="industries-intro">Domain-specific advisory, assurance, and compliance solutions built for sector realities.</p>
+            </header>
+            <div className="industries-scroll-wrap" role="region" aria-label="Industries we serve">
+              <div className="industries-track">
+                {[...industries, ...industries].map((ind, i) => (
+                  <article key={`${ind.title}-${i}`} className="industries-card">
+                    <div className="industries-card-img">
+                      <img src={ind.image} alt={ind.title} loading="lazy" />
+                      <div className="industries-card-overlay" />
+                    </div>
+                    <div className="industries-card-content">
+                      <p className="industries-card-index">{String((i % industries.length) + 1).padStart(2, '0')}</p>
+                      <h3>{ind.title}</h3>
+                      <p>{ind.desc}</p>
+                      <Link to="/industries" className="industries-card-btn">View More</Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
           <div className="industries-cta">
@@ -273,82 +421,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Presence */}
-      <section className="home-section home-presence">
+      {/* Clients Section */}
+      <section className="home-section home-clients" id="clients-preview">
         <div className="container">
-          <div className="presence-header">
-            <span className="presence-eyebrow">Where We Are</span>
-            <div className="presence-accent" />
-            <h2 className="presence-title">Our Presence</h2>
-            <p className="presence-intro">Headquartered in Varanasi with branch offices across key cities to serve you locally.</p>
-          </div>
-          <div className="presence-grid">
-            <div className="presence-card presence-card-main">
-              <div className="presence-card-icon">HQ</div>
-              <h3>Head Office</h3>
-              <p className="presence-city">Varanasi</p>
-              <p className="presence-address">S-8/108-B-3-A Prashantpuri, M.A Road, Varanasi – 221002</p>
-              <p className="presence-desc">Our flagship office and central hub for assurance, tax, and advisory services.</p>
-            </div>
-            {presenceBranches.map((branch, i) => (
-              <div key={i} className="presence-card">
-                <div className="presence-card-icon">{branch.initial}</div>
-                <h3>Branch</h3>
-                <p className="presence-city">{branch.city}</p>
-                <p className="presence-address">{branch.address}</p>
-                <p className="presence-contact">{branch.contact}</p>
+          <header className="clients-header">
+            <span className="clients-eyebrow-wrap">
+              <span className="clients-eyebrow">Who We Work With</span>
+            </span>
+            <h2 className="clients-title">Trusted by Leading Organizations</h2>
+            <p className="clients-intro">
+              Corporates, banks, and institutions across India rely on us for their financial and advisory needs.
+            </p>
+          </header>
+          <div className="clients-shell">
+            <div className="clients-card">
+              <div className="clients-logos-marquee" aria-hidden="true">
+                <div className="clients-logos-track">
+                  {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
+                    <div key={i} className="clients-logo-slot">
+                      <img
+                        src={logo.src}
+                        alt={logo.name}
+                        className="clients-logo-img"
+                        loading="lazy"
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+              <p className="clients-card-caption">Representing leading names across banking, manufacturing, and institutions.</p>
+              <Link to="/clients" className="clients-cta">View Our Clients</Link>
+            </div>
+            <div className="clients-response-grid">
+              {clientResponses.map((item, idx) => (
+                <article className="clients-response-card" key={idx}>
+                  <p className="clients-response-quote">"{item.quote}"</p>
+                  <p className="clients-response-by">{item.by}</p>
+                </article>
+              ))}
+            </div>
           </div>
-          <p className="presence-tagline">
-            We serve clients across India with strong regional expertise and national capabilities.
-          </p>
         </div>
       </section>
 
       {/* Second Hero / CTA Section - Redesigned */}
       <section className="home-hero-2">
         <div className="home-hero-2-pattern" aria-hidden="true" />
-        <div className="home-hero-2-accent" aria-hidden="true" />
         <div className="container home-hero-2-inner">
-          <p className="home-hero-2-eyebrow">Expert guidance since 2003</p>
-          <h2 className="home-hero-2-title">Looking for Reliable Financial & Advisory Experts?</h2>
-          <p className="home-hero-2-desc">
-            Partner with Dwivedi Gupta & Co. for professional guidance, compliance confidence, and business growth.
-          </p>
-          <Link to="/schedule-consultation" className="btn btn-primary btn-lg home-hero-2-btn">Schedule a Consultation</Link>
-        </div>
-      </section>
-
-      {/* Clients Section */}
-      <section className="home-section home-clients" id="clients-preview">
-        <div className="container">
-          <header className="clients-header">
-            <span className="clients-eyebrow">Who We Work With</span>
-            <div className="clients-accent" aria-hidden="true" />
-            <h2 className="clients-title">Trusted by Leading Organizations</h2>
-            <p className="clients-intro">
-              Corporates, banks, and institutions across India rely on us for their financial and advisory needs.
+          <div className="home-hero-2-card">
+            <p className="home-hero-2-eyebrow">Expert Guidance Since 2003</p>
+            <h2 className="home-hero-2-title">Looking for Reliable Financial & Advisory Experts?</h2>
+            <p className="home-hero-2-desc">
+              Partner with Dwivedi Gupta & Co. for professional guidance, compliance confidence, and sustainable business growth.
             </p>
-          </header>
-          <div className="clients-card">
-            <div className="clients-logos-marquee" aria-hidden="true">
-              <div className="clients-logos-track">
-                {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
-                  <div key={i} className="clients-logo-slot">
-                    <img
-                      src={logo.src}
-                      alt={logo.name}
-                      className="clients-logo-img"
-                      loading="lazy"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <p className="clients-card-caption">Representing leading names across banking, manufacturing, and institutions.</p>
-            <Link to="/clients" className="clients-cta">View Our Clients</Link>
+            <Link to="/schedule-consultation" className="home-hero-2-btn">Schedule a Consultation</Link>
           </div>
         </div>
       </section>
@@ -358,88 +485,114 @@ export default function Home() {
 
         .home-hero-2 {
           position: relative;
-          min-height: 56vh;
-          min-height: 56dvh;
+          min-height: 0;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 4.5rem 1.5rem;
+          padding: 1.25rem 0.75rem;
           overflow: hidden;
-          background: linear-gradient(135deg, rgba(76, 29, 149, 0.92) 0%, rgba(30, 58, 138, 0.9) 100%);
+          background: transparent;
+          border-radius: 0;
+          margin: 0;
+          box-shadow: none;
         }
         @media (max-width: 767px) {
-          .home-hero-2 { min-height: 52vh; min-height: 52dvh; padding: 3rem 1rem; }
+          .home-hero-2 {
+            padding: 1rem 0.4rem;
+          }
         }
         .home-hero-2-pattern {
           position: absolute;
           inset: 0;
           z-index: 0;
-          opacity: 0.06;
-          background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0);
-          background-size: 32px 32px;
-        }
-        .home-hero-2-accent {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 120px;
-          height: 3px;
-          background: linear-gradient(90deg, transparent, var(--purple-400), var(--blue-400), transparent);
-          z-index: 1;
+          opacity: 0;
+          background-image:
+            radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.45) 1px, transparent 0),
+            linear-gradient(120deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+          background-size: 30px 30px, 100% 100%;
         }
         .home-hero-2-inner {
           position: relative;
           z-index: 2;
-          text-align: center;
-          max-width: 580px;
+          max-width: 1120px;
           margin: 0 auto;
         }
+        .home-hero-2-card {
+          border: 1px solid rgba(140, 183, 220, 0.26);
+          background: linear-gradient(135deg, #0f2747 0%, #173b68 52%, #1f5d96 100%);
+          border-radius: 26px;
+          padding: 3.1rem 1.5rem 2.9rem;
+          text-align: center;
+          box-shadow: 0 16px 34px rgba(15, 23, 42, 0.24);
+        }
+        @media (min-width: 768px) {
+          .home-hero-2-card {
+            padding: 3.35rem 2.3rem 3.1rem;
+          }
+        }
         .home-hero-2-eyebrow {
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.2em;
+          font-size: 0.76rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: var(--purple-400);
-          margin-bottom: 1rem;
+          color: rgba(228, 240, 252, 0.9);
+          margin-bottom: 0.78rem;
         }
         .home-hero-2-title {
-          font-size: clamp(1.5rem, 4vw, 2.25rem);
+          font-size: clamp(2rem, 4.6vw, 3.35rem);
           font-weight: 600;
           color: var(--white);
-          line-height: 1.3;
-          margin-bottom: 1rem;
-          letter-spacing: -0.02em;
+          line-height: 1.12;
+          margin-bottom: 0.86rem;
+          letter-spacing: -0.032em;
+          max-width: 760px;
+          margin-left: auto;
+          margin-right: auto;
         }
         .home-hero-2-desc {
-          color: rgba(255, 255, 255, 0.92);
-          font-size: 1rem;
-          line-height: 1.65;
-          margin-bottom: 1.75rem;
+          color: rgba(240, 248, 255, 0.88);
+          font-size: clamp(1rem, 2.2vw, 1.15rem);
+          line-height: 1.6;
+          margin: 0 auto 1.55rem;
+          max-width: 700px;
         }
-        .home-hero-2 .home-hero-2-btn {
+        .home-hero-2-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 0.88rem 2rem;
-          font-size: 1rem;
-          font-weight: 600;
-          border-radius: 10px;
-          border: 1px solid rgba(255, 255, 255, 0.24);
-          background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 55%, #2563eb 100%);
-          color: var(--white);
-          box-shadow: 0 10px 28px rgba(15, 23, 42, 0.28);
+          min-height: 56px;
+          padding: 0.9rem 2.2rem;
+          font-size: 1.03rem;
+          font-weight: 700;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.35);
+          background: #ffffff;
+          color: #0f2747;
+          box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
           text-decoration: none;
           transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+          white-space: nowrap;
         }
-        .home-hero-2 .home-hero-2-btn:hover {
-          color: var(--white);
-          border-color: rgba(255, 255, 255, 0.42);
-          box-shadow: 0 14px 32px rgba(15, 23, 42, 0.34);
-          transform: translateY(-1px);
+        .home-hero-2-btn:hover {
+          color: #0f2747;
+          border-color: rgba(255, 255, 255, 0.5);
+          box-shadow: 0 14px 28px rgba(15, 23, 42, 0.28);
+          transform: translateY(-2px);
         }
-        .home-hero-2 .home-hero-2-btn:active {
+        .home-hero-2-btn:active {
           transform: translateY(0) scale(0.98);
+        }
+        @media (max-width: 560px) {
+          .home-hero-2-card {
+            border-radius: 18px;
+            padding: 2.25rem 1rem 2rem;
+          }
+          .home-hero-2-btn {
+            width: 100%;
+            min-height: 50px;
+            font-size: 0.95rem;
+            padding: 0.8rem 1.2rem;
+          }
         }
 
         .home-section {
@@ -463,119 +616,158 @@ export default function Home() {
           background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 100%);
         }
         .about-header {
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.9rem;
           text-align: center;
+        }
+        .about-header-kicker-wrap {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 0.72rem;
+          padding: 0.34rem 0.72rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.32);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 247, 255, 0.86));
         }
         .about-eyebrow {
           display: block;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          color: var(--purple-600);
+          font-size: 0.74rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          color: var(--purple-700);
           text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-        .about-accent {
-          width: 56px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 1rem;
-        }
-        .about-title {
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
-          color: var(--slate-800);
           margin: 0;
         }
-        .about-stats {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-          margin-bottom: 2.5rem;
+        .about-title {
+          font-size: clamp(2rem, 4.4vw, 2.85rem);
+          color: var(--slate-900);
+          margin: 0 0 0.55rem 0;
+          line-height: 1.18;
+          letter-spacing: -0.02em;
         }
-        .about-stat {
-          text-align: center;
-          padding: 1.25rem 1rem;
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-        }
-        .about-stat-value {
-          display: block;
-          font-size: 1.75rem;
-          font-weight: 700;
-          color: var(--purple-600);
-          font-family: var(--font-display);
-          line-height: 1.2;
-        }
-        .about-stat-label {
-          font-size: 0.8125rem;
-          color: var(--text-muted);
-          font-weight: 500;
+        .about-header-subtitle {
+          margin: 0 auto;
+          max-width: 620px;
+          color: var(--slate-600);
+          font-size: clamp(0.96rem, 2vw, 1.04rem);
+          line-height: 1.6;
         }
         .about-grid {
           display: grid;
-          gap: 2rem;
+          gap: 1.75rem;
         }
         @media (min-width: 768px) {
           .about-grid {
-            grid-template-columns: 1.1fr 1fr;
-            gap: 2.5rem;
-            align-items: start;
+            grid-template-columns: 1.12fr 0.88fr;
+            gap: 2rem;
+            align-items: stretch;
           }
         }
         .about-content {
           min-width: 0;
         }
-        .about-lead p {
-          font-size: 1.0625rem;
-          color: var(--slate-700);
-          line-height: 1.75;
-          margin: 0 0 1.25rem 0;
-          font-weight: 500;
+        .about-content-shell {
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 16px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          box-shadow: 0 14px 30px rgba(15, 39, 71, 0.08);
+          padding: 1.15rem 1.05rem 1rem;
         }
-        .about-rest p {
-          color: var(--text-muted);
-          line-height: 1.75;
-          margin-bottom: 1rem;
+        @media (min-width: 992px) {
+          .about-content-shell {
+            padding: 1.3rem 1.25rem 1.1rem;
+          }
         }
-        .about-rest p:last-child { margin-bottom: 0; }
-        .about-highlights {
-          list-style: none;
-          margin: 0.75rem 0 0;
-          padding: 0;
-          display: grid;
-          gap: 0.55rem;
+        .about-intro-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.45rem;
+          margin-bottom: 0.7rem;
         }
-        .about-highlights li {
-          position: relative;
-          padding-left: 1rem;
-          color: var(--slate-700);
-          font-size: 0.9375rem;
-          line-height: 1.55;
+        .about-kicker {
+          font-size: 0.71rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--purple-700);
         }
-        .about-highlights li::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0.55em;
+        .about-kicker-dot {
           width: 5px;
           height: 5px;
-          border-radius: 50%;
-          background: var(--purple-500);
+          border-radius: 999px;
+          background: var(--blue-500);
+        }
+        .about-kicker-muted {
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.07em;
+          text-transform: uppercase;
+          color: var(--slate-500);
+        }
+        .about-lead-title {
+          margin: 0 0 0.56rem 0;
+          font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+          line-height: 1.3;
+          color: var(--slate-900);
+          letter-spacing: -0.02em;
+        }
+        .about-summary {
+          font-size: 0.96rem;
+          color: var(--slate-700);
+          line-height: 1.62;
+          margin: 0;
+          font-weight: 500;
+        }
+        .about-summary-muted {
+          margin-top: 0.55rem;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+        .about-highlights-grid {
+          margin-top: 0.9rem;
+          display: grid;
+          gap: 0.62rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 560px) {
+          .about-highlights-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+        }
+        .about-highlight-card {
+          position: relative;
+          border-radius: 10px;
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          background: #ffffff;
+          padding: 0.72rem 0.7rem;
+          box-shadow: 0 4px 12px rgba(15, 39, 71, 0.04);
+        }
+        .about-highlight-title {
+          margin: 0 0 0.2rem 0;
+          font-size: 0.79rem;
+          line-height: 1.35;
+          font-weight: 700;
+          color: var(--slate-900);
+        }
+        .about-highlight-text {
+          margin: 0;
+          font-size: 0.79rem;
+          line-height: 1.42;
+          color: var(--slate-700);
         }
         .about-images {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.9rem;
+          min-height: 100%;
         }
         @media (min-width: 768px) {
           .about-images {
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1rem;
+            height: 100%;
           }
         }
         .about-img-main {
@@ -583,7 +775,17 @@ export default function Home() {
           overflow: hidden;
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
           border: 1px solid var(--border);
-          aspect-ratio: 4/3;
+          aspect-ratio: 5 / 4;
+          width: 100%;
+          max-height: 520px;
+        }
+        @media (min-width: 992px) {
+          .about-img-main {
+            aspect-ratio: auto;
+            height: 100%;
+            min-height: 100%;
+            max-height: none;
+          }
         }
         .about-img-main img {
           width: 100%;
@@ -591,22 +793,28 @@ export default function Home() {
           object-fit: cover;
           display: block;
         }
-        .about-badges {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-        .about-badge {
-          padding: 0.4rem 0.7rem;
-          border-radius: 999px;
-          border: 1px solid var(--border);
-          background: var(--white);
-          font-size: 0.8125rem;
-          color: var(--slate-700);
-          font-weight: 500;
-        }
         .about-cta-wrap {
-          margin-top: 2rem;
+          margin-top: 1.05rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.7rem;
+          flex-wrap: wrap;
+        }
+        .about-cta-wrap .btn {
+          min-width: 220px;
+          min-height: 42px;
+          padding: 0.62rem 1.25rem;
+          font-size: 0.94rem;
+        }
+        @media (max-width: 560px) {
+          .about-cta-wrap {
+            gap: 0.55rem;
+          }
+          .about-cta-wrap .btn {
+            width: 100%;
+            min-width: 0;
+          }
         }
 
         .home-services {
@@ -616,35 +824,42 @@ export default function Home() {
           margin-bottom: 2rem;
           text-align: center;
         }
+        .services-eyebrow-wrap {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.36rem 0.82rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.34);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.88));
+          margin-bottom: 0.62rem;
+        }
         .services-eyebrow {
           display: block;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          color: var(--purple-600);
+          font-size: 0.73rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--purple-700);
           text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-        .services-accent {
-          width: 56px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 1rem;
+          margin: 0;
         }
         .services-title {
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
-          color: var(--slate-800);
-          margin: 0 0 0.75rem 0;
+          font-size: clamp(2rem, 4.6vw, 3rem);
+          color: var(--slate-900);
+          margin: 0 0 0.62rem 0;
+          line-height: 1.14;
+          letter-spacing: -0.028em;
+        }
+        .home-services .services-title::after {
+          display: none;
+          content: none;
         }
         .services-intro {
-          font-size: 1.0625rem;
+          font-size: clamp(1rem, 2.2vw, 1.15rem);
           color: var(--text-muted);
-          max-width: 560px;
+          max-width: 760px;
           margin: 0 auto;
-          line-height: 1.6;
+          line-height: 1.62;
         }
         .home-services-grid {
           display: grid;
@@ -659,47 +874,87 @@ export default function Home() {
         }
         .home-service-card {
           position: relative;
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 1.75rem 1.5rem;
-          transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 10px;
+          padding: 0;
+          transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease, background 0.2s ease;
           overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          min-height: 100%;
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.95) inset,
+            0 12px 26px rgba(15, 39, 71, 0.1);
         }
         .home-service-card:hover {
-          border-color: var(--purple-400);
-          box-shadow: 0 12px 40px rgba(124, 58, 237, 0.1);
-          transform: translateY(-2px);
+          border-color: rgba(31, 79, 134, 0.36);
+          background: linear-gradient(180deg, #ffffff 0%, #f1f7ff 100%);
+          box-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.98) inset,
+            0 16px 34px rgba(15, 39, 71, 0.16);
+          transform: translateY(-4px);
+        }
+        .service-card-media {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+        }
+        .service-card-media img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.35s ease;
+        }
+        .home-service-card:hover .service-card-media img {
+          transform: scale(1.04);
+        }
+        .service-card-media-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(2, 6, 23, 0.12) 0%, rgba(2, 6, 23, 0.28) 100%);
+        }
+        .service-card-body {
+          position: relative;
+          padding: 1.18rem 1.1rem 1rem;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
         }
         .service-number {
           position: absolute;
-          top: 1.25rem;
-          right: 1.25rem;
-          font-size: 2rem;
+          top: 0.75rem;
+          right: 1rem;
+          font-size: 1.9rem;
           font-weight: 700;
-          color: var(--slate-100);
+          color: rgba(255, 255, 255, 0.88);
+          text-shadow: 0 1px 10px rgba(2, 6, 23, 0.35);
           font-family: var(--font-display);
           line-height: 1;
+          z-index: 2;
         }
         .service-card-accent {
-          width: 40px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
+          width: 44px;
+          height: 4px;
+          background: linear-gradient(90deg, var(--purple-700), var(--blue-700));
           border-radius: 2px;
-          margin-bottom: 1.25rem;
+          margin: 0 0 0.85rem;
         }
         .home-service-card h3 {
-          font-size: 1.125rem;
-          font-weight: 600;
+          font-size: 1.06rem;
+          font-weight: 700;
           color: var(--slate-800);
-          margin-bottom: 0.5rem;
-          line-height: 1.3;
+          margin-bottom: 0.55rem;
+          line-height: 1.35;
         }
         .home-service-card p {
-          font-size: 0.9375rem;
+          font-size: 0.9rem;
           color: var(--text-muted);
-          line-height: 1.65;
+          line-height: 1.62;
           margin: 0;
+          flex: 1;
         }
         .home-service-card-link {
           display: block;
@@ -707,14 +962,33 @@ export default function Home() {
           text-decoration: none;
         }
         .home-service-card-read-more {
-          display: inline-block;
-          margin-top: 0.85rem;
-          font-size: 0.9375rem;
-          font-weight: 600;
-          color: var(--purple-600);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 0.95rem;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+          color: var(--purple-700);
+          position: relative;
+          width: fit-content;
+          padding: 0.42rem 0.72rem;
+          border-radius: 8px;
+          border: 1px solid rgba(31, 79, 134, 0.3);
+          background: rgba(31, 79, 134, 0.08);
+          white-space: nowrap;
+          line-height: 1;
+          transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+        }
+        .home-service-card-read-more::after {
+          content: '›';
+          margin-left: 0.35rem;
         }
         .home-service-card-link:hover .home-service-card-read-more {
-          color: var(--purple-700);
+          color: var(--blue-700);
+          border-color: rgba(31, 79, 134, 0.45);
+          background: rgba(31, 79, 134, 0.14);
         }
         .services-cta {
           margin-top: 2.5rem;
@@ -722,138 +996,213 @@ export default function Home() {
         }
 
         .why-choose-us {
-          background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 100%);
+          background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+        }
+        .why-shell {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 18px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          box-shadow: 0 16px 36px rgba(15, 39, 71, 0.08);
+          padding: 1.2rem 1rem 1rem;
+        }
+        @media (min-width: 768px) {
+          .why-shell {
+            padding: 1.5rem 1.4rem 1.35rem;
+          }
         }
         .why-header {
-          margin-bottom: 2.5rem;
+          margin-bottom: 1.1rem;
           text-align: center;
         }
         .why-eyebrow {
           display: block;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          color: var(--purple-600);
+          font-size: 0.73rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          color: var(--purple-700);
           text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-        .why-accent {
-          width: 56px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 1rem;
+          margin-bottom: 0.45rem;
         }
         .why-title {
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
-          color: var(--slate-800);
-          margin: 0 0 0.75rem 0;
+          font-size: clamp(1.7rem, 4vw, 2.3rem);
+          color: var(--slate-900);
+          margin: 0 0 0.42rem 0;
+          letter-spacing: -0.02em;
         }
         .why-intro {
-          font-size: 1.0625rem;
+          font-size: 0.98rem;
           color: var(--text-muted);
-          max-width: 560px;
+          max-width: 700px;
           margin: 0 auto;
-          line-height: 1.6;
+          line-height: 1.58;
+        }
+        .why-layout {
+          display: grid;
+          gap: 0.85rem;
+        }
+        @media (min-width: 1024px) {
+          .why-layout {
+            grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.6fr);
+            gap: 1rem;
+            align-items: stretch;
+          }
+        }
+        .why-feature-card {
+          border-radius: 14px;
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          background: linear-gradient(135deg, #0f2747 0%, #173b68 55%, #1f5d96 100%);
+          box-shadow: 0 14px 30px rgba(15, 23, 42, 0.26);
+          padding: 1rem 0.95rem;
+          color: #ffffff;
+        }
+        .why-feature-kicker {
+          margin: 0 0 0.4rem;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.82);
+        }
+        .why-feature-card h3 {
+          margin: 0 0 0.42rem;
+          font-size: 1.08rem;
+          line-height: 1.34;
+          letter-spacing: -0.01em;
+          color: #ffffff;
+        }
+        .why-feature-card p {
+          margin: 0;
+          font-size: 0.86rem;
+          line-height: 1.55;
+          color: rgba(255, 255, 255, 0.9);
+        }
+        .why-feature-points {
+          margin-top: 0.75rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem;
+        }
+        .why-feature-points span {
+          display: inline-flex;
+          align-items: center;
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          border-radius: 999px;
+          padding: 0.24rem 0.55rem;
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.92);
+          background: rgba(255, 255, 255, 0.08);
         }
         .why-grid {
           display: grid;
-          gap: 1.5rem;
+          gap: 0.75rem;
           grid-template-columns: 1fr;
         }
         @media (min-width: 640px) {
-          .why-grid { grid-template-columns: repeat(2, 1fr); }
+          .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (min-width: 1024px) {
-          .why-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+          .why-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
         }
         .why-card {
           position: relative;
           background: var(--white);
-          border: 1px solid var(--border);
+          border: 1px solid rgba(148, 163, 184, 0.22);
           border-radius: 12px;
-          padding: 1.75rem 1.5rem;
-          transition: box-shadow 0.25s ease, border-color 0.25s ease;
+          padding: 0.85rem 0.8rem 0.8rem;
+          transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+          box-shadow: 0 6px 16px rgba(15, 39, 71, 0.06);
         }
         .why-card:hover {
-          border-color: var(--purple-400);
-          box-shadow: 0 12px 36px rgba(124, 58, 237, 0.08);
+          border-color: rgba(31, 79, 134, 0.34);
+          box-shadow: 0 12px 24px rgba(15, 39, 71, 0.12);
+          transform: translateY(-2px);
         }
-        .why-num {
-          position: absolute;
-          top: 1.25rem;
-          right: 1.25rem;
-          font-size: 1.75rem;
+        .why-card-index {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 8px;
+          background: linear-gradient(135deg, rgba(31, 79, 134, 0.12), rgba(74, 134, 189, 0.18));
+          color: var(--purple-700);
+          font-size: 0.75rem;
           font-weight: 700;
-          color: var(--slate-100);
-          font-family: var(--font-display);
-          line-height: 1;
-        }
-        .why-card-bar {
-          width: 40px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin-bottom: 1.25rem;
+          margin-bottom: 0.45rem;
         }
         .why-card h3 {
-          font-size: 1.125rem;
-          font-weight: 600;
+          font-size: 0.93rem;
+          font-weight: 700;
           color: var(--slate-800);
-          margin-bottom: 0.5rem;
-          line-height: 1.3;
+          margin-bottom: 0.28rem;
+          line-height: 1.34;
         }
         .why-card p {
-          font-size: 0.9375rem;
+          font-size: 0.82rem;
           color: var(--text-muted);
-          line-height: 1.65;
+          line-height: 1.52;
           margin: 0;
         }
 
         .home-industries {
           background: linear-gradient(180deg, var(--white) 0%, var(--slate-50) 100%);
         }
+        .industries-shell {
+          border: none;
+          border-radius: 0;
+          background: transparent;
+          box-shadow: none;
+          padding: 0;
+        }
+        @media (min-width: 768px) {
+          .industries-shell {
+            padding: 0;
+          }
+        }
         .industries-header {
-          margin-bottom: 2.5rem;
+          margin-bottom: 1.25rem;
           text-align: center;
+        }
+        .industries-eyebrow-wrap {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.36rem 0.82rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.34);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.88));
+          margin-bottom: 0.62rem;
         }
         .industries-eyebrow {
           display: block;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          color: var(--purple-600);
+          font-size: 0.73rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--purple-700);
           text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-        .industries-accent {
-          width: 56px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 1rem;
+          margin: 0;
         }
         .industries-title {
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
-          color: var(--slate-800);
-          margin: 0 0 0.75rem 0;
+          font-size: clamp(2rem, 4.6vw, 3rem);
+          color: var(--slate-900);
+          margin: 0 0 0.62rem 0;
+          letter-spacing: -0.028em;
+          line-height: 1.14;
         }
         .industries-intro {
-          font-size: 1.0625rem;
+          font-size: clamp(1rem, 2.2vw, 1.15rem);
           color: var(--text-muted);
-          max-width: 560px;
+          max-width: 760px;
           margin: 0 auto;
-          line-height: 1.6;
+          line-height: 1.62;
         }
         .industries-scroll-wrap {
           position: relative;
-          margin: 0 -1rem;
-          padding: 0 1rem;
           overflow: hidden;
+          width: 100%;
+          margin: 0;
+          padding: 0;
         }
         .industries-scroll-wrap::before,
         .industries-scroll-wrap::after {
@@ -861,56 +1210,54 @@ export default function Home() {
           position: absolute;
           top: 0;
           bottom: 0;
-          width: 40px;
+          width: 36px;
           z-index: 2;
           pointer-events: none;
         }
         .industries-scroll-wrap::before {
           left: 0;
-          background: linear-gradient(90deg, var(--slate-50) 0%, transparent 100%);
+          background: linear-gradient(90deg, #f8fbff 0%, transparent 100%);
         }
         .industries-scroll-wrap::after {
           right: 0;
-          background: linear-gradient(270deg, var(--slate-50) 0%, transparent 100%);
-        }
-        @media (min-width: 768px) {
-          .industries-scroll-wrap { margin: 0 -1.5rem; padding: 0 1.5rem; }
-          .industries-scroll-wrap::before,
-          .industries-scroll-wrap::after { width: 60px; }
+          background: linear-gradient(270deg, #f8fbff 0%, transparent 100%);
         }
         .industries-track {
           display: flex;
-          gap: 1.25rem;
+          gap: 0.9rem;
           width: max-content;
-          padding: 0.25rem 0 1.5rem;
-          animation: industries-scroll 45s linear infinite;
+          padding: 0.2rem 0 0.4rem;
+          animation: industries-marquee 34s linear infinite;
+          will-change: transform;
+          justify-content: flex-start;
         }
         .industries-track:hover {
           animation-play-state: paused;
         }
-        @keyframes industries-scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        @keyframes industries-marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
         }
         .industries-card {
-          flex: 0 0 auto;
-          width: 280px;
+          display: flex;
+          flex-direction: column;
           background: var(--white);
-          border-radius: 12px;
+          border-radius: 14px;
           overflow: hidden;
-          border: 1px solid var(--border);
-          transition: box-shadow 0.25s ease, transform 0.2s ease;
-        }
-        @media (min-width: 640px) {
-          .industries-card { width: 320px; }
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          transition: box-shadow 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
+          width: min(290px, 76vw);
+          min-height: 100%;
+          box-shadow: 0 6px 18px rgba(15, 39, 71, 0.06);
         }
         .industries-card:hover {
-          box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12);
-          transform: translateY(-4px);
+          box-shadow: 0 14px 28px rgba(15, 39, 71, 0.12);
+          transform: translateY(-3px);
+          border-color: rgba(31, 79, 134, 0.34);
         }
         .industries-card-img {
           position: relative;
-          aspect-ratio: 4/3;
+          aspect-ratio: 16/9;
           overflow: hidden;
         }
         .industries-card-img img {
@@ -926,20 +1273,68 @@ export default function Home() {
         .industries-card-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 40%, rgba(15, 23, 42, 0.6) 100%);
+          background: linear-gradient(180deg, rgba(2, 6, 23, 0.08) 0%, rgba(2, 6, 23, 0.34) 100%);
           pointer-events: none;
         }
+        .industries-card-content {
+          padding: 0.8rem 0.82rem 0.88rem;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+        .industries-card-index {
+          margin: 0 0 0.36rem 0;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: var(--purple-700);
+        }
         .industries-card h3 {
-          font-size: 1rem;
-          font-weight: 600;
+          font-size: 0.94rem;
+          font-weight: 700;
           color: var(--slate-800);
-          margin: 0;
-          padding: 1.25rem 1.25rem 1.5rem;
+          margin: 0 0 0.32rem 0;
           line-height: 1.35;
         }
+        .industries-card-content > p:not(.industries-card-index) {
+          margin: 0;
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          line-height: 1.5;
+          flex: 1;
+        }
+        .industries-card-btn {
+          margin-top: 0.62rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: fit-content;
+          padding: 0.32rem 0.62rem;
+          border-radius: 8px;
+          border: 1px solid rgba(31, 79, 134, 0.26);
+          background: rgba(31, 79, 134, 0.08);
+          color: var(--purple-700);
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .industries-card-btn:hover {
+          color: var(--blue-700);
+          border-color: rgba(31, 79, 134, 0.42);
+          background: rgba(31, 79, 134, 0.14);
+        }
         .industries-cta {
-          margin-top: 2.5rem;
+          margin-top: 1.25rem;
           text-align: center;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .industries-track {
+            animation: none;
+          }
         }
 
         .home-presence {
@@ -1004,7 +1399,7 @@ export default function Home() {
         }
         .presence-card:hover {
           border-color: var(--purple-400);
-          box-shadow: 0 8px 28px rgba(124, 58, 237, 0.08);
+          box-shadow: 0 8px 28px rgba(31, 79, 134, 0.12);
         }
         .presence-card-main {
           padding: 1.75rem;
@@ -1078,7 +1473,7 @@ export default function Home() {
           border-radius: 16px;
           padding: 2.5rem 1.5rem;
           text-align: center;
-          box-shadow: 0 20px 50px rgba(124, 58, 237, 0.25);
+          box-shadow: 0 20px 50px rgba(15, 39, 71, 0.3);
         }
         .home-cta-title {
           font-size: clamp(1.35rem, 3vw, 1.75rem);
@@ -1115,51 +1510,68 @@ export default function Home() {
           opacity: 0.8;
         }
         .clients-header {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           text-align: center;
           margin-bottom: 2.5rem;
-          max-width: 640px;
+          max-width: 100%;
           margin-left: auto;
           margin-right: auto;
         }
+        .clients-eyebrow-wrap {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.36rem 0.82rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.34);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.88));
+          margin-bottom: 0.62rem;
+        }
         .clients-eyebrow {
           display: block;
-          font-size: 0.8125rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          color: var(--purple-600);
+          font-size: 0.73rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--purple-700);
           text-transform: uppercase;
-          margin-bottom: 0.5rem;
-        }
-        .clients-accent {
-          width: 56px;
-          height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
-          border-radius: 2px;
-          margin: 0 auto 1rem;
+          margin: 0;
         }
         .clients-title {
           font-family: var(--font-display);
-          font-size: clamp(1.75rem, 4vw, 2.25rem);
+          font-size: clamp(2rem, 4.6vw, 3rem);
           font-weight: 400;
-          color: var(--slate-800);
-          margin: 0 0 0.75rem 0;
-          line-height: 1.2;
+          color: var(--slate-900);
+          margin: 0 0 0.62rem 0;
+          line-height: 1.14;
+          letter-spacing: -0.028em;
+          white-space: nowrap;
+          text-align: center;
+          display: inline-block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        @media (max-width: 991px) {
+          .clients-title {
+            white-space: normal;
+          }
         }
         .clients-intro {
-          font-size: 1.0625rem;
+          font-size: clamp(1rem, 2.2vw, 1.15rem);
           color: var(--text-muted);
-          line-height: 1.6;
+          line-height: 1.62;
           margin: 0;
         }
         .clients-card {
           background: var(--white);
           border: 1px solid var(--border);
           border-radius: 16px;
-          padding: 2.5rem 2rem;
+          padding: 2rem 1.5rem;
           text-align: center;
           box-shadow: 0 4px 24px rgba(30, 41, 59, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-          max-width: 720px;
-          margin: 0 auto;
+          max-width: 980px;
+          margin: 0 auto 1rem;
           transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .clients-card:hover {
@@ -1218,7 +1630,7 @@ export default function Home() {
           font-size: 0.9375rem;
           color: var(--text-muted);
           line-height: 1.5;
-          margin: 0 0 1.5rem 0;
+          margin: 0 0 1.1rem 0;
         }
         .clients-cta {
           display: inline-flex;
@@ -1232,16 +1644,99 @@ export default function Home() {
           border: none;
           border-radius: 10px;
           text-decoration: none;
-          box-shadow: 0 2px 12px rgba(124, 58, 237, 0.35);
+          box-shadow: 0 2px 12px rgba(31, 79, 134, 0.35);
           transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
         }
         .clients-cta:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+          box-shadow: 0 6px 20px rgba(31, 79, 134, 0.42);
           opacity: 1;
         }
         .clients-cta:active {
           transform: translateY(0);
+        }
+        .clients-response-grid {
+          display: grid;
+          gap: 0.8rem;
+          grid-template-columns: 1fr;
+          max-width: 980px;
+          margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+          .clients-response-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.9rem;
+          }
+        }
+        .clients-response-card {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 12px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          padding: 0.85rem 0.82rem;
+          box-shadow: 0 6px 18px rgba(15, 39, 71, 0.06);
+        }
+        .clients-response-quote {
+          margin: 0 0 0.42rem 0;
+          font-size: 0.84rem;
+          line-height: 1.52;
+          color: var(--slate-700);
+          font-weight: 500;
+        }
+        .clients-response-by {
+          margin: 0;
+          font-size: 0.74rem;
+          line-height: 1.35;
+          color: var(--purple-700);
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+        .home-seo-intent {
+          padding-top: 2rem;
+          padding-bottom: 0.8rem;
+        }
+        .home-seo-intent-shell {
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 14px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          box-shadow: 0 10px 24px rgba(15, 39, 71, 0.06);
+          padding: 1rem;
+        }
+        .home-seo-intent-shell h2 {
+          margin: 0;
+          color: var(--slate-900);
+          font-size: clamp(1.18rem, 2.4vw, 1.54rem);
+          line-height: 1.35;
+        }
+        .home-seo-intent-shell p {
+          margin: 0.6rem 0 0;
+          color: var(--slate-600);
+          line-height: 1.62;
+          font-size: 0.94rem;
+        }
+        .home-seo-intent-links {
+          margin-top: 0.78rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.45rem;
+        }
+        .home-seo-intent-links a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.42rem 0.7rem;
+          border-radius: 999px;
+          border: 1px solid rgba(31, 93, 150, 0.28);
+          background: rgba(31, 93, 150, 0.08);
+          color: var(--primary);
+          font-size: 0.8rem;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+        .home-seo-intent-links a:hover {
+          color: #173b68;
+          border-color: rgba(31, 93, 150, 0.45);
+          background: rgba(31, 93, 150, 0.12);
         }
       `}</style>
     </>

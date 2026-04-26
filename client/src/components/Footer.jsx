@@ -58,7 +58,7 @@ function ScrollToTop() {
       aria-label="Scroll to top"
       aria-hidden={!visible}
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="18 15 12 9 6 15" />
       </svg>
     </button>
@@ -78,47 +78,54 @@ export default function Footer() {
   return (
     <footer className="footer" role="contentinfo">
       <div className="footer-container">
-        <div className="footer-grid">
-          {/* Column 1: Brand */}
-          <div className="footer-col footer-brand">
+        <div className="footer-top">
+          <div className="footer-brand-row">
             <Link to="/" className="footer-logo-link" aria-label="Dwivedi Gupta & Co. (DGC India) – Home">
               <img
-                src="/CA%20India%20Logo.png"
+                src="/dist/logofooter.png"
                 alt=""
                 className="footer-logo-img"
-                width="120"
-                height="44"
+                width="72"
+                height="72"
               />
             </Link>
-            <p className="footer-company-name">Dwivedi Gupta & Co.</p>
-            <p className="footer-tagline">
-              Dwivedi Gupta & Co. is a Chartered Accountants firm providing taxation, audit,
-              advisory, and financial consulting services since 2003 with offices in Varanasi,
-              Delhi, Kolkata, and Bokaro.
-            </p>
+            <div className="footer-brand-text">
+              <p className="footer-company-name">Dwivedi Gupta & Co.</p>
+              <p className="footer-tagline">Tax, audit, advisory, and financial consulting since 2003.</p>
+              <p className="footer-tagline">Serving businesses with partner-led expertise, compliance clarity, and long-term value.</p>
+            </div>
+          </div>
+          <div className="footer-contact-row">
+            <a href={`mailto:${EMAIL}`} className="footer-contact-chip">
+              <EmailIcon /> {EMAIL}
+            </a>
+            <a href={`tel:${PHONE}`} className="footer-contact-chip">
+              <PhoneIcon /> {PHONE_DISPLAY}
+            </a>
             <Link to="/schedule-consultation" className="footer-cta-btn">
               Schedule Consultation
             </Link>
-            <div className="footer-social" aria-label="Social and contact links">
-              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="LinkedIn">
-                <LinkedInIcon />
-              </a>
-              <a href={`mailto:${EMAIL}`} className="footer-social-icon" aria-label="Email">
-                <EmailIcon />
-              </a>
-              <a href={`tel:${PHONE}`} className="footer-social-icon" aria-label="Phone">
-                <PhoneIcon />
-              </a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="WhatsApp">
-                <WhatsAppIcon />
-              </a>
-            </div>
           </div>
+          <div className="footer-social" aria-label="Social and contact links">
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="LinkedIn">
+              <LinkedInIcon />
+            </a>
+            <a href={`mailto:${EMAIL}`} className="footer-social-icon" aria-label="Email">
+              <EmailIcon />
+            </a>
+            <a href={`tel:${PHONE}`} className="footer-social-icon" aria-label="Phone">
+              <PhoneIcon />
+            </a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="WhatsApp">
+              <WhatsAppIcon />
+            </a>
+          </div>
+        </div>
 
-          {/* Column 2: Quick Links */}
+        <div className="footer-grid">
           <nav className="footer-col" aria-label="Quick links">
             <h3 className="footer-heading">Quick Links</h3>
-            <ul className="footer-list">
+            <ul className="footer-list footer-list-compact">
               {QUICK_LINKS.map(({ to, label }) => (
                 <li key={label}>
                   <Link to={to} className="footer-link">{label}</Link>
@@ -127,10 +134,9 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Column 3: Services */}
           <div className="footer-col">
             <h3 className="footer-heading">Services</h3>
-            <ul className="footer-list">
+            <ul className="footer-list footer-list-compact">
               {FOOTER_SERVICES.map(({ to, label }) => (
                 <li key={label}>
                   <Link to={to} className="footer-link">{label}</Link>
@@ -139,19 +145,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Office Addresses */}
+          <div className="footer-col">
+            <h3 className="footer-heading">Resources</h3>
+            <ul className="footer-list footer-list-compact">
+              {RESOURCE_LINKS.map(({ to, label }) => (
+                <li key={label}>
+                  <Link to={to} className="footer-link">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="footer-col">
             <h3 className="footer-heading">Our Offices</h3>
-            <ul className="footer-list footer-offices">
+            <ul className="footer-list footer-offices-compact">
               {OFFICES.map(({ city, label, address, mapUrl }) => (
                 <li key={city}>
-                  <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="footer-office-link">
+                  <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="footer-office-chip">
                     <span className="footer-office-icon" aria-hidden="true">
                       <LocationIcon />
                     </span>
                     <span className="footer-office-text">
                       <strong>{city}</strong> — {label}
-                      <br />
                       <span className="footer-office-address">{address}</span>
                     </span>
                   </a>
@@ -160,7 +175,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 5: Newsletter & Resources */}
           <div className="footer-col footer-newsletter-col">
             <h3 className="footer-heading">Newsletter</h3>
             {subscribed ? (
@@ -178,14 +192,10 @@ export default function Footer() {
                 <button type="submit" className="footer-newsletter-btn">Subscribe</button>
               </form>
             )}
-            <h3 className="footer-heading footer-resources-heading">Resources</h3>
-            <ul className="footer-list">
-              {RESOURCE_LINKS.map(({ to, label }) => (
-                <li key={label}>
-                  <Link to={to} className="footer-link">{label}</Link>
-                </li>
-              ))}
-            </ul>
+            <div className="footer-newsletter-note">
+              <p>Monthly updates on tax, compliance, and regulatory changes.</p>
+              <p>For urgent queries, our team typically responds within 1 business day.</p>
+            </div>
           </div>
         </div>
 
@@ -223,99 +233,149 @@ export default function Footer() {
       <style>{`
         .footer {
           position: relative;
-          background: linear-gradient(180deg, #0c1222 0%, #071018 50%, #050b12 100%);
-          color: #e2e8f0;
+          background: #0f2747;
+          color: #ffffff;
           padding: 0;
           margin-top: auto;
+          margin-top: 1.25rem;
         }
         .footer-container {
           width: 100%;
-          max-width: 1280px;
+          max-width: 1320px;
           margin: 0 auto;
-          padding: 3.5rem 1.5rem 2rem;
+          padding: 1.6rem 1.1rem 1rem;
+        }
+        .footer-top {
+          display: grid;
+          gap: 0.9rem;
+          border: 1px solid rgba(140, 183, 220, 0.22);
+          border-radius: 14px;
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+          padding: 0.85rem 0.9rem;
+          margin-bottom: 1rem;
+        }
+        @media (min-width: 900px) {
+          .footer-top {
+            grid-template-columns: 1.25fr 1.35fr auto;
+            align-items: center;
+            gap: 0.8rem 1rem;
+          }
+        }
+        .footer-brand-row {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          min-width: 0;
+        }
+        .footer-brand-text {
+          min-width: 0;
+        }
+        .footer-contact-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.45rem;
+        }
+        .footer-contact-chip {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.4rem;
+          min-height: 44px;
+          border: 1px solid rgba(140, 183, 220, 0.28);
+          border-radius: 12px;
+          padding: 0.5rem 1rem;
+          color: #ffffff;
+          font-size: 0.8rem;
+          font-weight: 600;
+          text-decoration: none;
+          background: rgba(255, 255, 255, 0.08);
+          white-space: nowrap;
+        }
+        .footer-contact-chip:hover {
+          color: #ffffff;
+          border-color: rgba(140, 183, 220, 0.42);
+          background: rgba(255, 255, 255, 0.1);
         }
         .footer-grid {
           display: grid;
-          gap: 2.5rem 1.5rem;
-          margin-bottom: 2rem;
+          gap: 1.15rem 1rem;
+          margin-bottom: 0.9rem;
         }
         @media (min-width: 640px) {
-          .footer-grid { grid-template-columns: 1fr 1fr; }
+          .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (min-width: 900px) {
-          .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+          .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
         @media (min-width: 1200px) {
-          .footer-grid {
-            grid-template-columns: 1.6fr 1fr 1fr 1.4fr 1.2fr;
-            gap: 2.5rem 2rem;
-            margin-bottom: 2.5rem;
-          }
+          .footer-grid { grid-template-columns: 1fr 1fr 1fr 1.35fr 1fr; }
         }
         .footer-col { min-width: 0; }
-        .footer-brand { max-width: 340px; }
         .footer-logo-link {
           display: inline-flex;
-          margin-bottom: 1rem;
+          margin-bottom: 0;
           transition: opacity 0.2s ease;
         }
         .footer-logo-link:hover { opacity: 0.9; }
-        .footer-logo-img { height: 44px; width: auto; object-fit: contain; display: block; }
+        .footer-logo-img { height: 56px; width: 56px; object-fit: contain; display: block; }
         .footer-tagline {
-          color: #94a3b8;
-          font-size: 0.9rem;
-          line-height: 1.6;
-          margin-bottom: 1.25rem;
+          color: #ffffff;
+          font-size: 0.8rem;
+          line-height: 1.45;
+          margin: 0;
         }
         .footer-company-name {
           font-family: var(--font-display);
-          font-size: 1.125rem;
+          font-size: 0.98rem;
           font-weight: 500;
           color: #fff;
-          margin-bottom: 0.75rem;
+          margin: 0 0 0.2rem;
           letter-spacing: 0.02em;
         }
         .footer-cta-btn {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 0.625rem 1.25rem;
-          font-size: 0.875rem;
+          min-height: 44px;
+          padding: 0.5rem 1rem;
+          font-size: 0.8rem;
           font-weight: 600;
           color: #fff;
-          background: linear-gradient(135deg, var(--purple-600), var(--purple-700));
-          border: none;
-          border-radius: 6px;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(140, 183, 220, 0.28);
+          border-radius: 12px;
           text-decoration: none;
           transition: box-shadow 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
-          margin-bottom: 1.5rem;
+          white-space: nowrap;
         }
         .footer-cta-btn:hover {
-          box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
+          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35);
           transform: translateY(-1px);
           opacity: 0.95;
         }
-        .footer-cta-btn:focus-visible { outline: 2px solid var(--purple-400); outline-offset: 2px; }
+        .footer-cta-btn:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
         .footer-social {
           display: flex;
-          gap: 0.75rem;
+          gap: 0.42rem;
           flex-wrap: wrap;
+          justify-content: flex-start;
         }
         .footer-social-icon {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
+          width: 34px;
+          height: 34px;
           border-radius: 8px;
-          background: rgba(255, 255, 255, 0.06);
-          color: #60A5FA;
+          background: rgba(255, 255, 255, 0.1);
+          color: #ffffff;
           transition: color 0.2s ease, background 0.2s ease, box-shadow 0.25s ease;
         }
         .footer-social-icon:hover {
-          color: #93c5fd;
-          background: rgba(96, 165, 250, 0.15);
-          box-shadow: 0 0 16px rgba(96, 165, 250, 0.3);
+          color: #ffffff;
+          background: rgba(140, 183, 220, 0.25);
+          box-shadow: 0 0 14px rgba(96, 165, 250, 0.25);
         }
         .footer-heading {
           font-family: var(--font-body);
@@ -324,57 +384,72 @@ export default function Footer() {
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: #fff;
-          margin-bottom: 1rem;
+          margin-bottom: 0.55rem;
         }
-        .footer-resources-heading { margin-top: 1.5rem; }
         .footer-list { list-style: none; padding: 0; margin: 0; }
-        .footer-list li { margin-bottom: 0.5rem; }
+        .footer-list li { margin-bottom: 0.28rem; }
+        .footer-list-compact { columns: 1; }
         .footer-link {
           display: inline-block;
-          color: #94a3b8;
-          font-size: 0.9rem;
+          color: #ffffff;
+          font-size: 0.8rem;
           text-decoration: none;
           transition: color 0.2s ease, text-indent 0.2s ease;
         }
         .footer-link:hover {
-          color: #60A5FA;
+          color: #ffffff;
           text-indent: 2px;
         }
-        .footer-offices { display: flex; flex-direction: column; gap: 0.75rem; }
-        .footer-office-link {
-          display: inline-flex;
-          align-items: flex-start;
-          gap: 0.5rem;
-          color: #94a3b8;
-          font-size: 0.85rem;
-          text-decoration: none;
-          transition: color 0.2s ease;
+        .footer-offices-compact {
+          display: grid;
+          gap: 0.4rem;
         }
-        .footer-office-link:hover { color: #60A5FA; }
+        .footer-office-chip {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.42rem;
+          color: #ffffff;
+          font-size: 0.78rem;
+          text-decoration: none;
+          transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+          border: 1px solid rgba(140, 183, 220, 0.24);
+          border-radius: 10px;
+          padding: 0.38rem 0.46rem;
+          background: rgba(255, 255, 255, 0.04);
+        }
+        .footer-office-chip:hover {
+          color: #ffffff;
+          border-color: rgba(140, 183, 220, 0.4);
+          background: rgba(255, 255, 255, 0.08);
+        }
         .footer-office-icon {
           flex-shrink: 0;
-          color: #60A5FA;
-          margin-top: 2px;
+          color: #93c5fd;
+          margin-top: 1px;
         }
-        .footer-office-text strong { color: #e2e8f0; font-size: 0.9rem; }
-        .footer-office-address { color: #64748b; font-size: 0.8rem; }
+        .footer-office-text {
+          display: inline-flex;
+          flex-direction: column;
+          gap: 0.08rem;
+        }
+        .footer-office-text strong { color: #ffffff; font-size: 0.78rem; font-weight: 700; }
+        .footer-office-address { color: #ffffff; font-size: 0.72rem; line-height: 1.35; }
         .footer-newsletter-form {
           display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 0.5rem;
+          flex-direction: column;
+          gap: 0.42rem;
           margin-bottom: 0;
+          width: 100%;
           max-width: 320px;
         }
         .footer-newsletter-input {
-          flex: 1;
-          min-width: 140px;
-          padding: 0.6rem 0.75rem;
-          font-size: 0.875rem;
+          width: 100%;
+          padding: 0.46rem 0.62rem;
+          font-size: 0.8rem;
           color: #0f172a;
           background: rgba(255, 255, 255, 0.95);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 6px;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          border-radius: 8px;
         }
         .footer-newsletter-input::placeholder { color: #64748b; }
         .footer-newsletter-input:focus {
@@ -383,39 +458,53 @@ export default function Footer() {
           box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.25);
         }
         .footer-newsletter-btn {
-          flex-shrink: 0;
-          padding: 0.6rem 1rem;
-          font-size: 0.8125rem;
+          width: 100%;
+          padding: 0.42rem 0.88rem;
+          font-size: 0.76rem;
           font-weight: 600;
-          color: #0f172a;
-          background: linear-gradient(135deg, #60A5FA, #3B82F6);
+          color: #ffffff;
+          background: linear-gradient(135deg, var(--purple-700), var(--blue-700));
           border: none;
-          border-radius: 6px;
+          border-radius: 8px;
           cursor: pointer;
           transition: box-shadow 0.25s ease, opacity 0.2s ease;
         }
         .footer-newsletter-btn:hover {
-          box-shadow: 0 0 16px rgba(96, 165, 250, 0.4);
+          box-shadow: 0 8px 18px rgba(15, 23, 42, 0.28);
           opacity: 0.95;
         }
-        .footer-newsletter-success { color: #86efac; font-size: 0.9rem; }
+        .footer-newsletter-success { color: #ffffff; font-size: 0.82rem; }
+        .footer-newsletter-note {
+          margin-top: 0.55rem;
+          display: grid;
+          gap: 0.22rem;
+          width: 100%;
+          max-width: 320px;
+        }
+        .footer-newsletter-note p {
+          margin: 0;
+          font-size: 0.72rem;
+          line-height: 1.4;
+          color: #ffffff;
+          opacity: 0.92;
+        }
         .footer-divider {
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-          margin-bottom: 1.5rem;
+          background: linear-gradient(90deg, transparent, rgba(191, 219, 254, 0.35), transparent);
+          margin-bottom: 0.8rem;
         }
         .footer-bottom {
           display: flex;
           flex-wrap: wrap;
           align-items: center;
           justify-content: center;
-          gap: 1rem;
+          gap: 0.65rem;
           padding-top: 0;
           text-align: center;
         }
         .footer-copyright {
-          font-size: 0.8125rem;
-          color: #64748b;
+          font-size: 0.76rem;
+          color: #ffffff;
           letter-spacing: 0.02em;
         }
         .footer-bottom-links {
@@ -426,13 +515,13 @@ export default function Footer() {
           justify-content: center;
         }
         .footer-bottom-link {
-          font-size: 0.8125rem;
-          color: #94a3b8;
+          font-size: 0.76rem;
+          color: #ffffff;
           text-decoration: none;
           transition: color 0.2s ease;
         }
-        .footer-bottom-link:hover { color: #60A5FA; }
-        .footer-bottom-sep { color: #475569; font-size: 0.75rem; user-select: none; }
+        .footer-bottom-link:hover { color: #ffffff; }
+        .footer-bottom-sep { color: #8fb4d8; font-size: 0.7rem; user-select: none; }
         .footer-whatsapp-wrap {
           position: fixed;
           bottom: calc(max(1.25rem, env(safe-area-inset-bottom)) + 54px + 10px);
@@ -515,32 +604,32 @@ export default function Footer() {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 54px;
-          height: 54px;
+          width: 58px;
+          height: 58px;
           padding: 0;
           background:
-            radial-gradient(120% 120% at 30% 20%, rgba(147, 197, 253, 0.35), transparent 55%),
-            linear-gradient(145deg, #1e40af 0%, #1d4ed8 55%, #1e3a8a 100%);
-          border: 1px solid rgba(191, 219, 254, 0.3);
+            radial-gradient(120% 120% at 30% 20%, rgba(191, 219, 254, 0.4), transparent 52%),
+            linear-gradient(145deg, #173b68 0%, #1f5d96 58%, #0f2747 100%);
+          border: 1px solid rgba(191, 219, 254, 0.34);
           border-radius: 50%;
-          color: #eff6ff;
+          color: #f8fbff;
           cursor: pointer;
           box-shadow:
-            0 10px 24px rgba(15, 23, 42, 0.35),
-            0 3px 10px rgba(37, 99, 235, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            0 12px 28px rgba(15, 23, 42, 0.36),
+            0 4px 12px rgba(31, 93, 150, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28);
           opacity: 0;
           visibility: hidden;
           pointer-events: none;
-          transform: translateY(14px) scale(0.94);
+          transform: translateY(14px) scale(0.92);
           transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, box-shadow 0.25s ease, filter 0.25s ease;
         }
         .footer-scroll-top::after {
           content: '';
           position: absolute;
-          inset: 5px;
+          inset: 6px;
           border-radius: inherit;
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           pointer-events: none;
         }
         .footer-scroll-top--visible {
@@ -553,21 +642,21 @@ export default function Footer() {
           transform: translateY(-3px) scale(1.03);
           filter: brightness(1.05);
           box-shadow:
-            0 16px 32px rgba(30, 64, 175, 0.4),
-            0 0 24px rgba(96, 165, 250, 0.3),
+            0 18px 36px rgba(23, 59, 104, 0.42),
+            0 0 26px rgba(96, 165, 250, 0.28),
             inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         .footer-scroll-top--visible:active {
           transform: translateY(0) scale(0.98);
         }
         .footer-scroll-top:focus-visible {
-          outline: 2px solid #bfdbfe;
+          outline: 2px solid rgba(191, 219, 254, 0.9);
           outline-offset: 3px;
         }
         @media (max-width: 640px) {
           .footer-scroll-top {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             bottom: max(1rem, env(safe-area-inset-bottom));
             right: max(1rem, env(safe-area-inset-right));
           }

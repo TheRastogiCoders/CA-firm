@@ -1,20 +1,31 @@
 import { Link } from 'react-router-dom';
 
-const coreValues = [
-  { title: 'Partnership', desc: 'Instead of being a distant service provider, we collaborate with our clients in all our engagements, work with them as a team and take ownership and responsibility of things, to create long lasting partnerships.' },
-  { title: 'Integrity', desc: 'Our services are aimed at protecting our client\'s interests. By adopting transparent processes and adhering to highest ethical standards, we ensure client confidentiality and our own credibility. Whilst collaborating with our clients, we remain absolutely independent to deliver unbiased opinions.' },
-  { title: 'Passion', desc: 'We are passionate for our client\'s success. By creating a highly stimulating work environment, working with utmost dedication and commitment and focusing on delivery and execution, we perform to not just satisfy but delight our clients.' },
-  { title: 'Excellence', desc: 'By continually focusing on quality and deploying best practices, we bring excellence in our work, add value for our clients and strive to enter the realm of supremacy.' },
+const valueCards = [
+  {
+    title: 'Partnership',
+    desc: 'We work as an extension of your team with ownership, accountability, and a long-term perspective.',
+  },
+  {
+    title: 'Integrity',
+    desc: 'Transparent processes and strong ethical standards guide every advisory and assurance engagement.',
+  },
+  {
+    title: 'Passion',
+    desc: 'We are deeply invested in client outcomes and committed to high-quality execution.',
+  },
+  {
+    title: 'Excellence',
+    desc: 'Continuous improvement, best practices, and technical depth define our delivery standards.',
+  },
 ];
 
-const strengths = [
-  '20+ Years Experience',
-  'Experienced Professionals',
-  'Multi-City Presence',
-  'Diverse Industry Expertise',
-  'Strong Client Relationships',
-  'Partner-Led Approach',
-  'Ethical Practices',
+const peopleMetrics = [
+  { value: '20', label: 'Audit Staff' },
+  { value: '10', label: 'Finance & Consultancy' },
+  { value: '8', label: 'Tax & Legal' },
+  { value: '5', label: 'Government Schemes' },
+  { value: '7', label: 'EDP Operators' },
+  { value: '10', label: 'Support Staff' },
 ];
 
 const industriesList = [
@@ -24,332 +35,536 @@ const industriesList = [
   { title: 'Trading & Export Businesses', image: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=85' },
   { title: 'Government & Public Sector', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=85' },
   { title: 'SMEs & Startups', image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1200&q=85' },
-  { title: 'Non-Profit Organizations', image: 'https://media.istockphoto.com/id/1391554503/photo/team-of-motivated-volunteers-gathering-hands-in-unity-after-successful-meeting-at-donation.jpg?s=612x612&w=0&k=20&c=zj-530d9qjnKtzwQhygQajjEySUav9urPEJaAXa2bxs=' },
 ];
 
-const presenceBranches = [
-  { initial: 'D', city: 'Delhi', address: '62, Shrestha Vihar, Vikas Marg Extension, Delhi – 110092', contact: 'In charge: Delhi Branch. Reach us for audit, tax & compliance in NCR.' },
-  { initial: 'K', city: 'Kolkata', address: 'Brijdham Housing Complex, 637 Dakshin Dari Road, 5th Floor Flat-5E, Building No 16-C, Kolkata, West Bengal', contact: 'In charge: Kolkata Branch. Serving Eastern India with local expertise.' },
-  { initial: 'B', city: 'Bokaro', address: 'C-1, 21A, 2nd Floor, City Centre, Sector-4, Bokaro Steel City, Jharkhand', contact: 'In charge: Bokaro Branch. Industry-focused CA services in the region.' },
+const offices = [
+  {
+    city: 'Varanasi',
+    kind: 'Head Office',
+    address: 'S-8/108-B-3-A Prashantpuri, M.A Road, Varanasi - 221002',
+  },
+  {
+    city: 'Delhi',
+    kind: 'Branch Office',
+    address: '62, Shrestha Vihar, Vikas Marg Extension, Delhi - 110092',
+  },
+  {
+    city: 'Kolkata',
+    kind: 'Branch Office',
+    address: 'Brijdham Housing Complex, 637 Dakshin Dari Road, 5th Floor Flat-5E, Kolkata',
+  },
+  {
+    city: 'Bokaro',
+    kind: 'Branch Office',
+    address: 'C-1, 21A, 2nd Floor, City Centre, Sector-4, Bokaro Steel City, Jharkhand',
+  },
 ];
 
 export default function About() {
   return (
     <>
-      {/* Hero — same style as Home */}
-      <section className="hero hero-about" aria-label="About hero">
-        <div className="hero-bg">
-          <div className="hero-bg-image" />
-          <div className="hero-overlay hero-overlay-base" />
-          <div className="hero-overlay hero-overlay-gradient" />
-          <div className="hero-vignette" />
-        </div>
-        <div className="hero-content">
-          <div className="container hero-container">
-            <div className="hero-slide hero-slide-active">
-              <div className="hero-accent" />
-              <p className="hero-label">DWIVEDI GUPTA & CO.</p>
-              <p className="hero-tagline">Chartered Accountants | Advisors | Consultants</p>
-              <h1 className="hero-title">About Dwivedi Gupta & Co.</h1>
-              <p className="hero-desc">
-                A reputed firm providing taxation, audit & assurance, advisory, and financial consulting services with over two decades of experience.
-              </p>
-              <div className="hero-cta">
-                <Link to="/schedule-consultation" className="hero-btn hero-btn-primary">Schedule Consultation</Link>
-                <Link to="/contact" className="hero-btn hero-btn-outline">Contact Us</Link>
-              </div>
-            </div>
+      <section className="page-hero about-page-hero">
+        <div className="container">
+          <span className="page-hero-kicker">About Dwivedi Gupta & Co.</span>
+          <h1 className="page-title about-page-title">Partner-led Chartered Accountant advisory, assurance, and compliance expertise since 2003.</h1>
+          <p className="page-subtitle about-page-intro">
+            We help businesses stay compliant, strengthen governance, and build long-term financial confidence.
+          </p>
+          <div className="page-hero-actions about-page-actions">
+            <Link to="/schedule-consultation" className="btn btn-primary">Schedule Consultation</Link>
+            <Link to="/contact" className="btn btn-secondary">Talk to Our Team</Link>
           </div>
         </div>
       </section>
 
-      {/* Who We Are — same as Home "About the Firm" */}
-      <section className="home-section home-about" id="who-we-are">
+      <section className="home-section about-seo-intent" aria-labelledby="about-seo-title">
         <div className="container">
-          <div className="about-header">
-            <span className="about-eyebrow">Who We Are</span>
-            <div className="about-accent" />
-            <h2 className="about-title">About the Firm</h2>
-          </div>
-          <div className="about-stats about-stats-primary">
-            <div className="about-stat">
-              <span className="about-stat-value">2003</span>
-              <span className="about-stat-label">Established</span>
-            </div>
-            <div className="about-stat">
-              <span className="about-stat-value">4</span>
-              <span className="about-stat-label">Offices</span>
-            </div>
-            <div className="about-stat">
-              <span className="about-stat-value">20+</span>
-              <span className="about-stat-label">Years Experience</span>
-            </div>
-          </div>
-          <div className="about-grid">
-            <div className="about-content">
-              <div className="about-lead">
-                <p>
-                  Founded in 2003, Dwivedi Gupta & Co. (DGC) is a Chartered Accountants firm providing Assurance, Taxation and Advisory/Consulting services. Revered for our professional ethos and technical expertise, drawn on perspicacity of over two decades and a team of highly competent professionals, we provide efficacious solutions to our client's needs, running deep into their engagements, understanding need and products.
-                </p>
-              </div>
-              <div className="about-rest">
-                <p>
-                  Our philosophy is of partnering with our clients and not being a distant service provider. Since businesses are inherently different, we tailor our services to meet client's specific needs and banish the 'one-size-fits-all' standardization.
-                </p>
-                <p>
-                  We recruit, train, motivate and retain highly capable and sharpest talent, who bring quality in their work and deliver the best solutions. Headquartered in Varanasi with branches at Kolkata, Delhi and Bokaro, at each center we aim to deploy state-of-art infrastructure, best practices and people development programs. Under the able direction of 7 partners & other qualified CA Staff, DGC's team strength is uniquely positioned to provide you quality opinions and services. Our interdisciplinary approach renders to give you seamless value.
-                </p>
-                <p>
-                  Serving to the wider business community for more than two decades, we enjoy unparalleled reputation and respect of our clients, who trust and rely on us for our expertise and professionalism.
-                </p>
-              </div>
-            </div>
-            <div className="about-images">
-              <div className="about-img-main">
-                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=85" alt="Professional advisory and consulting at Dwivedi Gupta & Co." />
-              </div>
-            </div>
-          </div>
-          <div className="about-compliance-link-wrap">
-            <p className="about-compliance-link-text">
-              Looking for registration numbers and statutory details?
+          <div className="about-seo-intent-shell">
+            <h2 id="about-seo-title">Trusted Chartered Accountants for tax planning, audit assurance, and compliance advisory</h2>
+            <p>
+              Our firm combines regulatory depth with practical business understanding to support organizations across taxation, GST,
+              statutory audit, company law, and strategic financial advisory. Explore our core service portfolio and industry expertise.
             </p>
-            <Link to="/compliance" className="btn btn-secondary">View Compliance Information</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision & Mission — card style like Home services/why */}
-      <section className="home-section home-services">
-        <div className="container">
-          <div className="services-header">
-            <span className="services-eyebrow">Our Direction</span>
-            <div className="services-accent" />
-            <h2 className="services-title">Vision & Mission</h2>
-            <p className="services-intro">Guiding principles that define our commitment to excellence and client success.</p>
-          </div>
-          <div className="home-services-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            <div className="home-service-card">
-              <span className="service-number">01</span>
-              <div className="service-card-accent" />
-              <h3>Vision</h3>
-              <p>To become a trusted leader in professional financial and advisory services through excellence, innovation, and integrity.</p>
-            </div>
-            <div className="home-service-card">
-              <span className="service-number">02</span>
-              <div className="service-card-accent" />
-              <h3>Mission</h3>
-              <p>Provide high-quality services with transparency; deliver innovative financial solutions; maintain ethical standards; build lasting client relationships; and continuously enhance our expertise and capabilities.</p>
+            <div className="about-seo-intent-links">
+              <Link to="/services">Explore CA Services</Link>
+              <Link to="/services/audit-assurance">Audit & Assurance</Link>
+              <Link to="/services/tax-compliance">Tax & Compliance</Link>
+              <Link to="/industries">Industries We Serve</Link>
+              <Link to="/team">Meet Our Team</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Values — same as Home "Why Choose Us" */}
-      <section className="home-section why-choose-us">
+      <section className="home-section about-overview">
         <div className="container">
-          <div className="why-header">
-            <span className="why-eyebrow">What We Stand For</span>
-            <div className="why-accent" />
-            <h2 className="why-title">Core Values</h2>
-            <p className="why-intro">Our philosophy, principles and values are so strongly weaved in our culture fabric that our beliefs are shared amongst all and which helps us earn our client's trust and respect.</p>
+          <div className="about-overview-grid">
+            <div className="about-overview-content">
+              <h2>Who We Are</h2>
+              <p>
+                Founded in 2003, Dwivedi Gupta & Co. (DGC) is a Chartered Accountants firm delivering taxation, audit, assurance, and advisory services through a strong partner-led approach.
+              </p>
+              <p>
+                We tailor every engagement to client context, growth stage, and compliance requirements instead of following a one-size-fits-all model.
+              </p>
+              <p>
+                Our office infrastructure, experienced professionals, and partner-led supervision enable us to handle
+                compliance-intensive assignments for corporates, institutions, and growth-stage businesses with confidence.
+              </p>
+              <p>
+                We focus on practical outcomes through disciplined planning, timely coordination, and quality review
+                so clients can make decisions with stronger financial and compliance confidence.
+              </p>
+              <div className="about-meta-grid">
+                <article className="about-meta-card"><strong>2003</strong><span>Established</span></article>
+                <article className="about-meta-card"><strong>4</strong><span>Office Locations</span></article>
+                <article className="about-meta-card"><strong>20+</strong><span>Years of Experience</span></article>
+                <article className="about-meta-card"><strong>7</strong><span>Partners</span></article>
+              </div>
+            </div>
+            <div className="about-overview-media">
+              <img src="/dist/officeimage.png" alt="Dwivedi Gupta and Co office and work environment" />
+            </div>
           </div>
-          <div className="why-grid">
-            {coreValues.map((item, i) => (
-              <div key={i} className="why-card">
-                <span className="why-num">{String(i + 1).padStart(2, '0')}</span>
-                <div className="why-card-bar" />
+        </div>
+      </section>
+
+      <section className="home-section about-vision-mission">
+        <div className="container">
+          <div className="about-section-head">
+            <span className="about-section-head-kicker">Our Direction</span>
+            <h2>Vision and Mission</h2>
+          </div>
+          <div className="about-vm-grid">
+            <article className="about-vm-card">
+              <p className="about-vm-label">Vision</p>
+              <p>To be a trusted leader in professional financial and advisory services through excellence, innovation, and integrity.</p>
+            </article>
+            <article className="about-vm-card">
+              <p className="about-vm-label">Mission</p>
+              <p>To deliver practical, ethical, and high-impact solutions that strengthen compliance, improve decision-making, and create long-term client value.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section about-values">
+        <div className="container">
+          <div className="about-section-head">
+            <span className="about-section-head-kicker">What We Stand For</span>
+            <h2>Core Values</h2>
+          </div>
+          <div className="about-values-grid">
+            {valueCards.map((item, i) => (
+              <article key={item.title} className="about-value-card">
+                <span className="about-value-index">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Our People — from PDF */}
-      <section className="home-section why-choose-us">
+      <section className="home-section about-people">
         <div className="container">
-          <div className="why-header">
-            <span className="why-eyebrow">Our People</span>
-            <div className="why-accent" />
-            <h2 className="why-title">Our People</h2>
-            <p className="why-intro">
-              We recruit, train, motivate and retain highly capable and sharpest talent, who bring quality in their work and deliver the best solutions. We nurture our people and turn them into our assets. The firm has adequate manpower and infrastructure to undertake specialized assignments from Government, Semi-Government, Financial Institutions, Insurance Companies, Bank and Corporate Sectors.
-            </p>
+          <div className="about-section-head">
+            <span className="about-section-head-kicker">Our People</span>
+            <h2>Team Capability</h2>
           </div>
-          <div className="about-stats" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))' }}>
-            <div className="about-stat"><span className="about-stat-value">20</span><span className="about-stat-label">Audit Staff</span></div>
-            <div className="about-stat"><span className="about-stat-value">10</span><span className="about-stat-label">Finance & Consultancy</span></div>
-            <div className="about-stat"><span className="about-stat-value">8</span><span className="about-stat-label">Tax & Legal Section</span></div>
-            <div className="about-stat"><span className="about-stat-value">5</span><span className="about-stat-label">Government Schemes & Consultancy</span></div>
-            <div className="about-stat"><span className="about-stat-value">7</span><span className="about-stat-label">E.D.P. Operators</span></div>
-            <div className="about-stat"><span className="about-stat-value">10</span><span className="about-stat-label">Semi-skilled Staff / Peons</span></div>
-          </div>
-          <p className="about-rest" style={{ maxWidth: '720px', margin: '1.5rem auto 0', textAlign: 'center' }}>
-            Apart from qualified CA and CS staff, our firm has strategic alliance with various expert professionals who are engaged based on assignment requirements.
+          <p className="about-people-intro">
+            We invest in recruiting and developing highly capable professionals, supported by strong infrastructure and multidisciplinary expertise.
           </p>
-        </div>
-      </section>
-
-      {/* Our Strengths — stat-style list */}
-      <section className="home-section home-about">
-        <div className="container">
-          <div className="about-header">
-            <span className="about-eyebrow">Our Edge</span>
-            <div className="about-accent" />
-            <h2 className="about-title">Our Strengths</h2>
-          </div>
-          <div className="about-stats" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))' }}>
-            {strengths.map((item, i) => (
-              <div key={i} className="about-stat">
-                <span className="about-stat-value about-strength-value">{item}</span>
-              </div>
+          <div className="about-people-metrics">
+            {peopleMetrics.map((item) => (
+              <article className="about-people-metric" key={item.label}>
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Industries We Serve — same card style as Home */}
-      <section className="home-section home-industries">
+      <section className="home-section about-industries">
         <div className="container">
-          <div className="industries-header">
-            <span className="industries-eyebrow">Sector Expertise</span>
-            <div className="industries-accent" />
-            <h2 className="industries-title">Industries We Serve</h2>
-            <p className="industries-intro">We provide services across multiple industries with sector-specific knowledge and compliance support.</p>
+          <div className="about-section-head">
+            <span className="about-section-head-kicker">Sector Expertise</span>
+            <h2>Industries We Serve</h2>
           </div>
-          <div className="industries-grid-static">
-            {industriesList.map((ind, i) => (
-              <div key={i} className="industries-card">
-                <div className="industries-card-img">
-                  <img src={ind.image} alt="" />
-                  <div className="industries-card-overlay" />
-                </div>
-                <h3>{ind.title}</h3>
-              </div>
+          <div className="about-industries-grid">
+            {industriesList.map((item) => (
+              <article key={item.title} className="about-industry-card">
+                <img src={item.image} alt={item.title} loading="lazy" />
+                <h3>{item.title}</h3>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Commitment to Clients — single block like intro */}
-      <section className="home-section why-choose-us">
+      <section className="home-section about-presence">
         <div className="container">
-          <div className="why-header">
-            <span className="why-eyebrow">Our Promise</span>
-            <div className="why-accent" />
-            <h2 className="why-title">Commitment to Clients</h2>
+          <div className="about-section-head">
+            <span className="about-section-head-kicker">Where We Are</span>
+            <h2>Our Presence</h2>
           </div>
-          <p className="about-rest" style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-            We deliver solutions that go beyond compliance—improving financial efficiency, reducing risks, and supporting strategic decision-making for long-term client success.
-          </p>
-        </div>
-      </section>
-
-      {/* Our Presence — same as Home */}
-      <section className="home-section home-presence">
-        <div className="container">
-          <div className="presence-header">
-            <span className="presence-eyebrow">Where We Are</span>
-            <div className="presence-accent" />
-            <h2 className="presence-title">Our Presence</h2>
-            <p className="presence-intro">Headquartered in Varanasi with branch offices across key cities to serve you locally.</p>
-          </div>
-          <div className="presence-grid">
-            <div className="presence-card presence-card-main">
-              <div className="presence-card-icon">HQ</div>
-              <h3>Head Office</h3>
-              <p className="presence-city">Varanasi</p>
-              <p className="presence-desc">Our flagship office and central hub for assurance, tax, and advisory services.</p>
-            </div>
-            {presenceBranches.map((branch, i) => (
-              <div key={i} className="presence-card">
-                <div className="presence-card-icon">{branch.initial}</div>
-                <h3>Branch</h3>
-                <p className="presence-city">{branch.city}</p>
-                <p className="presence-address">{branch.address}</p>
-                <p className="presence-contact">{branch.contact}</p>
-              </div>
+          <div className="about-offices-grid">
+            {offices.map((item) => (
+              <article key={item.city} className="about-office-card">
+                <p className="about-office-city">{item.city}</p>
+                <p className="about-office-kind">{item.kind}</p>
+                <p className="about-office-address">{item.address}</p>
+              </article>
             ))}
           </div>
-          <p className="presence-tagline">
-            We serve clients across India with strong regional expertise and national capabilities.
-          </p>
         </div>
       </section>
 
-      {/* CTA — same as Home hero-2 */}
-      <section className="home-hero-2">
-        <div className="home-hero-2-pattern" aria-hidden="true" />
-        <div className="home-hero-2-accent" aria-hidden="true" />
-        <div className="container home-hero-2-inner">
-          <p className="home-hero-2-eyebrow">Expert guidance since 2003</p>
-          <h2 className="home-hero-2-title">Partner with Dwivedi Gupta & Co.</h2>
-          <p className="home-hero-2-desc">
-            For trusted financial guidance and professional excellence.
-          </p>
-          <Link to="/schedule-consultation" className="btn btn-primary btn-lg home-hero-2-btn">Schedule a Consultation</Link>
+      <section className="about-page-cta">
+        <div className="container">
+          <div className="about-page-cta-card">
+            <p className="about-page-cta-kicker">Expert Guidance Since 2003</p>
+            <h2>Ready to strengthen compliance and financial decision-making?</h2>
+            <p>Work with our team for partner-led advisory and practical execution support.</p>
+            <Link to="/schedule-consultation" className="btn btn-primary">Schedule a Consultation</Link>
+          </div>
         </div>
       </section>
 
       <style>{`
-        .hero-about .hero-nav { display: none; }
-        .industries-grid-static {
-          display: grid;
-          gap: 1.25rem;
-          grid-template-columns: 1fr;
+        .about-page-hero {
+          padding-top: clamp(4.5rem, 8vw, 6rem);
+          padding-bottom: clamp(3rem, 6vw, 4rem);
+          border-bottom: 1px solid rgba(31, 93, 150, 0.2);
+          background:
+            radial-gradient(1100px 360px at 50% -120px, rgba(23, 59, 104, 0.3), transparent 64%),
+            linear-gradient(180deg, rgba(236, 244, 253, 0.96) 0%, rgba(220, 234, 249, 0.9) 52%, rgba(243, 249, 255, 0.96) 100%);
         }
-        @media (min-width: 640px) {
-          .industries-grid-static { grid-template-columns: repeat(2, 1fr); }
+        .about-page-hero::before {
+          background-image: radial-gradient(circle at 1px 1px, rgba(23, 59, 104, 0.1) 1px, transparent 0);
+          opacity: 0.24;
         }
-        @media (min-width: 1024px) {
-          .industries-grid-static { grid-template-columns: repeat(3, 1fr); }
+        .about-page-hero::after {
+          opacity: 0.12;
+          filter: grayscale(8%) saturate(95%);
         }
-        .industries-grid-static .industries-card {
-          width: 100%;
+        .about-page-hero .container {
+          max-width: 1220px;
         }
-        .about-stat .about-stat-value.about-strength-value {
-          font-size: 0.9375rem;
-          font-weight: 600;
-          color: var(--slate-800);
+        .about-page-title {
+          max-width: 980px;
         }
-        .about-stats-primary {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .about-page-intro {
+          max-width: 920px;
         }
-        @media (max-width: 900px) {
-          .about-stats-primary {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+        @media (max-width: 991px) {
+          .about-page-hero .container {
+            max-width: 900px;
           }
         }
-        @media (max-width: 560px) {
-          .about-stats-primary {
-            grid-template-columns: 1fr;
-            margin-bottom: 1.75rem;
-          }
-          .about-stats-primary .about-stat {
-            padding: 1.1rem 0.9rem;
-          }
-          .about-stats-primary .about-stat-value {
-            font-size: 1.55rem;
-          }
+        .about-page-actions {
+          margin-top: 1.2rem;
         }
-        .about-compliance-link-wrap {
-          margin-top: 2rem;
-          padding: 1.25rem;
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          background: var(--white);
+        .about-seo-intent {
+          padding-top: 2rem;
+          padding-bottom: 0.9rem;
+        }
+        .about-seo-intent-shell {
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 14px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          box-shadow: 0 10px 24px rgba(15, 39, 71, 0.06);
+          padding: 1rem;
+        }
+        .about-seo-intent-shell h2 {
+          margin: 0;
+          color: var(--slate-900);
+          font-size: clamp(1.16rem, 2.3vw, 1.48rem);
+          line-height: 1.35;
+        }
+        .about-seo-intent-shell p {
+          margin: 0.58rem 0 0;
+          color: var(--slate-600);
+          font-size: 0.93rem;
+          line-height: 1.62;
+        }
+        .about-seo-intent-links {
+          margin-top: 0.74rem;
           display: flex;
           flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.75rem;
+          gap: 0.45rem;
         }
-        .about-compliance-link-text {
+        .about-seo-intent-links a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.4rem 0.68rem;
+          border-radius: 999px;
+          border: 1px solid rgba(31, 93, 150, 0.28);
+          background: rgba(31, 93, 150, 0.08);
+          color: var(--primary);
+          font-size: 0.79rem;
+          font-weight: 600;
+          line-height: 1.3;
+        }
+        .about-seo-intent-links a:hover {
+          color: #173b68;
+          border-color: rgba(31, 93, 150, 0.45);
+          background: rgba(31, 93, 150, 0.12);
+        }
+        .about-overview-grid {
+          display: grid;
+          gap: 1rem;
+        }
+        @media (min-width: 992px) {
+          .about-overview-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: stretch;
+          }
+        }
+        .about-overview-content {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 16px;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+          padding: 1.1rem;
+          box-shadow: 0 12px 30px rgba(15, 39, 71, 0.08);
+        }
+        .about-overview-content h2 {
+          font-size: clamp(1.5rem, 3vw, 2rem);
+          margin-bottom: 0.5rem;
+          color: var(--slate-900);
+        }
+        .about-overview-content p {
+          color: var(--text-muted);
+          line-height: 1.62;
+          margin-bottom: 0.65rem;
+        }
+        .about-meta-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0.55rem;
+          margin-top: 0.5rem;
+        }
+        .about-meta-card {
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 12px;
+          background: #ffffff;
+          padding: 0.65rem 0.6rem;
+          text-align: center;
+        }
+        .about-meta-card strong {
+          display: block;
+          font-size: 1.2rem;
+          color: var(--purple-700);
+          line-height: 1.2;
+        }
+        .about-meta-card span {
+          display: block;
+          margin-top: 0.15rem;
+          font-size: 0.74rem;
+          color: var(--slate-600);
+          font-weight: 600;
+        }
+        .about-overview-media {
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          min-height: 100%;
+        }
+        .about-overview-media img {
+          width: 100%;
+          height: 100%;
+          min-height: 320px;
+          object-fit: cover;
+        }
+        .about-section-head {
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+        .about-section-head-kicker {
+          display: flex;
+          width: fit-content;
+          padding: 0.34rem 0.78rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.34);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.88));
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--purple-700);
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 0.6rem;
+        }
+        .about-section-head h2 {
+          display: block;
+          width: 100%;
+          margin: 0 auto;
+          font-size: clamp(1.8rem, 4vw, 2.7rem);
+          line-height: 1.16;
+          letter-spacing: -0.03em;
+          color: var(--slate-900);
+        }
+        .about-vm-grid,
+        .about-values-grid,
+        .about-people-metrics,
+        .about-industries-grid,
+        .about-offices-grid {
+          display: grid;
+          gap: 0.8rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+          .about-vm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .about-values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .about-people-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+          .about-industries-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+          .about-offices-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        .about-vm-card,
+        .about-value-card,
+        .about-people-metric,
+        .about-industry-card,
+        .about-office-card {
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 14px;
+          background: #ffffff;
+          box-shadow: 0 8px 20px rgba(15, 39, 71, 0.06);
+        }
+        .about-vm-card {
+          padding: 1rem;
+        }
+        .about-vm-label {
+          font-size: 0.74rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--purple-700);
+          margin-bottom: 0.35rem;
+        }
+        .about-vm-card p:last-child {
           margin: 0;
-          color: var(--slate-700);
-          font-size: 0.95rem;
+          color: var(--text-muted);
+          line-height: 1.58;
+        }
+        .about-value-card {
+          padding: 0.95rem;
+        }
+        .about-value-index {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 9px;
+          background: linear-gradient(135deg, rgba(31, 79, 134, 0.12), rgba(74, 134, 189, 0.18));
+          color: var(--purple-700);
+          font-size: 0.75rem;
+          font-weight: 700;
+          margin-bottom: 0.45rem;
+        }
+        .about-value-card h3 {
+          margin: 0 0 0.35rem 0;
+          color: var(--slate-900);
+          font-size: 1rem;
+        }
+        .about-value-card p {
+          margin: 0;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          line-height: 1.55;
+        }
+        .about-people-intro {
+          max-width: 760px;
+          margin: 0 auto 0.8rem;
+          text-align: center;
+          color: var(--text-muted);
+        }
+        .about-people-metric {
+          padding: 0.9rem 0.7rem;
+          text-align: center;
+        }
+        .about-people-metric strong {
+          display: block;
+          color: var(--purple-700);
+          font-size: 1.3rem;
+          line-height: 1.2;
+        }
+        .about-people-metric span {
+          display: block;
+          margin-top: 0.18rem;
+          color: var(--slate-600);
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+        .about-industry-card img {
+          width: 100%;
+          aspect-ratio: 16/9;
+          object-fit: cover;
+          border-radius: 14px 14px 0 0;
+        }
+        .about-industry-card h3 {
+          margin: 0;
+          padding: 0.75rem 0.8rem;
+          font-size: 0.92rem;
+          color: var(--slate-800);
+        }
+        .about-office-card {
+          padding: 0.9rem 0.85rem;
+        }
+        .about-office-city {
+          margin: 0;
+          color: var(--slate-900);
+          font-size: 1rem;
+          font-weight: 700;
+        }
+        .about-office-kind {
+          margin: 0.1rem 0 0.35rem;
+          color: var(--purple-700);
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+        .about-office-address {
+          margin: 0;
+          color: var(--text-muted);
+          font-size: 0.86rem;
+          line-height: 1.5;
+        }
+        .about-page-cta {
+          padding: 1rem 0 2rem;
+        }
+        .about-page-cta-card {
+          border: 1px solid rgba(140, 183, 220, 0.26);
+          background: linear-gradient(135deg, #0f2747 0%, #173b68 52%, #1f5d96 100%);
+          border-radius: 22px;
+          padding: 2.4rem 1.2rem;
+          text-align: center;
+          color: #fff;
+          box-shadow: 0 16px 34px rgba(15, 23, 42, 0.24);
+        }
+        .about-page-cta-kicker {
+          margin: 0 0 0.5rem 0;
+          font-size: 0.74rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(220, 236, 252, 0.9);
+        }
+        .about-page-cta-card h2 {
+          margin: 0 0 0.55rem 0;
+          font-size: clamp(1.6rem, 4vw, 2.5rem);
+          line-height: 1.16;
+          letter-spacing: -0.025em;
+        }
+        .about-page-cta-card p {
+          margin: 0 auto 1.15rem;
+          max-width: 700px;
+          color: rgba(240, 248, 255, 0.9);
+          line-height: 1.58;
         }
       `}</style>
     </>

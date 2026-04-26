@@ -1,18 +1,18 @@
 @import './styles/home-sections.css';
 
 :root {
-  /* Purple palette */
-  --purple-900: #4C1D95;
-  --purple-700: #6D28D9;
-  --purple-600: #7C3AED;
-  --purple-500: #8B5CF6;
-  --purple-400: #A78BFA;
-  /* Blue palette */
-  --blue-900: #1E3A8A;
-  --blue-700: #1D4ED8;
-  --blue-600: #2563EB;
-  --blue-500: #3B82F6;
-  --blue-400: #60A5FA;
+  /* Navy premium palette */
+  --purple-900: #0f2747;
+  --purple-700: #173b68;
+  --purple-600: #1f4f86;
+  --purple-500: #2f6ea8;
+  --purple-400: #6ea2d0;
+  /* Cool blue accents */
+  --blue-900: #0f2c4e;
+  --blue-700: #1f5d96;
+  --blue-600: #2f6ea8;
+  --blue-500: #4a86bd;
+  --blue-400: #8cb7dc;
   /* Neutrals */
   --white: #FFFFFF;
   --slate-50: #F8FAFC;
@@ -47,29 +47,31 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Vertical scrollbar: white track and thumb */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.85) rgba(255, 255, 255, 0.2);
+  scrollbar-color: rgba(47, 110, 168, 0.85) rgba(15, 39, 71, 0.18);
 }
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 *::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 39, 71, 0.18);
 }
 *::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(180deg, rgba(31, 79, 134, 0.95), rgba(47, 110, 168, 0.92));
   border-radius: 5px;
+  border: 1px solid rgba(140, 183, 220, 0.25);
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #fff;
+  background: linear-gradient(180deg, rgba(47, 110, 168, 1), rgba(74, 134, 189, 0.96));
 }
 *::-webkit-scrollbar-button {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 39, 71, 0.18);
 }
 *::-webkit-scrollbar-button:vertical:decrement,
 *::-webkit-scrollbar-button:vertical:increment {
@@ -82,6 +84,7 @@ body {
   background: var(--bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -160,15 +163,15 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--purple-600), var(--purple-700));
+  background: linear-gradient(135deg, var(--purple-700), var(--purple-600), var(--blue-700));
   color: var(--white);
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 4px 14px rgba(15, 39, 71, 0.35);
 }
 
 .btn-primary:hover {
   color: var(--white);
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+  background: linear-gradient(135deg, var(--purple-600), var(--purple-500), var(--blue-600));
+  box-shadow: 0 6px 20px rgba(15, 39, 71, 0.45);
 }
 
 .btn-secondary {
@@ -187,13 +190,13 @@ button {
 .btn-accent {
   background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
   color: var(--white);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 14px rgba(31, 93, 150, 0.35);
 }
 
 .btn-accent:hover {
   color: var(--white);
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  box-shadow: 0 6px 20px rgba(31, 93, 150, 0.45);
 }
 
 .section-title {
@@ -216,5 +219,202 @@ button {
 @media (min-width: 768px) {
   .section {
     padding: 5rem 0;
+  }
+}
+
+/* Global reveal animations */
+main .page-hero,
+main .section,
+main .home-section,
+main .about-card,
+main .service-card,
+main article {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+main .page-hero.is-revealed,
+main .section.is-revealed,
+main .home-section.is-revealed,
+main .about-card.is-revealed,
+main .service-card.is-revealed,
+main article.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main .page-hero,
+  main .section,
+  main .home-section,
+  main .about-card,
+  main .service-card,
+  main article {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Professional micro-animations */
+@keyframes premium-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes heading-sweep {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0.65;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+    opacity: 1;
+  }
+}
+
+@keyframes card-shimmer {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.36;
+  }
+  100% {
+    transform: translateX(165%);
+    opacity: 0;
+  }
+}
+
+/* Subtle heading underline sweep on section head blocks */
+.about-section-head h2,
+.industries-section-head h2,
+.contact-main-head h2,
+.services-header h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.about-section-head h2::after,
+.industries-section-head h2::after,
+.contact-main-head h2::after,
+.services-header h2::after {
+  content: none;
+  display: none;
+}
+
+/* Gentle floating effect on accent pills/chips only */
+.page-hero-kicker,
+.about-section-head-kicker,
+.services-eyebrow,
+.industries-section-kicker,
+.clients-eyebrow,
+.contact-main-kicker {
+  animation: premium-float 4.6s ease-in-out infinite;
+}
+
+/* Soft shimmer on interactive cards/buttons while hovering */
+.home-service-card,
+.services-page-card,
+.services-page-catalogue-card,
+.industry-card,
+.clients-card,
+.clients-response-card,
+.about-value-card,
+.about-industry-card,
+.about-office-card,
+.contact-card,
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-service-card::before,
+  .services-page-card::before,
+  .services-page-catalogue-card::before,
+  .industry-card::before,
+  .clients-card::before,
+  .clients-response-card::before,
+  .about-value-card::before,
+  .about-industry-card::before,
+  .about-office-card::before,
+  .contact-card::before,
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.28) 48%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+
+  .home-service-card:hover::before,
+  .services-page-card:hover::before,
+  .services-page-catalogue-card:hover::before,
+  .industry-card:hover::before,
+  .clients-card:hover::before,
+  .clients-response-card:hover::before,
+  .about-value-card:hover::before,
+  .about-industry-card:hover::before,
+  .about-office-card:hover::before,
+  .contact-card:hover::before,
+  .btn:hover::before {
+    animation: card-shimmer 0.95s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-kicker,
+  .about-section-head-kicker,
+  .services-eyebrow,
+  .industries-section-kicker,
+  .clients-eyebrow,
+  .contact-main-kicker {
+    animation: none;
+  }
+
+  .about-section-head h2::after,
+  .industries-section-head h2::after,
+  .contact-main-head h2::after,
+  .services-header h2::after {
+    animation: none;
+  }
+
+  .home-service-card::before,
+  .services-page-card::before,
+  .services-page-catalogue-card::before,
+  .industry-card::before,
+  .clients-card::before,
+  .clients-response-card::before,
+  .about-value-card::before,
+  .about-industry-card::before,
+  .about-office-card::before,
+  .contact-card::before,
+  .btn::before {
+    animation: none !important;
+    display: none !important;
   }
 }

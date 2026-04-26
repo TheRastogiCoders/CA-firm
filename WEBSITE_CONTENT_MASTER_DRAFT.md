@@ -1,7 +1,37 @@
-# Dwivedi Gupta & Co. - Website Content Master Draft
+# Dwivedi Gupta & Co. – Website Content Master / Review Document
 
-Use this as the central content deck for website publishing.  
-You can revise wording section-by-section before final publishing.
+**Purpose:** This is the single document that contains **all text and information** used (or to be used) on the Dwivedi Gupta & Co. website. Use it to:
+
+- **Review** every piece of content in one place (no need to check each page/tab).
+- **Edit** wording, emails, phone numbers, addresses, and any copy here first.
+- **Share** with your team or stakeholders to finalize content before or after development.
+- **Finalize** content in one place; once approved, the same text can be applied on the website.
+
+**How to use:**  
+Edit this file section by section. Whatever you finalize here (e.g. 2 emails in Contact Us, specific taglines, form labels) is the content that should appear on the site. A companion file **WEBSITE_CONTENT_DATA.csv** lists key contact details and credentials in table form for easy review in Excel.
+
+---
+
+## Quick reference – Pages and what’s in this document
+
+| Page / Section        | Route                    | Content in this document                                                                 |
+|----------------------|--------------------------|-------------------------------------------------------------------------------------------|
+| Home                 | `/`                      | Hero slides, About snippet, Core Services, Why Choose Us, Industries, Presence, CTAs     |
+| About Us             | `/about-us`              | Hero, Who We Are, Vision, Mission, Core Values, People, Strengths, Commitment            |
+| Services             | `/services`              | Hero, overview, full service list, approach, CTAs                                        |
+| Industries           | `/industries`            | Hero, intro, sector content (7 sectors), CTA                                             |
+| Team                 | `/team`                  | Hero, intro, team section notes, CTA                                                     |
+| Clients              | `/clients`               | Hero, client types, trust stats, engagement model, FAQs, CTA                             |
+| Insights / Blog      | `/insights`              | Hero, intro, category labels, CTA                                                        |
+| Careers              | `/careers`               | Hero, main copy, application email                                                       |
+| Schedule Consultation| `/schedule-consultation` | Hero, why book, form labels, success message                                             |
+| **Contact Us**       | `/contact`               | **Both emails, both phones**, hero, what to expect, form success message                |
+| Compliance           | `/compliance`            | Intro, all published credentials (registration, RBI, CAG, PAN, GSTN, official email)     |
+| Privacy Policy       | `/privacy-policy`        | Full policy text, contact for privacy                                                    |
+| Terms                | `/terms`                 | Full terms text                                                                          |
+| Disclaimer           | `/disclaimer`            | Full disclaimer text                                                                     |
+| Sitemap              | `/sitemap`               | Title, subtitle, note                                                                    |
+| Footer               | (all pages)              | Tagline, short description, copyright                                                    |
 
 ---
 

@@ -94,23 +94,35 @@ export default function ScheduleConsultation() {
 
   return (
     <>
-      {/* Premium page hero — aligned with home-hero-2 */}
-      <section className="sched-hero" aria-label="Schedule a consultation">
-        <div className="sched-hero-pattern" aria-hidden="true" />
-        <div className="sched-hero-accent" aria-hidden="true" />
+      <section className="page-hero sched-page-hero" aria-labelledby="schedule-consultation-title">
         <div className="container">
-          <div className="sched-hero-inner">
-            <p className="sched-hero-eyebrow">Schedule a Consultation</p>
-            <h1 className="sched-hero-title">Book a Free Consultation</h1>
-            <p className="sched-hero-desc">
-              Reserve a 30-minute slot with our CAs. Choose your preferred date and time—we’ll confirm within 1–2 business days. No obligation.
-            </p>
+          <span className="page-hero-kicker">Schedule Consultation</span>
+          <h1 id="schedule-consultation-title" className="page-title">Book Your Consultation Session</h1>
+          <p className="page-subtitle sched-page-subtitle">
+            Reserve a focused 30-minute advisory call with our CA team. Share your preferred slot and service area,
+            and we will confirm the engagement mode within 1-2 business days.
+          </p>
+          <div className="page-hero-actions sched-hero-actions">
+            <Link to="/services" className="btn btn-primary">Explore Services</Link>
+            <Link to="/contact" className="btn btn-secondary">Talk to Our Team</Link>
+          </div>
+          <div className="sched-hero-trust">
+            <span>Free 30-minute discussion</span>
+            <span aria-hidden="true">•</span>
+            <span>No obligation advisory</span>
+            <span aria-hidden="true">•</span>
+            <span>Confidential interaction</span>
           </div>
         </div>
       </section>
 
       <section className="section sched-section">
         <div className="container">
+          <div className="sched-section-head">
+            <span className="sched-section-kicker">Consultation Desk</span>
+            <h2>Share your details and preferred slot</h2>
+            <p>Our team reviews each request personally and aligns the consultation format to your requirement.</p>
+          </div>
           <div className="sched-layout">
             {/* Left: Why book + trust */}
             <aside className="sched-sidebar">
@@ -270,108 +282,97 @@ export default function ScheduleConsultation() {
       </section>
 
       <style>{`
-        .sched-hero {
-          position: relative;
-          min-height: clamp(360px, 52vh, 520px);
-          min-height: clamp(360px, 52dvh, 520px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: clamp(3.8rem, 7vw, 5rem) 0 clamp(2.6rem, 4.5vw, 3.4rem);
+        .sched-page-hero {
+          border-bottom: 1px solid rgba(31, 93, 150, 0.24);
           background:
-            linear-gradient(135deg, rgba(76, 29, 149, 0.9) 0%, rgba(30, 58, 138, 0.9) 100%),
-            url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1920&q=85');
-          background-size: cover;
-          background-position: center;
-          overflow: hidden;
+            radial-gradient(1000px 340px at 50% -120px, rgba(31, 93, 150, 0.2), transparent 62%),
+            linear-gradient(180deg, rgba(241, 247, 255, 0.98) 0%, rgba(231, 241, 252, 0.92) 56%, rgba(255, 255, 255, 0.98) 100%);
         }
-        @media (max-width: 767px) {
-          .sched-hero {
-            min-height: clamp(320px, 46vh, 460px);
-            min-height: clamp(320px, 46dvh, 460px);
-            padding: 3.2rem 1rem 2.25rem;
-          }
+        .sched-page-hero::before {
+          background-image: radial-gradient(circle at 1px 1px, rgba(23, 59, 104, 0.1) 1px, transparent 0);
+          opacity: 0.24;
         }
-        .sched-hero-pattern {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          opacity: 0.06;
-          background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0);
-          background-size: 32px 32px;
+        .sched-page-hero::after {
+          opacity: 0.1;
+          filter: grayscale(8%) saturate(95%);
         }
-        .sched-hero-accent {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 120px;
-          height: 3px;
-          background: linear-gradient(90deg, transparent, var(--purple-400), var(--blue-400), transparent);
-          z-index: 1;
+        .sched-page-subtitle {
+          max-width: 940px;
         }
-        .sched-hero-inner {
-          position: relative;
-          z-index: 2;
-          text-align: center;
-          max-width: 760px;
-          margin: 0 auto;
+        .sched-hero-actions {
+          justify-content: center;
         }
-        .sched-hero-eyebrow {
-          font-size: 0.8125rem;
+        .sched-hero-trust {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          font-size: 0.84rem;
+          color: var(--slate-700);
           font-weight: 600;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: var(--purple-400);
-          margin-bottom: 0.75rem;
         }
-        .sched-hero-title {
-          font-size: clamp(1.95rem, 4.7vw, 3rem);
-          font-weight: 600;
-          color: var(--white);
-          line-height: 1.16;
-          margin-bottom: 0.9rem;
-          letter-spacing: -0.02em;
-        }
-        .sched-hero-desc {
-          color: rgba(255, 255, 255, 0.92);
-          font-size: clamp(1rem, 2.1vw, 1.1rem);
-          line-height: 1.72;
-          margin: 0;
-        }
-        @media (max-width: 767px) {
-          .sched-hero-inner {
-            text-align: left;
-          }
+        .sched-hero-trust span[aria-hidden='true'] {
+          color: rgba(100, 116, 139, 0.6);
         }
 
         .sched-section {
-          padding: 4rem 0 5rem;
-          background: linear-gradient(180deg, var(--slate-50) 0%, var(--white) 100%);
+          padding: 4rem 0 5.5rem;
+          background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
         }
         @media (min-width: 768px) {
-          .sched-section { padding: 5rem 0 6rem; }
+          .sched-section { padding: 4.8rem 0 6rem; }
+        }
+        .sched-section-head {
+          text-align: center;
+          max-width: 860px;
+          margin: 0 auto 2rem;
+        }
+        .sched-section-kicker {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.34rem 0.78rem;
+          border-radius: 999px;
+          background: rgba(31, 93, 150, 0.12);
+          color: var(--primary);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+        .sched-section-head h2 {
+          margin: 0.78rem 0 0;
+          font-size: clamp(1.46rem, 2.8vw, 2.04rem);
+          color: var(--slate-900);
+          line-height: 1.24;
+        }
+        .sched-section-head p {
+          margin: 0.64rem 0 0;
+          color: var(--slate-600);
+          font-size: 0.98rem;
+          line-height: 1.62;
         }
         .sched-layout {
           display: grid;
-          gap: 2.5rem;
+          gap: 1.6rem;
           align-items: start;
         }
         @media (min-width: 968px) {
-          .sched-layout { grid-template-columns: 1fr 1.15fr; gap: 3rem; }
+          .sched-layout { grid-template-columns: 1fr 1.16fr; gap: 2rem; }
         }
 
         .sched-sidebar-card {
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          background: #fff;
+          border: 1px solid rgba(148, 163, 184, 0.26);
+          border-radius: 18px;
           padding: 2rem 1.5rem;
-          box-shadow: 0 4px 24px rgba(30, 41, 59, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 10px 28px rgba(15, 39, 71, 0.08);
           transition: box-shadow 0.25s ease, border-color 0.25s ease;
         }
         .sched-sidebar-card:hover {
-          border-color: var(--purple-200, #E9D5FF);
-          box-shadow: 0 12px 40px rgba(124, 58, 237, 0.08);
+          border-color: rgba(31, 93, 150, 0.34);
+          box-shadow: 0 16px 38px rgba(31, 79, 134, 0.13);
         }
         .sched-sidebar-title {
           font-size: 1.25rem;
@@ -383,7 +384,7 @@ export default function ScheduleConsultation() {
         .sched-accent-bar {
           width: 48px;
           height: 3px;
-          background: linear-gradient(90deg, var(--purple-600), var(--blue-600));
+          background: linear-gradient(90deg, #1f5d96, #2f6ea8);
           border-radius: 2px;
           margin-bottom: 1.5rem;
         }
@@ -403,7 +404,7 @@ export default function ScheduleConsultation() {
           flex-shrink: 0;
           font-size: 0.75rem;
           font-weight: 700;
-          color: var(--purple-400);
+          color: #1f5d96;
           font-family: var(--font-display);
           letter-spacing: 0.02em;
         }
@@ -425,16 +426,16 @@ export default function ScheduleConsultation() {
           line-height: 1.6;
           margin: 0 0 1.25rem 0;
           padding-top: 1rem;
-          border-top: 1px solid var(--border);
+          border-top: 1px solid rgba(148, 163, 184, 0.28);
         }
         .sched-link-contact {
           font-size: 0.9375rem;
           font-weight: 500;
-          color: var(--blue-600);
+          color: #1f5d96;
           text-decoration: none;
           transition: color 0.2s ease;
         }
-        .sched-link-contact:hover { color: var(--blue-700); }
+        .sched-link-contact:hover { color: #173b68; }
         .sched-trust {
           margin-top: 1.5rem;
           display: flex;
@@ -452,16 +453,16 @@ export default function ScheduleConsultation() {
 
         .sched-form-wrap { min-width: 0; }
         .sched-form-card {
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 16px;
+          background: #fff;
+          border: 1px solid rgba(148, 163, 184, 0.26);
+          border-radius: 18px;
           padding: 2.25rem 1.75rem;
-          box-shadow: 0 4px 24px rgba(30, 41, 59, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 10px 28px rgba(15, 39, 71, 0.08);
           transition: box-shadow 0.25s ease, border-color 0.25s ease;
         }
         .sched-form-card:hover {
-          border-color: var(--purple-200, #E9D5FF);
-          box-shadow: 0 12px 40px rgba(124, 58, 237, 0.08);
+          border-color: rgba(31, 93, 150, 0.34);
+          box-shadow: 0 16px 38px rgba(31, 79, 134, 0.13);
         }
         @media (min-width: 768px) {
           .sched-form-card { padding: 2.5rem 2.25rem; }
@@ -489,7 +490,7 @@ export default function ScheduleConsultation() {
           color: var(--slate-700);
           margin-bottom: 0.4rem;
         }
-        .sched-required { color: var(--purple-600); }
+        .sched-required { color: #1f5d96; }
         .sched-form input,
         .sched-form select,
         .sched-form textarea {
@@ -512,8 +513,8 @@ export default function ScheduleConsultation() {
         .sched-form select:focus,
         .sched-form textarea:focus {
           outline: none;
-          border-color: var(--purple-500);
-          box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+          border-color: #1f5d96;
+          box-shadow: 0 0 0 3px rgba(31, 79, 134, 0.16);
         }
         .sched-form textarea {
           resize: vertical;

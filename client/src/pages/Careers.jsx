@@ -5,6 +5,7 @@ export default function Careers() {
     <>
       <section className="page-hero">
         <div className="container">
+          <span className="page-hero-kicker">Work With Us</span>
           <h1 className="page-title">Careers</h1>
           <p className="page-subtitle">
             Join our team of professionals. Explore opportunities at Dwivedi Gupta & Co.

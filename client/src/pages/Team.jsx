@@ -19,7 +19,7 @@ const partners = [
     role: 'Partner',
     initials: 'VAM',
     qualifications: 'FCA, B.S.C., LLB, DISA(ICAI), DIM, CCCAB',
-    specialization: 'Assurance & Accounting',
+    specialization: 'Direct & Indirect Tax, Assurance & Accounting, Project Finance/Debt Syndication',
     experience: '18 Years',
     membership: '407188',
     email: 'vivek.gupta@dgc.ind.in',
@@ -167,18 +167,26 @@ export default function Team() {
     <>
       <section className="page-hero team-hero">
         <div className="container">
+          <span className="page-hero-kicker">Leadership & Experts</span>
           <h1 className="page-title">Our Team</h1>
           <p className="page-subtitle">
             Under the able direction of 7 partners and other qualified CA staff, DGC's team is uniquely positioned to provide you quality opinions and services.
           </p>
-          <p className="team-hero-extra">
-            Click <strong>View more</strong> on any profile to see full qualifications, experience, and contact details.
-          </p>
+          <div className="team-hero-stats">
+            <article><strong>{partners.length}</strong><span>Partner Profiles</span></article>
+            <article><strong>20+</strong><span>Years Legacy</span></article>
+            <article><strong>Pan India</strong><span>Client Service Reach</span></article>
+          </div>
         </div>
       </section>
 
       <section className="section team-section">
         <div className="container">
+          <div className="team-section-head">
+            <span className="team-section-kicker">Partner Profiles</span>
+            <h2>Experienced professionals guiding every engagement</h2>
+            <p>Select any profile to view qualifications, domain expertise, and contact details.</p>
+          </div>
           <div className="team-grid">
             {partners.map((member, i) => (
               <article key={i} className="team-card">
@@ -224,17 +232,68 @@ export default function Team() {
 
       <style>{`
         .team-hero .container { max-width: 920px; }
-        .team-hero-extra {
-          margin-top: 1rem;
-          font-size: 0.9375rem;
-          color: var(--slate-600);
+        .team-hero-stats {
+          margin-top: 1.15rem;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 0.6rem;
         }
-        .team-hero-extra strong { color: var(--purple-600); }
+        .team-hero-stats article {
+          border: 1px solid rgba(148, 163, 184, 0.24);
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.72);
+          padding: 0.68rem 0.6rem;
+          text-align: center;
+        }
+        .team-hero-stats strong {
+          display: block;
+          color: var(--purple-700);
+          font-size: 1.06rem;
+          line-height: 1.2;
+        }
+        .team-hero-stats span {
+          display: block;
+          margin-top: 0.14rem;
+          color: var(--slate-600);
+          font-size: 0.78rem;
+          font-weight: 600;
+        }
 
         .team-section { padding-top: 2.5rem; padding-bottom: 3rem; }
+        .team-section-head {
+          text-align: center;
+          max-width: 900px;
+          margin: 0 auto 1.2rem;
+        }
+        .team-section-kicker {
+          display: inline-flex;
+          padding: 0.34rem 0.78rem;
+          border-radius: 999px;
+          border: 1px solid rgba(140, 183, 220, 0.34);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 247, 255, 0.88));
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--purple-700);
+          margin-bottom: 0.6rem;
+        }
+        .team-section-head h2 {
+          margin: 0;
+          font-size: clamp(1.8rem, 4vw, 2.7rem);
+          line-height: 1.16;
+          letter-spacing: -0.03em;
+          color: var(--slate-900);
+        }
+        .team-section-head p {
+          margin: 0.62rem auto 0;
+          max-width: 760px;
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
         .team-grid {
           display: grid;
-          gap: 1.5rem;
+          gap: 1rem;
           grid-template-columns: 1fr;
         }
         @media (min-width: 640px) {
@@ -243,39 +302,39 @@ export default function Team() {
         @media (min-width: 1024px) {
           .team-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
         }
-
         .team-card {
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 14px;
-          padding: 1.75rem;
+          background: linear-gradient(180deg, #ffffff 0%, #f9fcff 100%);
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 16px;
+          padding: 1.15rem 1rem;
+          box-shadow: 0 8px 20px rgba(15, 39, 71, 0.05);
           transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
         }
         .team-card:hover {
-          box-shadow: 0 12px 40px rgba(124, 58, 237, 0.1);
+          box-shadow: 0 12px 40px rgba(31, 79, 134, 0.14);
           border-color: var(--purple-400);
           transform: translateY(-2px);
         }
         .team-card-inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .team-avatar {
-          width: 72px;
-          height: 72px;
-          margin-bottom: 1rem;
+          width: 62px;
+          height: 62px;
+          margin-bottom: 0.82rem;
           display: flex;
           align-items: center;
           justify-content: center;
           background: linear-gradient(135deg, var(--purple-600), var(--blue-600));
           color: white;
           border-radius: 50%;
-          font-size: 1.25rem;
+          font-size: 1.06rem;
           font-weight: 700;
           font-family: var(--font-display);
         }
         .team-name {
-          font-size: 1.0625rem;
+          font-size: 1.02rem;
           font-weight: 600;
           color: var(--slate-800);
-          margin-bottom: 0.25rem;
+          margin-bottom: 0.2rem;
           line-height: 1.3;
         }
         .team-role {
@@ -301,11 +360,12 @@ export default function Team() {
         }
         .team-view-more {
           margin-top: auto;
-          padding: 0.5rem 1.25rem;
-          font-size: 0.875rem;
+          width: 100%;
+          padding: 0.58rem 0.9rem;
+          font-size: 0.84rem;
           font-weight: 600;
           color: var(--purple-600);
-          background: rgba(124, 58, 237, 0.08);
+          background: rgba(31, 79, 134, 0.12);
           border: 1px solid var(--purple-300);
           border-radius: 8px;
           cursor: pointer;
@@ -338,7 +398,7 @@ export default function Team() {
           position: relative;
           background: var(--white);
           border-radius: 16px;
-          max-width: 560px;
+          max-width: 700px;
           width: 100%;
           max-height: 90vh;
           overflow: hidden;
@@ -474,16 +534,33 @@ export default function Team() {
         .page-cta {
           margin-top: 3rem;
           text-align: center;
-          padding: 2rem;
-          background: var(--slate-50);
-          border-radius: 12px;
+          padding: 2rem 1.2rem;
+          border: 1px solid rgba(140, 183, 220, 0.3);
+          border-radius: 20px;
+          background: linear-gradient(135deg, #0f2747 0%, #173b68 52%, #1f5d96 100%);
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1rem;
+          box-shadow: 0 16px 34px rgba(15, 23, 42, 0.24);
         }
-        .page-cta p { margin: 0; color: var(--text-muted); }
+        .page-cta p {
+          margin: 0;
+          color: rgba(240, 248, 255, 0.92);
+          max-width: 760px;
+          line-height: 1.58;
+        }
         .page-cta-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+        .page-cta .btn-secondary {
+          border-color: rgba(220, 236, 252, 0.48);
+          color: #f8fcff;
+          background: transparent;
+        }
+        @media (max-width: 767px) {
+          .team-hero-stats {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
     </>
   );
