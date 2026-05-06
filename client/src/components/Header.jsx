@@ -770,6 +770,25 @@ export default function Header() {
           z-index: 999;
         }
         @media (max-width: 991px) {
+          .header-inner {
+            gap: 0.7rem;
+          }
+          .header-brand {
+            flex: 1 1 auto;
+            min-width: 0;
+            gap: 0.58rem;
+            align-items: center;
+          }
+          .header-brand-text {
+            min-width: 0;
+            overflow: hidden;
+          }
+          .header-name,
+          .header-tag {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
           .header-backdrop { display: block; }
           .header-nav {
             display: flex;
@@ -796,6 +815,7 @@ export default function Header() {
           .header-nav-links {
             display: flex;
             flex-direction: column;
+            align-items: stretch;
             gap: 0.35rem;
             border: none;
             background: transparent;
@@ -812,6 +832,8 @@ export default function Header() {
             display: inline-flex;
           }
           .header-nav-link {
+            display: flex;
+            width: 100%;
             justify-content: flex-start;
             padding: 0.88rem 0.9rem;
             font-size: 0.97rem;
@@ -821,6 +843,7 @@ export default function Header() {
             white-space: normal;
           }
           .header-services-dropdown {
+            display: block;
             width: 100%;
           }
           .header-services-trigger {
@@ -894,9 +917,11 @@ export default function Header() {
           }
           .header-name {
             font-size: 0.74rem;
+            letter-spacing: 0.02em;
           }
           .header-tag {
             font-size: 0.6rem;
+            letter-spacing: 0.1em;
           }
           .header-cta-desktop { display: none !important; }
         }

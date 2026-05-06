@@ -318,6 +318,66 @@ function App() {
           height: 16px;
           accent-color: #1f5d96;
         }
+        @media (max-width: 640px) {
+          .quick-service-modal-backdrop {
+            align-items: flex-end;
+            padding: 0.5rem;
+          }
+          .quick-service-modal {
+            width: 100%;
+            max-height: min(88dvh, 720px);
+            border-radius: 16px;
+            padding: 0.95rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+          }
+          .quick-service-modal-close {
+            top: 0.6rem;
+            right: 0.6rem;
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+          }
+          .quick-service-modal-kicker {
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+          }
+          .quick-service-modal h2 {
+            margin-top: 0.62rem;
+            font-size: clamp(1.18rem, 6vw, 1.42rem);
+            line-height: 1.25;
+            max-width: 92%;
+          }
+          .quick-service-modal > p {
+            margin-top: 0.48rem;
+            font-size: 0.86rem;
+            line-height: 1.45;
+          }
+          .quick-service-modal-grid {
+            margin-top: 0.8rem;
+            gap: 0.45rem;
+          }
+          .quick-service-chip {
+            min-height: 42px;
+            padding: 0.56rem 0.72rem;
+            font-size: 0.84rem;
+          }
+          .quick-service-modal-actions {
+            margin-top: 0.85rem;
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+          .quick-service-continue,
+          .quick-service-view-all {
+            width: 100%;
+            min-width: 0;
+            justify-content: center;
+          }
+          .quick-service-modal-check {
+            margin-top: 0.72rem;
+            font-size: 0.82rem;
+          }
+        }
       `}</style>
     </>
   );

@@ -82,7 +82,7 @@ export default function Footer() {
           <div className="footer-brand-row">
             <Link to="/" className="footer-logo-link" aria-label="Dwivedi Gupta & Co. (DGC India) – Home">
               <img
-                src="/dist/logofooter.png"
+                src="/logofooter.png"
                 alt=""
                 className="footer-logo-img"
                 width="72"
@@ -350,9 +350,19 @@ export default function Footer() {
           white-space: nowrap;
         }
         .footer-cta-btn:hover {
+          color: #ffffff;
+          border-color: rgba(191, 219, 254, 0.42);
+          background: rgba(255, 255, 255, 0.14);
           box-shadow: 0 8px 20px rgba(15, 23, 42, 0.35);
           transform: translateY(-1px);
-          opacity: 0.95;
+        }
+        .footer-cta-btn:visited {
+          color: #ffffff;
+        }
+        .footer-cta-btn:active {
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.12);
+          transform: translateY(0);
         }
         .footer-cta-btn:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
         .footer-social {
@@ -376,6 +386,65 @@ export default function Footer() {
           color: #ffffff;
           background: rgba(140, 183, 220, 0.25);
           box-shadow: 0 0 14px rgba(96, 165, 250, 0.25);
+        }
+        @media (max-width: 767px) {
+          .footer-top {
+            gap: 0.72rem;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.9rem 0.82rem;
+            border-radius: 12px;
+          }
+          .footer-brand-row {
+            align-items: flex-start;
+            gap: 0.6rem;
+          }
+          .footer-logo-img {
+            width: 46px;
+            height: 46px;
+          }
+          .footer-company-name {
+            font-size: 1rem;
+            line-height: 1.2;
+            margin-bottom: 0.16rem;
+          }
+          .footer-tagline {
+            font-size: 0.8rem;
+            line-height: 1.42;
+          }
+          .footer-contact-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.42rem;
+          }
+          .footer-contact-chip,
+          .footer-cta-btn {
+            width: 100%;
+            min-height: 42px;
+            padding: 0.5rem 0.72rem;
+            justify-content: flex-start;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            line-height: 1.35;
+            white-space: normal;
+            overflow-wrap: anywhere;
+          }
+          .footer-cta-btn {
+            justify-content: center;
+            font-weight: 700;
+            background: linear-gradient(135deg, #173b68 0%, #1f5d96 100%);
+            border-color: rgba(191, 219, 254, 0.36);
+          }
+          .footer-social {
+            justify-content: center;
+            padding-top: 0.35rem;
+          }
+          .footer-social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+          }
         }
         .footer-heading {
           font-family: var(--font-body);

@@ -123,7 +123,7 @@ export default function About() {
               </div>
             </div>
             <div className="about-overview-media">
-              <img src="/dist/officeimage.png" alt="Dwivedi Gupta and Co office and work environment" />
+              <img src="/officeimage.png" alt="Dwivedi Gupta and Co office and work environment" />
             </div>
           </div>
         </div>

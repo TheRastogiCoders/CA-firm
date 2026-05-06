@@ -345,7 +345,7 @@ export default function Home() {
             </div>
             <div className="about-images">
               <div className="about-img-main">
-                <img src="/dist/officeimage.png" alt="Dwivedi Gupta and Co office exterior and workspace" />
+                <img src="/officeimage.png" alt="Dwivedi Gupta and Co office exterior and workspace" />
               </div>
             </div>
           </div>
