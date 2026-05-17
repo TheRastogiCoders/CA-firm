@@ -1,15 +1,15 @@
 Section,Field,Value,Notes
-Contact,Primary Email,vivek.gupta@dgc.ind.in,Shown on Contact page
-Contact,Secondary Email,shikhar.dwivedi@dgc.ind.in,Shown on Contact page
-Contact,Primary Phone,+91 94158 05906,Shown on Contact page
-Contact,Secondary Phone,+91 9721227799,Shown on Contact page
-Careers,Application Email,vivek.gupta@dgc.ind.in,Where to send resume (Careers page)
-Privacy,Privacy Queries Email,vivek.gupta@dgc.ind.in,Contact for privacy (Privacy Policy)
-Compliance,Official Email,aditi.kapoor@dgc.ind.in,Published credentials
+Contact,Primary Email,shikhar.dwivedi@dgc.ind.in,Shown site-wide (header ticker footer contact page)
+Contact,Mobile,+91 9721227799,Shown on Contact page and footer
+Contact,Landline,0542-2502525,Shown on Contact page and footer
+Contact,WhatsApp,+91 9721227799,WhatsApp link: wa.me/919721227799
+Careers,Application Email,shikhar.dwivedi@dgc.ind.in,Careers page
+Privacy,Privacy Queries Email,shikhar.dwivedi@dgc.ind.in,Privacy Policy contact (when published)
+Compliance,Official Email,aditi.kapoor@dgc.ind.in,Published credentials on Compliance page
 Compliance,Year of Establishment,2003,
 Compliance,Firm Registration No.,012584C,
-Compliance,RBI Unique Code,293,
-Compliance,Peer Review Certificate No.,14832,
+Compliance,RBI Unique Code,000293,Leading zeros as on Compliance page
+Compliance,Peer Review Certificate No.,014832,Leading zeros as on Compliance page
 Compliance,CAG Empanelment No.,CR3209,
 Compliance,ICAI Firm Category,I (One),
 Compliance,PAN,AAEFD6000D,

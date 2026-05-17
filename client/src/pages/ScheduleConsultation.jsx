@@ -204,7 +204,7 @@ export default function ScheduleConsultation() {
                         value={form.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+91 94158 05906"
+                        placeholder="+91 9721227799"
                         autoComplete="tel"
                       />
                     </div>

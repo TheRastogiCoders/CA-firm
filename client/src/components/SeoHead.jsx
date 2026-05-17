@@ -177,8 +177,8 @@ export default function SeoHead() {
     name: 'Dwivedi Gupta & Co.',
     url: siteUrl,
     image: `${siteUrl}${DEFAULT_IMAGE}`,
-    email: 'connect@dgcindia.com',
-    telephone: '+91 94158 05906',
+    email: 'shikhar.dwivedi@dgc.ind.in',
+    telephone: '+91 9721227799',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Varanasi',

@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllServices } from '../data/servicesData';
+import {
+  CONTACT_EMAIL,
+  CONTACT_LANDLINE,
+  CONTACT_LANDLINE_RAW,
+  CONTACT_MOBILE_DISPLAY,
+  CONTACT_MOBILE_RAW,
+  WHATSAPP_URL,
+} from '../data/contactInfo';
 
 const QUICK_LINKS = [
   { to: '/', label: 'Home' },
@@ -32,11 +40,6 @@ const RESOURCE_LINKS = [
   { to: '/compliance', label: 'Compliance Information' },
 ];
 
-const EMAIL = 'vivek.gupta@dgc.ind.in';
-const PHONE = '+919415805906';
-const PHONE_DISPLAY = '+91 94158 05906';
-const WHATSAPP_MESSAGE = "Hi, I'm visiting your website and would like to know more about your CA services—tax, audit, or consultation.";
-const WHATSAPP_URL = `https://wa.me/${PHONE.replace(/\D/g, '')}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const LINKEDIN_URL = 'https://www.linkedin.com/company/dwivedi-gupta-co';
 
 const SCROLL_THRESHOLD = 400;
@@ -96,11 +99,14 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer-contact-row">
-            <a href={`mailto:${EMAIL}`} className="footer-contact-chip">
-              <EmailIcon /> {EMAIL}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="footer-contact-chip">
+              <EmailIcon /> {CONTACT_EMAIL}
             </a>
-            <a href={`tel:${PHONE}`} className="footer-contact-chip">
-              <PhoneIcon /> {PHONE_DISPLAY}
+            <a href={`tel:${CONTACT_MOBILE_RAW}`} className="footer-contact-chip">
+              <PhoneIcon /> {CONTACT_MOBILE_DISPLAY}
+            </a>
+            <a href={`tel:${CONTACT_LANDLINE_RAW}`} className="footer-contact-chip">
+              <PhoneIcon /> {CONTACT_LANDLINE}
             </a>
             <Link to="/schedule-consultation" className="footer-cta-btn">
               Schedule Consultation
@@ -110,10 +116,10 @@ export default function Footer() {
             <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="LinkedIn">
               <LinkedInIcon />
             </a>
-            <a href={`mailto:${EMAIL}`} className="footer-social-icon" aria-label="Email">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="footer-social-icon" aria-label="Email">
               <EmailIcon />
             </a>
-            <a href={`tel:${PHONE}`} className="footer-social-icon" aria-label="Phone">
+            <a href={`tel:${CONTACT_MOBILE_RAW}`} className="footer-social-icon" aria-label="Mobile">
               <PhoneIcon />
             </a>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="WhatsApp">

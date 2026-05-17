@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getAllServices } from '../data/servicesData';
+import {
+  CONTACT_EMAIL,
+  CONTACT_LANDLINE,
+  CONTACT_MOBILE_DISPLAY,
+} from '../data/contactInfo';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -14,9 +19,10 @@ const navLinks = [
 ];
 
 const infoTickerItems = [
-  'Email: connect@dgcindia.com',
-  'Support: info@dgcindia.com',
-  'Call: +91 94500 00000',
+  `Email: ${CONTACT_EMAIL}`,
+  `Mobile: ${CONTACT_MOBILE_DISPLAY}`,
+  `Landline: ${CONTACT_LANDLINE}`,
+  'WhatsApp: +91 9721227799',
   'Head Office: Varanasi',
   'Branches: Delhi | Kolkata | Bokaro',
   'RBI Registered & CAG Empanelled',

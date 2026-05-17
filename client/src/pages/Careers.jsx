@@ -17,7 +17,7 @@ export default function Careers() {
           <p style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>
             We are always looking for talented chartered accountants and finance professionals.
             For current openings, please write to us at{' '}
-            <a href="mailto:vivek.gupta@dgc.ind.in">vivek.gupta@dgc.ind.in</a> or check back later.
+            <a href="mailto:shikhar.dwivedi@dgc.ind.in">shikhar.dwivedi@dgc.ind.in</a> or check back later.
           </p>
           <Link to="/contact" className="btn btn-primary">Contact Us</Link>
         </div>

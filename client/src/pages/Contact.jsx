@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiUrl } from '../config';
+import {
+  CONTACT_EMAIL,
+  CONTACT_LANDLINE,
+  CONTACT_LANDLINE_RAW,
+  CONTACT_MOBILE_DISPLAY,
+  CONTACT_MOBILE_RAW,
+  WHATSAPP_URL,
+} from '../data/contactInfo';
 
 const CONTACT_OFFICES = [
   {
@@ -36,14 +44,6 @@ const CONTACT_OFFICES = [
     initial: 'B',
   },
 ];
-
-const EMAIL_PRIMARY = 'vivek.gupta@dgc.ind.in';
-const EMAIL_SECONDARY = 'shikhar.dwivedi@dgc.ind.in';
-const PHONE_PRIMARY = '+91 94158 05906';
-const PHONE_SECONDARY = '+91 9721227799';
-const PHONE_RAW_PRIMARY = '+919415805906';
-const PHONE_RAW_SECONDARY = '+919721227799';
-const WHATSAPP_URL = `https://wa.me/${PHONE_RAW_PRIMARY.replace(/\D/g, '')}`;
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -138,19 +138,19 @@ export default function Contact() {
                 <ul className="contact-meta">
                   <li>
                     <span className="contact-meta-label">Email</span>
-                    <a href={`mailto:${EMAIL_PRIMARY}`} className="contact-meta-value">{EMAIL_PRIMARY}</a>
-                    <br />
-                    <a href={`mailto:${EMAIL_SECONDARY}`} className="contact-meta-value">{EMAIL_SECONDARY}</a>
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="contact-meta-value">{CONTACT_EMAIL}</a>
                   </li>
                   <li>
-                    <span className="contact-meta-label">Phone</span>
-                    <a href={`tel:${PHONE_RAW_PRIMARY}`} className="contact-meta-value">{PHONE_PRIMARY}</a>
-                    <br />
-                    <a href={`tel:${PHONE_RAW_SECONDARY}`} className="contact-meta-value">{PHONE_SECONDARY}</a>
+                    <span className="contact-meta-label">Mobile</span>
+                    <a href={`tel:${CONTACT_MOBILE_RAW}`} className="contact-meta-value">{CONTACT_MOBILE_DISPLAY}</a>
+                  </li>
+                  <li>
+                    <span className="contact-meta-label">Landline</span>
+                    <a href={`tel:${CONTACT_LANDLINE_RAW}`} className="contact-meta-value">{CONTACT_LANDLINE}</a>
                   </li>
                   <li>
                     <span className="contact-meta-label">WhatsApp</span>
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="contact-meta-value">Chat with us</a>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="contact-meta-value">{CONTACT_MOBILE_DISPLAY}</a>
                   </li>
                 </ul>
               </div>
@@ -206,7 +206,7 @@ export default function Contact() {
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
-                      placeholder="+91 94158 05906"
+                      placeholder={CONTACT_MOBILE_DISPLAY}
                       className="contact-input"
                     />
                   </label>

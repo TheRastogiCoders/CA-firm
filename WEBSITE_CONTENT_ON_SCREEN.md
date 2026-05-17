@@ -333,7 +333,7 @@ This document lists **the exact text and content that is currently showing on th
 - Subtitle: Join our team of professionals. Explore opportunities at Dwivedi Gupta & Co.  
 
 ### Main content
-- We are always looking for talented chartered accountants and finance professionals. For current openings, please write to us at **vivek.gupta@dgc.ind.in** or check back later.  
+- We are always looking for talented chartered accountants and finance professionals. For current openings, please write to us at **shikhar.dwivedi@dgc.ind.in** or check back later.  
 - Button: Contact Us  
 
 ---
@@ -374,9 +374,10 @@ This document lists **the exact text and content that is currently showing on th
 ### Reach Us Directly
 - Title: Reach Us Directly  
 - Description: For urgent matters or a quick conversation, use the details below.  
-- **Email:** vivek.gupta@dgc.ind.in | shikhar.dwivedi@dgc.ind.in  
-- **Phone:** +91 94158 05906 | +91 9721227799  
-- **WhatsApp:** Chat with us  
+- **Email:** shikhar.dwivedi@dgc.ind.in  
+- **Mobile:** +91 9721227799  
+- **Landline:** 0542-2502525  
+- **WhatsApp:** +91 9721227799 (Chat with us)  
 
 ### Our Offices
 - Title: Our Offices  

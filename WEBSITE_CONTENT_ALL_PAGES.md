@@ -464,7 +464,7 @@ Page name: Careers
 ---
 
 ## Content
-We are always looking for talented chartered accountants and finance professionals. For current openings, please write to us at vivek.gupta@dgc.ind.in or check back later.
+We are always looking for talented chartered accountants and finance professionals. For current openings, please write to us at shikhar.dwivedi@dgc.ind.in or check back later.
 
 - Button: Contact Us
 
@@ -517,11 +517,10 @@ Page name: Contact Us
 ## Reach Us Directly
 - Title: Reach Us Directly
 - Description: For urgent matters or a quick conversation, use the details below.
-- Email 1: vivek.gupta@dgc.ind.in
-- Email 2: shikhar.dwivedi@dgc.ind.in
-- Phone 1: +91 94158 05906
-- Phone 2: +91 9721227799
-- WhatsApp: Chat with us
+- Email: shikhar.dwivedi@dgc.ind.in
+- Mobile: +91 9721227799
+- Landline: 0542-2502525
+- WhatsApp: +91 9721227799 (Chat with us)
 
 ---
 
@@ -558,7 +557,7 @@ Industry-focused CA services in the region. | Get directions →
 - Description: Fill in the form below and we’ll get back to you as soon as possible.
 - Fields: Name * | Email * | Phone | Subject | Message *
 - Subject options: General Enquiry | Tax | Audit | GST | Company Formation | Compliance | Other
-- Placeholders: Your full name | your@email.com | +91 94158 05906 | How can we help you?
+- Placeholders: Your full name | your@email.com | +91 9721227799 | How can we help you?
 - Button: Send Message
 - Success message: Thank you. We will get back to you within 24–48 hours.
 

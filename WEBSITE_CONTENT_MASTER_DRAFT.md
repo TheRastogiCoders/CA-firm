@@ -438,7 +438,7 @@ Our insights cover GST, direct and indirect tax, MCA/ROC compliance, audit, star
 ### Main Copy
 
 We are always looking for talented Chartered Accountants, article trainees, and finance professionals who value ethics, quality, and continuous learning.  
-To apply, email your resume and a brief profile summary to `vivek.gupta@dgc.ind.in`.
+To apply, email your resume and a brief profile summary to `shikhar.dwivedi@dgc.ind.in`.
 
 ### Optional Additions
 
@@ -501,10 +501,10 @@ Thank you. Your consultation request has been received. We will connect shortly 
 
 ### Direct Contact Block
 
-- Primary Email: `vivek.gupta@dgc.ind.in`
-- Secondary Email: `shikhar.dwivedi@dgc.ind.in`
-- Primary Phone: `+91 94158 05906`
-- Secondary Phone: `+91 9721227799`
+- Email: `shikhar.dwivedi@dgc.ind.in`
+- Mobile: `+91 9721227799`
+- Landline: `0542-2502525`
+- WhatsApp: `+91 9721227799`
 
 ### What to Expect
 
@@ -582,7 +582,7 @@ Dwivedi Gupta & Co. ("DGC", "we", "our", "us") values your privacy. This policy 
    You may request correction or deletion of your personal information by contacting us.
 
 8. **Contact for Privacy Queries**  
-   Email: `vivek.gupta@dgc.ind.in`
+   Email: `shikhar.dwivedi@dgc.ind.in`
 
 9. **Policy Updates**  
    This policy may be updated periodically. Continued use of the site implies acceptance of the latest version.
