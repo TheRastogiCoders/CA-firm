@@ -23,7 +23,7 @@ import Sitemap from './pages/Sitemap';
 import Disclaimer from './pages/Disclaimer';
 import Compliance from './pages/Compliance';
 import { getAllServices } from './data/servicesData';
-import SeoHead from './components/SeoHead';
+
 
 const QUICK_SERVICE_MODAL_KEY = 'dgc_quick_service_modal_hidden';
 
