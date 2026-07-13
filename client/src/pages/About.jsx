@@ -84,7 +84,11 @@ export default function About() {
               </div>
             </div>
             <div className="about-simple-media">
-              <img src="/officeimage.png" alt="Dwivedi Gupta and Co office" />
+              <img
+                src="/about-office.png"
+                alt="Chartered accountancy office workspace"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

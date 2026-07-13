@@ -5,7 +5,7 @@ import PageCtaBand from '../components/PageCtaBand';
 const heroContent = {
   tagline: 'Assurance | Taxation | Advisory | Consulting',
   title: 'Compliance and Growth Support for Businesses',
-  desc: 'We support corporates, SMEs, and institutions on statutory compliance and advisory matters.',
+  desc: 'Tax, audit, and advisory support for corporates and SMEs.',
 };
 
 const coreServices = [
@@ -13,25 +13,25 @@ const coreServices = [
     title: 'Tax & Regulatory',
     slug: 'tax-compliance',
     description: 'Tax planning, compliance, and representation.',
-    image: 'https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Audit & Assurance',
     slug: 'audit-assurance',
     description: 'Statutory, internal, tax, and stock audits.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Corporate Law',
     slug: 'corporate-law',
     description: 'Company law, governance, and ROC filings.',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=85',
   },
   {
     title: 'Advisory & Consulting',
     slug: 'financial-consulting',
     description: 'Valuation, due diligence, and transactions.',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=85',
   },
 ];
 
@@ -130,7 +130,7 @@ export default function Home() {
               <div className="hero-main">
                 <p className="hero-tagline">{heroContent.tagline}</p>
                 <h1 className="hero-title">{heroContent.title}</h1>
-                <p className="hero-desc hero-desc-home-singleline">{heroContent.desc}</p>
+                <p className="hero-desc">{heroContent.desc}</p>
                 <div className="hero-cta">
                   <Link to="/schedule-consultation" className="hero-btn hero-btn-primary">
                     Schedule Consultation
@@ -177,7 +177,11 @@ export default function Home() {
               </Link>
             </div>
             <div className="home-simple-about-media">
-              <img src="/officeimage.png" alt="Dwivedi Gupta and Co office" />
+              <img
+                src="/about-office.png"
+                alt="Chartered accountancy office workspace"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
