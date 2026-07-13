@@ -1,27 +1,9 @@
-export default function Disclaimer() {
-  const disclaimerSections = [
-    {
-      title: 'Informational Purpose Only',
-      text: 'Content published on this website is intended for general informational use and should not be interpreted as professional tax, legal, audit, or financial advice for any specific case.',
-    },
-    {
-      title: 'No Solicitation',
-      text: 'Nothing on this website is intended to solicit clients in violation of professional standards. Any reference to services, sectors, or capabilities is descriptive in nature.',
-    },
-    {
-      title: 'Accuracy of Information',
-      text: 'We endeavor to keep information accurate and current; however, we do not warrant completeness, reliability, or timeliness of all content at all times.',
-    },
-    {
-      title: 'Professional Advice Requirement',
-      text: 'Before acting on any information from this website, users should obtain direct professional advice based on their facts, records, and applicable regulations.',
-    },
-    {
-      title: 'Limitation of Liability',
-      text: 'Dwivedi Gupta & Co., its partners, and team members are not responsible for any loss arising from reliance on website content without formal professional consultation.',
-    },
-  ];
+import {
+  PROFESSIONAL_DISCLAIMER_FULL_PARAGRAPHS,
+  PROFESSIONAL_STANDARDS_SECTIONS,
+} from '../data/professionalDisclaimer';
 
+export default function Disclaimer() {
   return (
     <>
       <section className="page-hero disclaimer-page-hero">
@@ -29,27 +11,36 @@ export default function Disclaimer() {
           <span className="page-hero-kicker">Legal Notice</span>
           <h1 className="page-title">Disclaimer</h1>
           <p className="page-subtitle">
-            Important legal notice regarding website content, communication, and professional reliance.
+            Important notice regarding website content, professional standards, confidentiality, and reliance on information.
           </p>
         </div>
       </section>
       <section className="section disclaimer-section">
         <div className="container disclaimer-container">
           <div className="disclaimer-intro">
-            <h2>Scope and Legal Clarification</h2>
+            <h2>Disclaimer</h2>
+            {PROFESSIONAL_DISCLAIMER_FULL_PARAGRAPHS.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+            ))}
+          </div>
+
+          <div className="disclaimer-standards-head">
+            <h2>Professional Standards &amp; Governance</h2>
             <p>
-              This disclaimer is intended to set clear expectations around the use of website materials and communication.
-              For case-specific matters, please consult us through a formal engagement process.
+              The following statements supplement the disclaimer above and reflect our professional obligations
+              under the ICAI Code of Ethics and applicable regulatory frameworks.
             </p>
           </div>
+
           <div className="disclaimer-grid">
-            {disclaimerSections.map((section) => (
+            {PROFESSIONAL_STANDARDS_SECTIONS.map((section) => (
               <article key={section.title} className="disclaimer-card">
                 <h3>{section.title}</h3>
                 <p>{section.text}</p>
               </article>
             ))}
           </div>
+
           <p className="disclaimer-updated">Last updated: April 2026.</p>
         </div>
       </section>
@@ -72,20 +63,37 @@ export default function Disclaimer() {
           max-width: 1140px;
         }
         .disclaimer-intro {
-          text-align: center;
           max-width: 920px;
-          margin: 0 auto 1.6rem;
+          margin: 0 auto 1.8rem;
         }
         .disclaimer-intro h2 {
           margin: 0;
           color: var(--slate-900);
           font-size: clamp(1.42rem, 2.8vw, 1.96rem);
+          text-align: center;
         }
         .disclaimer-intro p {
-          margin: 0.68rem 0 0;
-          color: var(--slate-600);
+          margin: 0.85rem 0 0;
+          color: var(--slate-700);
           font-size: 0.96rem;
-          line-height: 1.64;
+          line-height: 1.68;
+          text-align: left;
+        }
+        .disclaimer-standards-head {
+          text-align: center;
+          max-width: 920px;
+          margin: 0 auto 1.2rem;
+        }
+        .disclaimer-standards-head h2 {
+          margin: 0;
+          color: var(--slate-900);
+          font-size: clamp(1.28rem, 2.5vw, 1.72rem);
+        }
+        .disclaimer-standards-head p {
+          margin: 0.6rem 0 0;
+          color: var(--slate-600);
+          font-size: 0.94rem;
+          line-height: 1.62;
         }
         .disclaimer-grid {
           display: grid;

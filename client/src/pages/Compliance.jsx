@@ -1,11 +1,5 @@
-const FIRM_CREDENTIALS = [
-  { label: 'Year of Establishment', value: '2003' },
-  { label: 'Firm Registration No.', value: '012584C' },
-  { label: 'Category of Firm (ICAI)', value: 'I (One)' },
-  { label: 'Official Email', value: 'aditi.kapoor@dgc.ind.in' },
-  { label: 'Head Office', value: 'Varanasi' },
-  { label: 'Branch Offices', value: 'Kolkata, Delhi & Bokaro' },
-];
+import { getMailtoHref } from '../data/contactInfo';
+import { FIRM_CREDENTIALS } from '../data/firmCredentials';
 
 export default function Compliance() {
   return (
@@ -32,7 +26,13 @@ export default function Compliance() {
             {FIRM_CREDENTIALS.map((item) => (
               <article key={item.label} className="compliance-item">
                 <span className="compliance-label">{item.label}</span>
-                <strong className="compliance-value">{item.value}</strong>
+                {item.label === 'Official Email' ? (
+                  <a href={getMailtoHref(item.value)} className="compliance-value compliance-value-link">
+                    {item.value}
+                  </a>
+                ) : (
+                  <strong className="compliance-value">{item.value}</strong>
+                )}
               </article>
             ))}
           </div>
@@ -123,6 +123,14 @@ export default function Compliance() {
           font-size: 1rem;
           color: var(--slate-800);
           line-height: 1.35;
+        }
+        .compliance-value-link {
+          font-weight: 700;
+          text-decoration: none;
+          color: var(--primary);
+        }
+        .compliance-value-link:hover {
+          text-decoration: underline;
         }
         .compliance-note {
           margin-top: 1rem;

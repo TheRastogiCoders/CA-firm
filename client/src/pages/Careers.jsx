@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { CONTACT_EMAIL, getMailtoHref } from '../data/contactInfo';
 
 export default function Careers() {
   return (
@@ -17,7 +18,7 @@ export default function Careers() {
           <p style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>
             We are always looking for talented chartered accountants and finance professionals.
             For current openings, please write to us at{' '}
-            <a href="mailto:shikhar.dwivedi@dgc.ind.in">shikhar.dwivedi@dgc.ind.in</a> or check back later.
+            <a href={getMailtoHref(CONTACT_EMAIL)}>{CONTACT_EMAIL}</a> or check back later.
           </p>
           <Link to="/contact" className="btn btn-primary">Contact Us</Link>
         </div>

@@ -2,6 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { getServiceBySlug } from '../data/servicesData';
 import { getInsightBySlug } from '../data/insightsData';
+import { ICAI_FIRM_REGISTRATION_NO } from '../data/firmCredentials';
+import { CONTACT_EMAIL, SITE_URL } from '../data/contactInfo';
 
 const DEFAULT_TITLE = 'Dwivedi Gupta & Co. | Chartered Accountants in India';
 const DEFAULT_DESCRIPTION =
@@ -14,7 +16,7 @@ function getSiteUrl() {
   if (typeof window !== 'undefined' && window.location?.origin) {
     return window.location.origin;
   }
-  return 'https://www.dgcindia.com';
+  return SITE_URL;
 }
 
 function getMetaByPath(pathname) {
@@ -22,16 +24,16 @@ function getMetaByPath(pathname) {
     return {
       title: 'Dwivedi Gupta & Co. | Tax, Audit, GST & Financial Advisory',
       description:
-        'Leading chartered accountant firm offering tax planning, audit, GST, compliance, project finance, and strategic advisory services with partner-led engagement.',
+        'Chartered Accountants firm for tax planning, audit, GST, compliance, company law, and financial advisory. Offices in Varanasi, Delhi, Kolkata, and Bokaro.',
       keywords:
         'chartered accountant, CA firm, tax consultant, GST consultant, audit firm, financial advisory india',
     };
   }
   if (pathname === '/about-us') {
     return {
-      title: 'About Dwivedi Gupta & Co. | Partner-Led CA Firm',
+      title: 'About Dwivedi Gupta & Co. | CA Firm Since 2003',
       description:
-        'Learn about Dwivedi Gupta & Co., our vision, values, professional team capability, and client-first approach across tax, audit, and advisory services.',
+        'About Dwivedi Gupta & Co.: tax, audit, and advisory practice since 2003. Vision, values, team, and offices across four cities.',
       keywords: 'about CA firm, chartered accountants team, audit and tax experts',
     };
   }
@@ -39,7 +41,7 @@ function getMetaByPath(pathname) {
     return {
       title: 'CA Services | Tax, Audit, GST, Compliance & Advisory',
       description:
-        'Explore our complete service portfolio including tax compliance, audit and assurance, GST advisory, company law, project finance, and strategic consulting.',
+        'Service list: tax compliance, audit and assurance, GST advisory, company law, company formation, financial consulting, and project finance.',
       keywords: 'tax services, audit services, GST services, compliance services, CA services india',
     };
   }
@@ -58,7 +60,7 @@ function getMetaByPath(pathname) {
     return {
       title: 'Industries We Serve | Sector-Focused CA Advisory',
       description:
-        'Industry-specific tax, audit, compliance, and financial advisory services tailored to sector realities, regulations, and business goals.',
+        'Tax, audit, and compliance services for manufacturing, banking, real estate, government, SMEs, and other sectors.',
       keywords: 'industry advisory, sector specific CA services, compliance by industry',
     };
   }
@@ -66,7 +68,7 @@ function getMetaByPath(pathname) {
     return {
       title: 'Our Team | Experienced Chartered Accountants',
       description:
-        'Meet our team of qualified professionals delivering partner-led tax, audit, compliance, and financial consulting services.',
+        'Meet the partners and staff at Dwivedi Gupta & Co. across tax, audit, compliance, and advisory.',
       keywords: 'CA team, audit experts, tax professionals, accounting firm team',
     };
   }
@@ -74,7 +76,7 @@ function getMetaByPath(pathname) {
     return {
       title: 'Clients & Engagement Approach | Dwivedi Gupta & Co.',
       description:
-        'Discover how we work with clients through structured engagement, transparent reporting, and long-term advisory partnerships.',
+        'How Dwivedi Gupta & Co. works with clients on audit, tax, and compliance engagements.',
       keywords: 'client services CA firm, advisory engagement, audit and compliance support',
     };
   }
@@ -139,8 +141,9 @@ function getMetaByPath(pathname) {
   if (pathname === '/disclaimer') {
     return {
       title: 'Disclaimer | Dwivedi Gupta & Co.',
-      description: 'Important legal disclaimer regarding website information and professional reliance limitations.',
-      keywords: 'website disclaimer, legal notice, advisory disclaimer',
+      description:
+        'Disclaimer and professional standards notice covering ICAI ethics, confidentiality, independence, and limitations on website information.',
+      keywords: 'website disclaimer, ICAI code of ethics, confidentiality, professional standards, legal notice',
     };
   }
   if (pathname === '/compliance') {
@@ -177,8 +180,13 @@ export default function SeoHead() {
     name: 'Dwivedi Gupta & Co.',
     url: siteUrl,
     image: `${siteUrl}${DEFAULT_IMAGE}`,
-    email: 'shikhar.dwivedi@dgc.ind.in',
+    email: CONTACT_EMAIL,
     telephone: '+91 9721227799',
+    identifier: {
+      '@type': 'PropertyValue',
+      name: 'ICAI Firm Registration Number',
+      value: ICAI_FIRM_REGISTRATION_NO,
+    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Varanasi',

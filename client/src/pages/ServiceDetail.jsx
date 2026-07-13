@@ -1,5 +1,6 @@
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { getServiceBySlug, getRelatedServices } from '../data/servicesData';
+import PageCtaBand from '../components/PageCtaBand';
 
 export default function ServiceDetail() {
   const { slug } = useParams();
@@ -13,306 +14,169 @@ export default function ServiceDetail() {
 
   return (
     <>
-      <section className="page-hero service-detail-page-hero" aria-labelledby="service-detail-title">
+      <section className="page-hero svc-detail-hero" aria-labelledby="service-detail-title">
         <div className="container">
-          <nav className="service-detail-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">Home</Link>
-            <span>/</span>
+          <nav className="svc-detail-breadcrumb" aria-label="Breadcrumb">
             <Link to="/services">Services</Link>
             <span>/</span>
             <span>{service.title}</span>
           </nav>
-          <span className="page-hero-kicker service-detail-kicker">Service Detail</span>
-          <h1 id="service-detail-title" className="page-title service-detail-title">{service.title}</h1>
-          <p className="page-subtitle service-detail-intro">{service.shortDescription}</p>
-          <div className="page-hero-actions service-detail-actions">
-            <Link to="/schedule-consultation" className="btn btn-primary">Schedule Consultation</Link>
-            <Link to="/contact" className="btn btn-secondary">Talk to Our Team</Link>
+          <h1 id="service-detail-title" className="page-title">
+            {service.title}
+          </h1>
+          <p className="page-subtitle">{service.shortDescription}</p>
+          <div className="page-hero-actions">
+            <Link to="/schedule-consultation" className="btn btn-primary">
+              Schedule Consultation
+            </Link>
+            <Link to="/contact" className="btn btn-secondary">
+              Contact Us
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="home-section service-detail-content" aria-labelledby="service-detail-overview">
-        <div className="container">
-          <div className="service-detail-layout">
-            <article className="service-detail-panel">
-              <h2 id="service-detail-overview">Overview</h2>
-              <p>{service.longDescription}</p>
-            </article>
+      <section className="home-section svc-detail-body">
+        <div className="container svc-detail-container">
+          <article className="svc-detail-overview">
+            <h2>Overview</h2>
+            <p>{service.longDescription}</p>
+          </article>
 
-            <aside className="service-detail-panel service-detail-panel-side">
-              <h3>Engagement Snapshot</h3>
-              <ul>
-                <li>Partner-led supervision and review</li>
-                <li>Structured timeline and milestone updates</li>
-                <li>Documentation and compliance-first execution</li>
-                <li>Cross-functional support for related services</li>
-              </ul>
-            </aside>
-          </div>
-
-          <div className="service-detail-deliverables">
-            <div className="about-section-head">
-              <span className="about-section-head-kicker">Key Deliverables</span>
-              <h2>What we deliver under {service.title}</h2>
-            </div>
-            <div className="service-detail-deliverable-grid">
-              {service.keyAreas.map((area, index) => (
-                <article key={area} className="service-detail-deliverable-card">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <p>{area}</p>
-                </article>
+          <div className="svc-detail-areas">
+            <h2>Key Areas</h2>
+            <ul>
+              {service.keyAreas.map((area) => (
+                <li key={area}>{area}</li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          <div className="service-detail-related">
-            <div className="about-section-head">
-              <span className="about-section-head-kicker">Explore More</span>
+          {related.length > 0 && (
+            <div className="svc-detail-related">
               <h2>Related Services</h2>
+              <div className="svc-detail-related-grid">
+                {related.map((item) => (
+                  <Link key={item.slug} to={`/services/${item.slug}`}>
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
             </div>
-            <div className="service-detail-related-grid">
-              {related.map((item, index) => (
-                <Link key={item.slug} to={`/services/${item.slug}`} className="service-detail-related-card">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.shortDescription}</p>
-                  <em>Open details →</em>
-                </Link>
-              ))}
-            </div>
-          </div>
+          )}
 
-          <div className="service-detail-final-cta">
-            <p>Need a combined scope with {service.title} and related services? Let us design the right engagement structure for you.</p>
-            <div>
-              <Link to="/schedule-consultation" className="btn btn-primary">Schedule Consultation</Link>
-              <Link to="/contact" className="btn btn-secondary">Contact Us</Link>
-            </div>
-          </div>
+          <PageCtaBand
+            title={`Discuss ${service.title}`}
+            description="Share your requirements. We will confirm scope and timelines before starting."
+          />
         </div>
       </section>
 
       <style>{`
-        .service-detail-page-hero {
-          border-bottom: 1px solid rgba(31, 93, 150, 0.22);
+        .svc-detail-hero {
+          padding-top: clamp(4rem, 7vw, 5.5rem);
+          padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+          border-bottom: 1px solid rgba(31, 93, 150, 0.18);
           background:
-            radial-gradient(1100px 360px at 50% -120px, rgba(31, 93, 150, 0.22), transparent 64%),
-            linear-gradient(180deg, rgba(241, 247, 255, 0.98) 0%, rgba(232, 241, 252, 0.92) 56%, rgba(255, 255, 255, 0.98) 100%);
+            radial-gradient(900px 300px at 50% -100px, rgba(23, 59, 104, 0.22), transparent 64%),
+            linear-gradient(180deg, rgba(236, 244, 253, 0.96) 0%, rgba(243, 249, 255, 0.98) 100%);
         }
-        .service-detail-page-hero::before {
-          background-image: radial-gradient(circle at 1px 1px, rgba(23, 59, 104, 0.1) 1px, transparent 0);
-          opacity: 0.24;
-        }
-        .service-detail-page-hero::after {
-          opacity: 0.12;
-          filter: grayscale(8%) saturate(95%);
-        }
-        .service-detail-page-hero .container {
-          max-width: 1220px;
-          text-align: center;
-        }
-        .service-detail-breadcrumb {
+        .svc-detail-breadcrumb {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.48rem;
+          gap: 0.4rem;
           align-items: center;
-          justify-content: center;
-          font-size: 0.8rem;
-          color: var(--slate-600);
+          margin-bottom: 0.75rem;
+          font-size: 0.82rem;
+          color: var(--slate-500);
         }
-        .service-detail-breadcrumb a {
+        .svc-detail-breadcrumb a {
           color: var(--slate-600);
           text-decoration: none;
         }
-        .service-detail-kicker { margin-top: 0.82rem; }
-        .service-detail-title {
-          max-width: 920px;
-          margin-left: auto;
-          margin-right: auto;
+        .svc-detail-breadcrumb a:hover {
+          color: var(--purple-700);
         }
-        .service-detail-intro {
-          max-width: 860px;
-          margin-left: auto;
-          margin-right: auto;
+        .svc-detail-hero .page-subtitle {
+          max-width: 40rem;
         }
-        .service-detail-actions {
-          margin-top: 1.2rem;
-          justify-content: center;
+        .svc-detail-hero .page-hero-actions {
+          margin-top: 1.1rem;
         }
-        .service-detail-content {
-          background: linear-gradient(180deg, #fff 0%, #f7fbff 100%);
+
+        .svc-detail-body {
+          padding-top: 2.25rem;
+          padding-bottom: 2.5rem;
         }
-        .service-detail-layout {
-          display: grid;
-          gap: 0.8rem;
-          grid-template-columns: 1fr;
+        .svc-detail-container {
+          max-width: 760px;
         }
-        @media (min-width: 980px) {
-          .service-detail-layout {
-            grid-template-columns: 1.2fr 0.8fr;
-          }
-        }
-        .service-detail-panel {
-          border: 1px solid rgba(148, 163, 184, 0.24);
-          border-radius: 14px;
-          background: #fff;
-          padding: 1rem;
-          box-shadow: 0 10px 28px rgba(15, 39, 71, 0.06);
-        }
-        .service-detail-panel h2,
-        .service-detail-panel h3 {
-          margin: 0;
+        .svc-detail-overview h2,
+        .svc-detail-areas h2,
+        .svc-detail-related h2 {
+          margin: 0 0 0.65rem;
+          font-size: 1.2rem;
           color: var(--slate-900);
-          font-size: 1.22rem;
         }
-        .service-detail-panel p {
-          margin: 0.65rem 0 0;
-          color: var(--slate-700);
-          font-size: 0.96rem;
-          line-height: 1.68;
+        .svc-detail-overview p {
+          margin: 0;
+          color: var(--slate-600);
+          font-size: 1.02rem;
+          line-height: 1.7;
         }
-        .service-detail-panel-side ul {
-          margin: 0.65rem 0 0;
+        .svc-detail-areas {
+          margin-top: 1.75rem;
+        }
+        .svc-detail-areas ul {
+          margin: 0;
           padding: 0;
           list-style: none;
           display: grid;
-          gap: 0.42rem;
+          gap: 0.45rem;
         }
-        .service-detail-panel-side li {
+        .svc-detail-areas li {
           position: relative;
-          padding-left: 0.86rem;
+          padding: 0.65rem 0.85rem 0.65rem 1.35rem;
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          border-radius: 10px;
+          background: #fff;
           color: var(--slate-700);
-          font-size: 0.89rem;
-          line-height: 1.56;
+          font-size: 0.94rem;
+          line-height: 1.45;
         }
-        .service-detail-panel-side li::before {
-          content: "";
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
+        .svc-detail-areas li::before {
+          content: '';
           position: absolute;
-          left: 0;
-          top: 0.54em;
-          background: var(--purple-500);
+          left: 0.65rem;
+          top: 50%;
+          width: 6px;
+          height: 6px;
+          margin-top: -3px;
+          border-radius: 50%;
+          background: var(--purple-600);
         }
-        .service-detail-deliverables,
-        .service-detail-related {
-          margin-top: 1.15rem;
+        .svc-detail-related {
+          margin: 1.75rem 0 1.5rem;
         }
-        .service-detail-deliverables .about-section-head,
-        .service-detail-related .about-section-head {
-          text-align: center;
-          margin-bottom: 0.9rem;
-        }
-        .service-detail-deliverables .about-section-head h2,
-        .service-detail-related .about-section-head h2 {
-          display: block;
-          width: 100%;
-          margin: 0.2rem auto 0;
-          font-size: clamp(1.5rem, 2.8vw, 2rem);
-          line-height: 1.2;
-          letter-spacing: -0.02em;
-          color: var(--slate-900);
-        }
-        .service-detail-deliverable-grid,
-        .service-detail-related-grid {
-          display: grid;
-          gap: 0.74rem;
-          grid-template-columns: 1fr;
-        }
-        @media (min-width: 900px) {
-          .service-detail-deliverable-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-          .service-detail-related-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-          }
-        }
-        .service-detail-deliverable-card {
-          border: 1px solid rgba(148, 163, 184, 0.24);
-          border-radius: 12px;
-          background: #fff;
-          padding: 0.86rem;
-        }
-        .service-detail-deliverable-card span {
-          color: var(--purple-700);
-          font-size: 0.75rem;
-          letter-spacing: 0.12em;
-          font-weight: 700;
-        }
-        .service-detail-deliverable-card p {
-          margin: 0.4rem 0 0;
-          color: var(--slate-700);
-          font-size: 0.9rem;
-          line-height: 1.56;
-        }
-        .service-detail-related-card {
-          border: 1px solid rgba(148, 163, 184, 0.24);
-          border-radius: 13px;
-          background: #fff;
-          padding: 0.9rem;
-          text-decoration: none;
-          color: inherit;
-          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-        .service-detail-related-card:hover {
-          transform: translateY(-2px);
-          border-color: rgba(31, 93, 150, 0.36);
-          box-shadow: 0 12px 28px rgba(15, 39, 71, 0.1);
-        }
-        .service-detail-related-card span {
-          color: var(--purple-700);
-          font-size: 0.74rem;
-          letter-spacing: 0.12em;
-          font-weight: 700;
-        }
-        .service-detail-related-card h3 {
-          margin: 0.38rem 0 0;
-          color: var(--slate-900);
-          font-size: 1rem;
-          line-height: 1.35;
-        }
-        .service-detail-related-card p {
-          margin: 0.45rem 0 0;
-          color: var(--text-muted);
-          font-size: 0.88rem;
-          line-height: 1.52;
-        }
-        .service-detail-related-card em {
-          margin-top: 0.7rem;
-          display: inline-flex;
-          font-style: normal;
-          color: var(--purple-700);
-          font-weight: 600;
-          font-size: 0.86rem;
-        }
-        .service-detail-final-cta {
-          margin-top: 1.15rem;
-          border: 1px solid rgba(140, 183, 220, 0.3);
-          border-radius: 18px;
-          background: linear-gradient(135deg, #0f2747 0%, #173b68 52%, #1f5d96 100%);
-          color: #fff;
-          padding: 1.8rem 1rem;
-          text-align: center;
-        }
-        .service-detail-final-cta p {
-          margin: 0;
-          color: rgba(240, 248, 255, 0.92);
-          font-size: 1rem;
-          line-height: 1.58;
-        }
-        .service-detail-final-cta div {
-          margin-top: 1rem;
+        .svc-detail-related-grid {
           display: flex;
-          justify-content: center;
           flex-wrap: wrap;
-          gap: 0.65rem;
+          gap: 0.5rem;
         }
-        .service-detail-final-cta .btn-secondary {
-          border-color: rgba(220, 236, 252, 0.48);
-          color: #f8fcff;
-          background: transparent;
+        .svc-detail-related-grid a {
+          display: inline-flex;
+          padding: 0.45rem 0.8rem;
+          border-radius: 8px;
+          border: 1px solid rgba(31, 93, 150, 0.26);
+          background: rgba(31, 93, 150, 0.06);
+          color: var(--purple-700);
+          font-size: 0.86rem;
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .svc-detail-related-grid a:hover {
+          background: rgba(31, 93, 150, 0.12);
+          border-color: rgba(31, 93, 150, 0.4);
         }
       `}</style>
     </>

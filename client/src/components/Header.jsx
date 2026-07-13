@@ -1,11 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getAllServices } from '../data/servicesData';
-import {
-  CONTACT_EMAIL,
-  CONTACT_LANDLINE,
-  CONTACT_MOBILE_DISPLAY,
-} from '../data/contactInfo';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -16,17 +11,6 @@ const navLinks = [
   { to: '/clients', label: 'Clients' },
   { to: '/insights', label: 'Insights' },
   { to: '/contact', label: 'Contact' },
-];
-
-const infoTickerItems = [
-  `Email: ${CONTACT_EMAIL}`,
-  `Mobile: ${CONTACT_MOBILE_DISPLAY}`,
-  `Landline: ${CONTACT_LANDLINE}`,
-  'WhatsApp: +91 9721227799',
-  'Head Office: Varanasi',
-  'Branches: Delhi | Kolkata | Bokaro',
-  'RBI Registered & CAG Empanelled',
-  'Mon-Sat: 10:00 AM - 7:00 PM',
 ];
 
 const TEAM_DROPDOWN_ITEMS = [
@@ -142,15 +126,6 @@ export default function Header() {
   return (
     <>
     <header ref={headerRef} className="header">
-      <div className="header-topbar" aria-label="Firm contact information ticker">
-        <div className="header-topbar-track">
-          {[...infoTickerItems, ...infoTickerItems].map((item, index) => (
-            <span className="header-topbar-item" key={`${item}-${index}`}>
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
       {menuOpen && (
         <div
           className="header-backdrop"
@@ -292,23 +267,9 @@ export default function Header() {
               )
             ))}
           </div>
-          <Link
-            to="/schedule-consultation"
-            className="header-cta header-cta-mobile"
-            onClick={() => setMenuOpen(false)}
-          >
-            Schedule Consultation
-          </Link>
         </nav>
 
         <div className="header-actions">
-          <Link
-            to="/schedule-consultation"
-            className="header-cta header-cta-desktop"
-            onClick={() => setMenuOpen(false)}
-          >
-            Schedule Consultation
-          </Link>
           <button
             type="button"
             className="header-menu-btn"
@@ -340,46 +301,6 @@ export default function Header() {
         .header-spacer {
           width: 100%;
           flex-shrink: 0;
-        }
-        .header-topbar {
-          position: relative;
-          overflow: hidden;
-          height: 34px;
-          display: flex;
-          align-items: center;
-          border-bottom: 1px solid rgba(140, 183, 220, 0.2);
-          background: linear-gradient(90deg, #0f2747 0%, #173b68 48%, #1f5d96 100%);
-        }
-        .header-topbar-track {
-          display: flex;
-          align-items: center;
-          gap: 1.8rem;
-          width: max-content;
-          white-space: nowrap;
-          animation: header-topbar-scroll 34s linear infinite;
-          will-change: transform;
-          padding: 0 1rem;
-        }
-        .header-topbar-item {
-          position: relative;
-          font-size: 0.73rem;
-          font-weight: 500;
-          letter-spacing: 0.01em;
-          color: rgba(255, 255, 255, 0.92);
-        }
-        .header-topbar-item:not(:last-child)::after {
-          content: '•';
-          margin-left: 1.8rem;
-          color: rgba(255, 255, 255, 0.5);
-        }
-        @keyframes header-topbar-scroll {
-          from { transform: translateX(-50%); }
-          to { transform: translateX(0); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .header-topbar-track {
-            animation: none;
-          }
         }
         .header .header-inner.container {
           max-width: 1360px;
@@ -459,14 +380,15 @@ export default function Header() {
         .header-nav {
           display: none;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           flex: 1 1 auto;
           min-width: 0;
+          margin-left: auto;
         }
         .header-nav-links {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
           flex-wrap: nowrap;
           gap: 0.1rem;
           padding: 0;
@@ -474,6 +396,7 @@ export default function Header() {
           border: none;
           border-radius: 0;
           box-shadow: none;
+          margin-left: auto;
         }
         @media (min-width: 1100px) {
           .header-nav-links {
@@ -495,16 +418,34 @@ export default function Header() {
           font-weight: 600;
           color: #4b5563;
           text-decoration: none;
-          border-radius: 8px;
+          border-radius: 0;
           letter-spacing: 0.005em;
           white-space: nowrap;
-          transition: color 0.2s ease, background 0.2s ease;
+          transition: color 0.2s ease;
           flex-shrink: 0;
+          background: transparent;
+        }
+        .header-nav-link::after {
+          content: '';
+          position: absolute;
+          left: 0.7rem;
+          right: 0.7rem;
+          bottom: 0.28rem;
+          height: 2px;
+          border-radius: 2px;
+          background: var(--primary);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 0.2s ease;
         }
         @media (min-width: 1100px) {
           .header-nav-link {
             padding: 0.56rem 0.82rem;
             font-size: 0.79rem;
+          }
+          .header-nav-link::after {
+            left: 0.82rem;
+            right: 0.82rem;
           }
         }
         @media (min-width: 1200px) {
@@ -512,14 +453,26 @@ export default function Header() {
             padding: 0.56rem 0.9rem;
             font-size: 0.8rem;
           }
+          .header-nav-link::after {
+            left: 0.9rem;
+            right: 0.9rem;
+          }
         }
         .header-nav-link:hover {
-          color: #374151;
-          background: rgba(148, 163, 184, 0.12);
+          color: var(--primary);
+          background: transparent;
+        }
+        .header-nav-link:hover::after {
+          transform: scaleX(0.55);
+          opacity: 0.55;
         }
         .header-nav-link-active {
           color: var(--primary);
-          background: rgba(31, 79, 134, 0.12);
+          background: transparent;
+        }
+        .header-nav-link-active::after {
+          transform: scaleX(1);
+          opacity: 1;
         }
         .header-services-dropdown {
           position: relative;
@@ -540,19 +493,36 @@ export default function Header() {
           font-weight: 600;
           color: #4b5563;
           text-decoration: none;
-          border-radius: 8px;
+          border-radius: 0;
           letter-spacing: 0.005em;
           white-space: nowrap;
-          transition: color 0.2s ease, background 0.2s ease;
+          transition: color 0.2s ease;
           flex-shrink: 0;
           position: relative;
           height: auto;
           line-height: inherit;
         }
+        .header-services-trigger::after {
+          content: '';
+          position: absolute;
+          left: 0.7rem;
+          right: 0.7rem;
+          bottom: 0.28rem;
+          height: 2px;
+          border-radius: 2px;
+          background: var(--primary);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 0.2s ease;
+        }
         @media (min-width: 1100px) {
           .header-services-trigger {
             padding: 0.56rem 0.82rem;
             font-size: 0.79rem;
+          }
+          .header-services-trigger::after {
+            left: 0.82rem;
+            right: 0.82rem;
           }
         }
         @media (min-width: 1200px) {
@@ -560,14 +530,26 @@ export default function Header() {
             padding: 0.56rem 0.9rem;
             font-size: 0.8rem;
           }
+          .header-services-trigger::after {
+            left: 0.9rem;
+            right: 0.9rem;
+          }
         }
         .header-services-trigger:hover {
-          color: #374151;
-          background: rgba(148, 163, 184, 0.12);
+          color: var(--primary);
+          background: transparent;
+        }
+        .header-services-trigger:hover::after {
+          transform: scaleX(0.55);
+          opacity: 0.55;
         }
         .header-services-trigger.header-nav-link-active {
           color: var(--primary);
-          background: rgba(31, 79, 134, 0.12);
+          background: transparent;
+        }
+        .header-services-trigger.header-nav-link-active::after {
+          transform: scaleX(1);
+          opacity: 1;
         }
         .header-services-trigger:focus {
           outline: none;
@@ -636,62 +618,6 @@ export default function Header() {
           gap: 0.55rem;
           flex-shrink: 0;
         }
-        .header-cta {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-width: 180px;
-          height: 46px;
-          padding: 0 1.2rem;
-          font-size: 0.81rem;
-          font-weight: 700;
-          letter-spacing: 0.01em;
-          color: #ffffff;
-          background: linear-gradient(135deg, #0f2747 0%, #173b68 52%, #1f5d96 100%);
-          border: 1px solid rgba(15, 39, 71, 0.45);
-          border-radius: 12px;
-          text-decoration: none;
-          box-shadow: 0 10px 22px rgba(15, 23, 42, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.24);
-          transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-          white-space: nowrap;
-          position: relative;
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-        @media (min-width: 1200px) {
-          .header-cta {
-            min-width: 198px;
-            height: 48px;
-            padding: 0 1.4rem;
-            font-size: 0.83rem;
-          }
-        }
-        .header-cta::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -36%;
-          width: 34%;
-          height: 100%;
-          background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
-          transform: skewX(-20deg);
-          transition: left 0.35s ease;
-        }
-        .header-cta:hover {
-          color: #ffffff;
-          border-color: rgba(23, 59, 104, 0.62);
-          background: linear-gradient(135deg, #173b68 0%, #1f4f86 50%, #2f6ea8 100%);
-          box-shadow: 0 14px 28px rgba(15, 23, 42, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.28);
-          transform: translateY(-2px);
-        }
-        .header-cta:hover::before {
-          left: 112%;
-        }
-        .header-cta:active {
-          transform: translateY(0) scale(0.985);
-        }
-        .header-cta-desktop { display: none; }
-        .header-cta-mobile { display: none; }
         .header-menu-btn {
           display: flex;
           flex-direction: column;
@@ -760,9 +686,6 @@ export default function Header() {
         @media (min-width: 992px) {
           .header-nav {
             display: flex;
-          }
-          .header-cta-desktop {
-            display: inline-flex;
           }
           .header-menu-btn {
             display: none;
@@ -848,6 +771,9 @@ export default function Header() {
             background: rgba(255, 255, 255, 0.74);
             white-space: normal;
           }
+          .header-nav-link::after {
+            display: none;
+          }
           .header-services-dropdown {
             display: block;
             width: 100%;
@@ -860,6 +786,9 @@ export default function Header() {
             border-radius: 10px;
             border: 1px solid rgba(148, 163, 184, 0.2);
             background: rgba(255, 255, 255, 0.74);
+          }
+          .header-services-trigger::after {
+            display: none;
           }
           .header-services-menu {
             position: static;
@@ -886,18 +815,9 @@ export default function Header() {
           }
           .header-nav-link-active {
             color: var(--primary);
-            background: rgba(31, 79, 134, 0.16);
-          }
-          .header-cta-mobile {
-            display: inline-flex !important;
-            width: 100%;
-            min-width: 0;
-            height: 48px;
-            margin-top: 0.85rem;
-            padding: 0.875rem 1.25rem;
-            font-size: 0.96rem;
-            text-align: center;
-            border-radius: 12px;
+            background: rgba(31, 79, 134, 0.1);
+            border-color: rgba(31, 93, 150, 0.28);
+            box-shadow: inset 3px 0 0 var(--primary);
           }
         }
         @media (max-width: 991px) {
@@ -906,18 +826,6 @@ export default function Header() {
           }
         }
         @media (max-width: 480px) {
-          .header-topbar {
-            height: 30px;
-          }
-          .header-topbar-track {
-            gap: 1.4rem;
-          }
-          .header-topbar-item {
-            font-size: 0.68rem;
-          }
-          .header-topbar-item:not(:last-child)::after {
-            margin-left: 1.4rem;
-          }
           .header-logo {
             height: 38px;
           }
@@ -929,7 +837,6 @@ export default function Header() {
             font-size: 0.6rem;
             letter-spacing: 0.1em;
           }
-          .header-cta-desktop { display: none !important; }
         }
       `}</style>
     </header>

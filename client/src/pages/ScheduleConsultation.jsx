@@ -24,15 +24,15 @@ const timeSlots = [
 const whyBookItems = [
   {
     title: 'Free 30-minute discussion',
-    desc: 'Understand your needs with no cost or obligation—get clarity before you commit.',
+    desc: 'Explain your situation at no charge. We will outline how we can help before you engage us.',
   },
   {
     title: 'Your choice of format',
-    desc: 'In-person at our office, phone call, or video call—we adapt to your preference.',
+    desc: 'Meet at our office, speak on the phone, or join by video call.',
   },
   {
-    title: 'Partner-led expertise',
-    desc: 'Speak directly with experienced CAs who can advise on tax, audit, and compliance.',
+    title: 'Experienced CAs',
+    desc: 'You speak with chartered accountants who handle tax, audit, and compliance work regularly.',
   },
 ];
 
