@@ -1,8 +1,20 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getMailtoHref } from '../data/contactInfo';
 import { partners } from '../data/partnersData';
 import PageCtaBand from '../components/PageCtaBand';
+
+function PartnerAvatar({ member, className }) {
+  if (member.photo) {
+    return (
+      <img
+        className={className}
+        src={member.photo}
+        alt={member.name}
+        loading="lazy"
+      />
+    );
+  }
+  return <div className={className}>{member.initials}</div>;
+}
 
 function MemberDetailModal({ member, onClose }) {
   if (!member) return null;
@@ -14,22 +26,18 @@ function MemberDetailModal({ member, onClose }) {
           ×
         </button>
         <div className="team-modal-header">
-          <div className="team-modal-avatar">{member.initials}</div>
+          <PartnerAvatar member={member} className="team-modal-avatar" />
           <div>
             <h2 id="modal-title">{member.name}</h2>
             <p>{member.role}{member.branch ? ` · ${member.branch}` : ''}</p>
           </div>
         </div>
         <div className="team-modal-body">
-          <p><strong>ICAI:</strong> {member.icaiMembershipNo}</p>
+          <p><strong>MRN:</strong> {member.icaiMembershipNo}</p>
           <p><strong>Qualifications:</strong> {member.qualifications}</p>
           <p><strong>Specialization:</strong> {member.specialization}</p>
           <p><strong>Experience:</strong> {member.experience}</p>
           <p className="team-modal-bio">{member.bio}</p>
-          <div className="team-modal-links">
-            <a href={getMailtoHref(member.email)}>{member.email}</a>
-            <a href={`tel:${member.phone.replace(/\s/g, '')}`}>{member.phone}</a>
-          </div>
         </div>
       </div>
     </div>
@@ -61,14 +69,6 @@ export default function Team() {
           <p className="page-subtitle">
             Seven partners leading tax, audit, compliance, and advisory across four offices.
           </p>
-          <div className="page-hero-actions">
-            <Link to="/team-members" className="btn btn-secondary">
-              Team Members
-            </Link>
-            <Link to="/contact" className="btn btn-primary">
-              Contact Us
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -77,30 +77,65 @@ export default function Team() {
           <div className="team-simple-grid">
             {partners.map((member) => (
               <article key={member.icaiMembershipNo} className="team-simple-card">
-                <div className="team-simple-avatar">{member.initials}</div>
-                <h2>{member.name}</h2>
-                <p className="team-simple-role">{member.role}</p>
-                {member.branch && <p className="team-simple-branch">{member.branch}</p>}
-                <p className="team-simple-meta">{member.specialization}</p>
-                <p className="team-simple-meta">{member.experience} · ICAI {member.icaiMembershipNo}</p>
-                <button type="button" onClick={() => setSelectedMember(member)}>
-                  View profile
-                </button>
+                <div className="team-simple-media">
+                  <PartnerAvatar member={member} className="team-simple-avatar" />
+                </div>
+                <div className="team-simple-body">
+                  <h2>{member.name}</h2>
+                  <p className="team-simple-role">{member.role}</p>
+                  <p className="team-simple-branch">{member.branch || '\u00A0'}</p>
+                  <p className="team-simple-meta">{member.specialization}</p>
+                  <p className="team-simple-meta">{member.experience} · MRN {member.icaiMembershipNo}</p>
+                  <button type="button" onClick={() => setSelectedMember(member)}>
+                    View profile
+                  </button>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="home-section team-simple-cta">
+      <section className="home-section team-gallery" aria-labelledby="team-gallery-title">
+        <div className="container">
+          <h2 id="team-gallery-title" className="team-gallery-heading">
+            Life at Dwivedi Gupta &amp; Co.
+          </h2>
+          <p className="team-gallery-intro">
+            Our people, celebrations, and moments together across the firm.
+          </p>
+          <div className="team-gallery-grid">
+            {[
+              {
+                src: '/images/gallery/team-office-front.jpeg',
+                alt: 'Firm team gathered outside the office',
+              },
+              {
+                src: '/images/gallery/team-celebration.jpeg',
+                alt: 'Firm team celebration at the office',
+              },
+              {
+                src: '/images/gallery/team-independence-day.jpeg',
+                alt: 'Firm team Independence Day gathering',
+              },
+              {
+                src: '/images/gallery/team-flag-ceremony.jpeg',
+                alt: 'Firm team at flag ceremony',
+              },
+            ].map((item) => (
+              <figure key={item.src} className="team-gallery-item">
+                <img src={item.src} alt={item.alt} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section team-simple-cta reveal-always is-revealed">
         <div className="container">
           <PageCtaBand
             title="Want to work with our team?"
             description="Reach out for careers or client engagements."
-            primaryLabel="Contact Us"
-            primaryTo="/contact"
-            secondaryLabel="Careers"
-            secondaryTo="/careers"
           />
         </div>
       </section>
@@ -119,13 +154,13 @@ export default function Team() {
             linear-gradient(180deg, rgba(236, 244, 253, 0.96) 0%, rgba(243, 249, 255, 0.98) 100%);
         }
         .team-simple-hero .page-subtitle { max-width: 36rem; }
-        .team-simple-hero .page-hero-actions { margin-top: 1.1rem; }
 
         .team-simple-list { padding-top: 2.5rem; padding-bottom: 1.5rem; }
         .team-simple-grid {
           display: grid;
           gap: 0.9rem;
           grid-template-columns: 1fr;
+          align-items: stretch;
         }
         @media (min-width: 640px) {
           .team-simple-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -136,25 +171,46 @@ export default function Team() {
         .team-simple-card {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          padding: 1.1rem 1rem;
+          align-items: stretch;
+          height: 100%;
+          min-height: 100%;
+          padding: 0;
+          overflow: hidden;
           border: 1px solid rgba(148, 163, 184, 0.24);
-          border-radius: 12px;
+          border-radius: 14px;
           background: #fff;
           box-shadow: 0 8px 22px rgba(15, 39, 71, 0.06);
         }
+        .team-simple-media {
+          width: 100%;
+          height: 300px;
+          flex-shrink: 0;
+          background: linear-gradient(145deg, rgba(31, 93, 150, 0.12), rgba(110, 162, 208, 0.18));
+        }
         .team-simple-avatar {
-          width: 48px;
-          height: 48px;
-          margin-bottom: 0.7rem;
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center 18%;
+          border-radius: 0;
+          font-size: 1.35rem;
+          font-weight: 700;
+          color: #fff;
+          background: linear-gradient(135deg, var(--purple-600), var(--blue-600));
+        }
+        div.team-simple-avatar {
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 50%;
-          background: linear-gradient(135deg, var(--purple-600), var(--blue-600));
-          color: #fff;
-          font-size: 0.85rem;
-          font-weight: 700;
+        }
+        .team-simple-body {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 1rem 1.05rem 1.1rem;
+          flex: 1;
+          min-height: 0;
         }
         .team-simple-card h2 {
           margin: 0 0 0.25rem;
@@ -172,6 +228,7 @@ export default function Team() {
           margin: 0.15rem 0 0;
           font-size: 0.78rem;
           color: var(--slate-500);
+          min-height: 1.15em;
         }
         .team-simple-meta {
           margin: 0.45rem 0 0;
@@ -180,7 +237,7 @@ export default function Team() {
           line-height: 1.45;
         }
         .team-simple-card button {
-          margin-top: 0.85rem;
+          margin-top: auto;
           padding: 0.45rem 0.85rem;
           border-radius: 8px;
           border: 1px solid rgba(31, 93, 150, 0.28);
@@ -192,6 +249,50 @@ export default function Team() {
         }
         .team-simple-card button:hover {
           background: rgba(31, 93, 150, 0.14);
+        }
+
+        .team-gallery {
+          padding-top: 0.5rem;
+          padding-bottom: 1.5rem;
+        }
+        .team-gallery-heading {
+          margin: 0 0 0.5rem;
+          text-align: center;
+          font-size: clamp(1.35rem, 3vw, 1.75rem);
+          color: var(--slate-900);
+        }
+        .team-gallery-intro {
+          margin: 0 auto 1.2rem;
+          max-width: 34rem;
+          text-align: center;
+          font-size: 0.96rem;
+          color: var(--slate-600);
+          line-height: 1.55;
+        }
+        .team-gallery-grid {
+          display: grid;
+          gap: 0.85rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 640px) {
+          .team-gallery-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        .team-gallery-item {
+          margin: 0;
+          overflow: hidden;
+          border-radius: 14px;
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          background: #fff;
+          box-shadow: 0 8px 22px rgba(15, 39, 71, 0.06);
+        }
+        .team-gallery-item img {
+          display: block;
+          width: 100%;
+          height: 240px;
+          object-fit: cover;
+          object-position: center;
         }
 
         .team-simple-cta { padding-top: 0.5rem; padding-bottom: 2.5rem; }
@@ -231,23 +332,30 @@ export default function Team() {
         }
         .team-modal-header {
           display: flex;
-          gap: 0.85rem;
+          gap: 1rem;
           align-items: center;
           padding: 1.25rem 1.25rem 1rem;
           border-bottom: 1px solid var(--border);
           background: var(--slate-50);
         }
         .team-modal-avatar {
-          width: 52px;
-          height: 52px;
+          width: 132px;
+          height: 132px;
           flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
+          display: block;
+          border-radius: 14px;
+          object-fit: cover;
+          object-position: center top;
           background: linear-gradient(135deg, var(--purple-600), var(--blue-600));
           color: #fff;
           font-weight: 700;
+          font-size: 1.1rem;
+          box-shadow: 0 6px 16px rgba(15, 39, 71, 0.12);
+        }
+        div.team-modal-avatar {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .team-modal-header h2 {
           margin: 0 0 0.2rem;
@@ -275,19 +383,6 @@ export default function Team() {
           color: var(--slate-600) !important;
           line-height: 1.65 !important;
         }
-        .team-modal-links {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          margin-top: 0.85rem;
-        }
-        .team-modal-links a {
-          font-size: 0.88rem;
-          font-weight: 600;
-          color: var(--purple-700);
-          text-decoration: none;
-        }
-        .team-modal-links a:hover { text-decoration: underline; }
       `}</style>
     </>
   );

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getAllServices } from '../data/servicesData';
 import PageCtaBand from '../components/PageCtaBand';
+import { SERVICE_ICONS } from '../components/ServiceIcons';
 
 export default function Services() {
   const services = getAllServices();
@@ -11,19 +12,12 @@ export default function Services() {
         <div className="container">
           <span className="page-hero-kicker">Services</span>
           <h1 id="services-page-title" className="page-title">
-            Tax, Audit, GST &amp; Advisory
+            Our Service Verticals
           </h1>
           <p className="page-subtitle">
-            Clear scope and deliverables for businesses and institutions.
+            Tax, Assurance, Finance &amp; Advisory — six focused practice areas for businesses,
+            institutions, and startups.
           </p>
-          <div className="page-hero-actions">
-            <Link to="/schedule-consultation" className="btn btn-primary">
-              Schedule Consultation
-            </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              Contact Us
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -33,18 +27,25 @@ export default function Services() {
             Our Services
           </h2>
           <div className="services-simple-grid">
-            {services.map((service, index) => (
-              <Link
-                key={service.slug}
-                to={`/services/${service.slug}`}
-                className="services-simple-card"
-              >
-                <span className="services-simple-index">{String(index + 1).padStart(2, '0')}</span>
-                <h3>{service.title}</h3>
-                <p>{service.shortDescription}</p>
-                <span className="services-simple-more">Learn more →</span>
-              </Link>
-            ))}
+            {services.map((service) => {
+              const Icon = SERVICE_ICONS[service.slug];
+              return (
+                <Link
+                  key={service.slug}
+                  to={`/services/${service.slug}`}
+                  className="services-simple-card"
+                >
+                  {Icon && (
+                    <span className="services-simple-icon" aria-hidden="true">
+                      <Icon />
+                    </span>
+                  )}
+                  <h3>{service.title}</h3>
+                  <p>{service.shortDescription}</p>
+                  <span className="services-simple-more">Learn more →</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -68,7 +69,7 @@ export default function Services() {
             linear-gradient(180deg, rgba(236, 244, 253, 0.96) 0%, rgba(243, 249, 255, 0.98) 100%);
         }
         .services-simple-hero .page-subtitle {
-          max-width: 34rem;
+          max-width: 38rem;
         }
         .services-simple-hero .page-hero-actions {
           margin-top: 1.1rem;
@@ -107,48 +108,50 @@ export default function Services() {
           padding: 1.05rem 1rem;
           border: 1px solid rgba(148, 163, 184, 0.24);
           border-radius: 12px;
-          background: #fff;
+          background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
           text-decoration: none;
           color: inherit;
-          box-shadow: 0 8px 22px rgba(15, 39, 71, 0.06);
-          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+          min-height: 100%;
         }
         .services-simple-card:hover {
+          border-color: rgba(31, 93, 150, 0.4);
+          box-shadow: 0 10px 24px rgba(15, 39, 71, 0.1);
           transform: translateY(-2px);
-          border-color: rgba(31, 93, 150, 0.34);
-          box-shadow: 0 12px 28px rgba(15, 39, 71, 0.1);
           color: inherit;
         }
-        .services-simple-index {
+        .services-simple-icon {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          width: 28px;
-          height: 28px;
-          margin-bottom: 0.55rem;
-          border-radius: 8px;
-          font-size: 0.72rem;
-          font-weight: 700;
+          width: 3.35rem;
+          height: 3.35rem;
+          margin-bottom: 0.85rem;
+          border-radius: 12px;
+          background: rgba(31, 93, 150, 0.1);
           color: var(--purple-700);
-          background: rgba(31, 79, 134, 0.1);
+        }
+        .services-simple-icon svg {
+          width: 1.7rem;
+          height: 1.7rem;
         }
         .services-simple-card h3 {
-          margin: 0 0 0.4rem;
+          margin: 0 0 0.45rem;
           font-size: 1.05rem;
           color: var(--slate-900);
-          line-height: 1.3;
+          line-height: 1.35;
         }
         .services-simple-card p {
           margin: 0;
           flex: 1;
+          font-size: 0.92rem;
           color: var(--slate-600);
-          font-size: 0.9rem;
           line-height: 1.55;
         }
         .services-simple-more {
           margin-top: 0.85rem;
-          font-size: 0.82rem;
-          font-weight: 600;
+          font-size: 0.8rem;
+          font-weight: 700;
           color: var(--purple-700);
         }
 

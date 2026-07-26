@@ -67,6 +67,12 @@
   --border: var(--slate-200);
   --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  /* Zoom-aware fluid type (rem + vw so browser zoom still enlarges text) */
+  --zoom-ratio: 1;
+  --fs-display: clamp(1.85rem, 1.15rem + 2.2vw, 3.2rem);
+  --fs-title: clamp(1.55rem, 1.05rem + 1.6vw, 2.45rem);
+  --fs-subtitle: clamp(1rem, 0.92rem + 0.35vw, 1.15rem);
+  --space-section-y: clamp(2.5rem, 2rem + 2vw, 5rem);
 }
 
 *,
@@ -80,6 +86,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Vertical scrollbar: white track and thumb */
@@ -117,6 +125,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 h1, h2, h3, h4 {
@@ -232,7 +242,7 @@ button {
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: var(--fs-title);
   color: var(--slate-800);
   margin-bottom: 0.5rem;
 }
@@ -714,3 +724,100 @@ main article.is-revealed {
     transform: none;
   }
 }
+
+/* ——— Zoom auto-adjustment ———
+   ZoomAdapt sets data-zoom / --zoom-ratio on <html>.
+   At higher zoom, tighten spacing and allow wrapping so content stays usable. */
+html.is-zoomed .page-title {
+  overflow-wrap: anywhere;
+}
+
+html.is-zoomed .container {
+  padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+  padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+}
+
+html.is-zoomed .header-inner {
+  gap: 0.65rem;
+  min-height: auto;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+html.is-zoomed .header-name,
+html.is-zoomed .header-tag,
+html.is-zoomed .header-nav-link,
+html.is-zoomed .header-services-trigger {
+  white-space: normal;
+}
+
+html.is-zoomed .header-nav-links {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  row-gap: 0.15rem;
+}
+
+html.is-zoomed .header-brand-text {
+  max-width: min(42vw, 18rem);
+}
+
+html.is-zoomed .home-services-grid,
+html.is-zoomed .home-stats-wrap,
+html.is-zoomed .about-simple-grid,
+html.is-zoomed .contact-simple-grid {
+  gap: 0.85rem;
+}
+
+html.is-zoomed .btn,
+html.is-zoomed .hero-btn,
+html.is-zoomed .page-cta-band-primary,
+html.is-zoomed .page-cta-band-secondary {
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+}
+
+html.is-zoomed-high {
+  --fs-display: clamp(1.55rem, 1.2rem + 1.2vw, 2.4rem);
+  --fs-title: clamp(1.35rem, 1.1rem + 0.9vw, 1.9rem);
+  --fs-subtitle: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+}
+
+html.is-zoomed-high .hero {
+  min-height: auto;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+html.is-zoomed-high .section,
+html.is-zoomed-high .home-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+html.is-zoomed-high .header-logo {
+  height: 40px;
+}
+
+html.is-zoomed-high .header-name {
+  font-size: 0.95rem;
+}
+
+html.is-zoomed-high .header-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+html.is-zoomed-high .header-nav-link,
+html.is-zoomed-high .header-services-trigger {
+  font-size: 0.9rem;
+  padding: 0.45rem 0.55rem;
+}
+
+@media (min-width: 992px) {
+  /* When zoomed, CSS viewport often shrinks — keep nav usable */
+  html.is-zoomed-high .header-nav-links {
+    gap: 0.15rem;
+  }
+}
+

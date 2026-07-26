@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { to: '/services', label: 'Services' },
   { to: '/team', label: 'Team' },
   { to: '/insights', label: 'Insights' },
+  { to: '/careers', label: 'Careers' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -23,7 +24,7 @@ const LEGAL_LINKS = [
   { to: '/disclaimer', label: 'Disclaimer' },
 ];
 
-const OFFICE_CITIES = ['Varanasi', 'Delhi', 'Kolkata', 'Bokaro'];
+const OFFICE_CITIES = ['VARANASI', 'DELHI', 'KOLKATA', 'BOKARO'];
 const LINKEDIN_URL = 'https://www.linkedin.com/company/dwivedi-gupta-co';
 const SCROLL_THRESHOLD = 400;
 
@@ -60,20 +61,14 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-top">
           <div className="footer-brand">
-            <Link to="/" className="footer-logo-link" aria-label="Dwivedi Gupta & Co. – Home">
-              <img src="/logofooter.png" alt="" className="footer-logo-img" width="52" height="52" />
-            </Link>
-            <div>
+            <Link to="/" className="footer-brand-link" aria-label="Dwivedi Gupta & Co. – Home">
               <p className="footer-company-name">Dwivedi Gupta &amp; Co.</p>
               <p className="footer-tagline">Chartered Accountants since 2003</p>
-            </div>
+            </Link>
           </div>
 
           <div className="footer-actions">
-            <Link to="/schedule-consultation" className="footer-btn footer-btn-primary">
-              Schedule Consultation
-            </Link>
-            <Link to="/contact" className="footer-btn footer-btn-secondary">
+            <Link to="/contact" className="footer-btn footer-btn-primary">
               Contact Us
             </Link>
           </div>
@@ -159,32 +154,30 @@ export default function Footer() {
         .footer-brand {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
           min-width: 0;
         }
-        .footer-logo-link {
-          display: inline-flex;
-          flex-shrink: 0;
-        }
-        .footer-logo-link:hover { opacity: 0.9; }
-        .footer-logo-img {
-          width: 48px;
-          height: 48px;
-          object-fit: contain;
+        .footer-brand-link {
           display: block;
+          text-decoration: none;
+          color: inherit;
+          min-width: 0;
+        }
+        .footer-brand-link:hover .footer-company-name {
+          color: #e8f1fb;
         }
         .footer-company-name {
-          margin: 0 0 0.15rem;
+          margin: 0 0 0.2rem;
           font-family: var(--font-display);
-          font-size: 1.05rem;
-          font-weight: 600;
+          font-size: 1.45rem;
+          font-weight: 700;
           color: #fff;
           letter-spacing: 0.01em;
+          line-height: 1.2;
         }
         .footer-tagline {
           margin: 0;
-          font-size: 0.84rem;
-          color: rgba(226, 236, 248, 0.78);
+          font-size: 1rem;
+          color: rgba(226, 236, 248, 0.82);
           line-height: 1.4;
         }
 

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { apiUrl } from '../config';
 import {
   CONTACT_EMAIL,
@@ -7,49 +7,84 @@ import {
   CONTACT_LANDLINE,
   CONTACT_LANDLINE_RAW,
   CONTACT_MOBILE_DISPLAY,
-  CONTACT_MOBILE_RAW,
-  WHATSAPP_URL,
 } from '../data/contactInfo';
 
-const FIRM_KEYWORDS = ['Tax', 'Audit', 'GST', 'Company Law', 'Compliance', 'Advisory'];
+const FIRM_KEYWORDS = ['Tax', 'Assurance', 'Finance', 'Advisory'];
+
+const SUBJECT_OPTIONS = [
+  'General Enquiry',
+  'Careers',
+  'Tax',
+  'Audit',
+  'GST',
+  'Company Formation',
+  'Compliance',
+  'Other',
+];
 
 const OFFICES = [
   {
-    city: 'Varanasi',
+    city: 'VARANASI',
     kind: 'Head Office',
     address: 'S-8/108-B-3-A Prashantpuri, M.A Road, Varanasi – 221002',
     mapUrl: 'https://tinyurl.com/kz2y9bax',
   },
   {
-    city: 'Delhi',
+    city: 'DELHI',
     kind: 'Branch',
     address: '62, Shrestha Vihar, Vikas Marg Extension, Delhi – 110092',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=62+Shrestha+Vihar+Vikas+Marg+Extension+Delhi+110092',
   },
   {
-    city: 'Kolkata',
+    city: 'KOLKATA',
     kind: 'Branch',
     address: 'Brijdham Housing Complex, 637 Dakshin Dari Road, Kolkata',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Brijdham+Housing+Complex+637+Dakshin+Dari+Road+Kolkata',
   },
   {
-    city: 'Bokaro',
+    city: 'BOKARO',
     kind: 'Branch',
     address: 'C-1, 21A, 2nd Floor, City Centre, Sector-4, Bokaro Steel City',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=C-1+21A+City+Centre+Sector+4+Bokaro+Steel+City',
   },
 ];
 
-export default function Contact() {
-  const [form, setForm] = useState({
+function buildInitialForm(searchParams) {
+  const subjectParam = searchParams.get('subject') || '';
+  const role = searchParams.get('role') || '';
+  const subject = SUBJECT_OPTIONS.includes(subjectParam)
+    ? subjectParam
+    : role
+      ? 'Careers'
+      : 'General Enquiry';
+
+  return {
     name: '',
     email: '',
     phone: '',
-    subject: 'General Enquiry',
-    message: '',
-  });
+    subject,
+    message:
+      subject === 'Careers' && role
+        ? `I would like to apply for the ${role} role.\n\n`
+        : '',
+  };
+}
+
+export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const formKey = useMemo(
+    () => `${searchParams.get('subject') || ''}|${searchParams.get('role') || ''}`,
+    [searchParams]
+  );
+
+  const [form, setForm] = useState(() => buildInitialForm(searchParams));
   const [status, setStatus] = useState({ type: null, message: '' });
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    setForm(buildInitialForm(searchParams));
+    setStatus({ type: null, message: '' });
+  }, [formKey, searchParams]);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -91,14 +126,6 @@ export default function Contact() {
           <p className="contact-simple-keywords" aria-label="Services">
             {FIRM_KEYWORDS.join(' · ')}
           </p>
-          <div className="page-hero-actions">
-            <Link to="/schedule-consultation" className="btn btn-primary">
-              Schedule Consultation
-            </Link>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              WhatsApp
-            </a>
-          </div>
         </div>
       </section>
 
@@ -106,30 +133,29 @@ export default function Contact() {
         <div className="container">
           <div className="contact-simple-grid">
             <div className="contact-simple-details">
-              <h2>Reach Us</h2>
-              <ul>
-                <li>
-                  <span>Email</span>
-                  <a href={getMailtoHref(CONTACT_EMAIL)}>{CONTACT_EMAIL}</a>
-                </li>
-                <li>
-                  <span>Mobile</span>
-                  <a href={`tel:${CONTACT_MOBILE_RAW}`}>{CONTACT_MOBILE_DISPLAY}</a>
-                </li>
-                <li>
-                  <span>Landline</span>
-                  <a href={`tel:${CONTACT_LANDLINE_RAW}`}>{CONTACT_LANDLINE}</a>
-                </li>
-                <li>
-                  <span>WhatsApp</span>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                    {CONTACT_MOBILE_DISPLAY}
-                  </a>
-                </li>
-              </ul>
-              <p className="contact-simple-note">
-                Response within 24–48 hours on working days.
-              </p>
+              <div className="contact-simple-media">
+                <img
+                  src="/images/gallery/office-varanasi.png"
+                  alt="Dwivedi Gupta & Co. head office in Varanasi"
+                  loading="lazy"
+                />
+              </div>
+              <div className="contact-simple-details-body">
+                <h2>Reach Us</h2>
+                <ul>
+                  <li>
+                    <span>Email</span>
+                    <a href={getMailtoHref(CONTACT_EMAIL)}>{CONTACT_EMAIL}</a>
+                  </li>
+                  <li>
+                    <span>Landline</span>
+                    <a href={`tel:${CONTACT_LANDLINE_RAW}`}>{CONTACT_LANDLINE}</a>
+                  </li>
+                </ul>
+                <p className="contact-simple-note">
+                  Response within 24–48 hours on working days.
+                </p>
+              </div>
             </div>
 
             <div className="contact-simple-form-card">
@@ -170,13 +196,11 @@ export default function Contact() {
                 <label>
                   Subject
                   <select name="subject" value={form.subject} onChange={handleChange}>
-                    <option value="General Enquiry">General Enquiry</option>
-                    <option value="Tax">Tax</option>
-                    <option value="Audit">Audit</option>
-                    <option value="GST">GST</option>
-                    <option value="Company Formation">Company Formation</option>
-                    <option value="Compliance">Compliance</option>
-                    <option value="Other">Other</option>
+                    {SUBJECT_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </label>
                 <label>
@@ -261,16 +285,39 @@ export default function Contact() {
         }
         .contact-simple-details,
         .contact-simple-form-card {
-          padding: 1.25rem 1.15rem;
           border: 1px solid rgba(148, 163, 184, 0.24);
           border-radius: 14px;
           background: #fff;
           box-shadow: 0 10px 28px rgba(15, 39, 71, 0.06);
         }
+        .contact-simple-form-card {
+          padding: 1.25rem 1.15rem;
+        }
+        .contact-simple-details {
+          padding: 0;
+          overflow: hidden;
+        }
+        .contact-simple-media {
+          width: 100%;
+          aspect-ratio: 16 / 11;
+          background: linear-gradient(145deg, rgba(31, 93, 150, 0.1), rgba(110, 162, 208, 0.16));
+        }
+        .contact-simple-media img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center top;
+        }
+        .contact-simple-details-body {
+          padding: 1.15rem 1.15rem 1.25rem;
+        }
         @media (min-width: 640px) {
-          .contact-simple-details,
           .contact-simple-form-card {
             padding: 1.5rem 1.4rem;
+          }
+          .contact-simple-details-body {
+            padding: 1.35rem 1.4rem 1.4rem;
           }
         }
         .contact-simple-details h2,
@@ -413,6 +460,7 @@ export default function Contact() {
         .contact-simple-offices-grid strong {
           display: block;
           font-size: 1rem;
+          letter-spacing: 0.06em;
           color: var(--slate-900);
         }
         .contact-simple-offices-grid span {

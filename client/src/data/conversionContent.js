@@ -4,8 +4,8 @@ export const WHO_WE_HELP = [
   {
     title: 'Corporates & Institutions',
     desc: 'Listed and unlisted companies, banks, NBFCs, and PSUs needing audit, tax, and regulatory filings.',
-    link: '/clients',
-    linkLabel: 'See client segments',
+    link: '/industries',
+    linkLabel: 'See industries & clients',
   },
   {
     title: 'MSMEs & Growing Businesses',
@@ -16,46 +16,46 @@ export const WHO_WE_HELP = [
   {
     title: 'Startups & New Ventures',
     desc: 'Founders setting up a company or LLP and building their first compliance calendar.',
-    link: '/services/company-formation',
-    linkLabel: 'Company formation',
+    link: '/services/startup-advisory',
+    linkLabel: 'Startup advisory',
   },
   {
     title: 'Professionals & Owners',
     desc: 'Directors and individuals who need tax planning, ITR filing, or notice support.',
-    link: '/services/tax-compliance',
-    linkLabel: 'Tax & compliance',
+    link: '/services/tax-regulatory-services',
+    linkLabel: 'Tax & regulatory',
   },
 ];
 
 export const CLIENT_PAIN_POINTS = [
-  {
-    problem: 'GST returns, reconciliation, or department notice',
-    serviceSlug: 'gst-advisory',
-    serviceLabel: 'GST Advisory',
-  },
   {
     problem: 'Statutory audit, tax audit, or internal controls review',
     serviceSlug: 'audit-assurance',
     serviceLabel: 'Audit & Assurance',
   },
   {
-    problem: 'Income tax, TDS, or assessment reply',
-    serviceSlug: 'tax-compliance',
-    serviceLabel: 'Tax & Compliance',
+    problem: 'Income tax, GST, TDS, or assessment reply',
+    serviceSlug: 'tax-regulatory-services',
+    serviceLabel: 'Tax & Regulatory Services',
   },
   {
     problem: 'Company registration, ROC filing, or director KYC',
-    serviceSlug: 'company-formation',
-    serviceLabel: 'Company Formation',
+    serviceSlug: 'corporate-law-compliance',
+    serviceLabel: 'Corporate Law & Compliance',
   },
   {
     problem: 'Bank finance, project report, or transaction due diligence',
-    serviceSlug: 'financial-consulting',
-    serviceLabel: 'Financial Consulting',
+    serviceSlug: 'project-finance-consultancy',
+    serviceLabel: 'Project Finance & Consultancy',
   },
   {
-    problem: 'Government scheme or incentive application',
-    serviceSlug: 'government-schemes-advisory',
-    serviceLabel: 'Government Schemes',
+    problem: 'Government subsidy or incentive application',
+    serviceSlug: 'government-subsidies',
+    serviceLabel: 'Government Subsidies',
+  },
+  {
+    problem: 'Startup setup, compliance calendar, or funding readiness',
+    serviceSlug: 'startup-advisory',
+    serviceLabel: 'Startup Advisory',
   },
 ];

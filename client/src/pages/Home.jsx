@@ -1,20 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import PageCtaBand from '../components/PageCtaBand';
+import { SERVICE_ICONS } from '../components/ServiceIcons';
 
 const heroContent = {
-  tagline: 'Assurance | Taxation | Advisory | Consulting',
-  title: 'Compliance and Growth Support for Businesses',
-  desc: 'Tax, audit, and advisory support for corporates and SMEs.',
+  tagline: 'Tax, Assurance, Finance & Advisory.',
+  titleLine1: 'Providing end-to-end assurance, taxation, compliance,',
+  titleLine2: 'and strategic advisory services for businesses, professionals,',
+  titleLine3: 'startups, and high-net-worth individuals',
 };
 
 const coreServices = [
-  {
-    title: 'Tax & Regulatory',
-    slug: 'tax-compliance',
-    description: 'Tax planning, compliance, and representation.',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=85',
-  },
   {
     title: 'Audit & Assurance',
     slug: 'audit-assurance',
@@ -22,24 +18,42 @@ const coreServices = [
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85',
   },
   {
-    title: 'Corporate Law',
-    slug: 'corporate-law',
-    description: 'Company law, governance, and ROC filings.',
+    title: 'Tax & Regulatory Services',
+    slug: 'tax-regulatory-services',
+    description: 'Tax planning, GST, TDS, and regulatory compliance.',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Corporate Law & Compliance',
+    slug: 'corporate-law-compliance',
+    description: 'Incorporation, company law, and ROC filings.',
     image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=85',
   },
   {
-    title: 'Advisory & Consulting',
-    slug: 'financial-consulting',
-    description: 'Valuation, due diligence, and transactions.',
+    title: 'Project Finance & Consultancy',
+    slug: 'project-finance-consultancy',
+    description: 'Structuring, syndication, valuation, and advisory.',
     image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Government Subsidies',
+    slug: 'government-subsidies',
+    description: 'Scheme selection, applications, and incentive support.',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=85',
+  },
+  {
+    title: 'Startup Advisory',
+    slug: 'startup-advisory',
+    description: 'Setup, compliance, tax, and funding-readiness support.',
+    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85',
   },
 ];
 
 const homeStats = [
   { key: 'years', value: 20, suffix: '+', label: 'Years of Excellence' },
-  { key: 'partners', value: 7, suffix: '+', label: 'Partners' },
+  { key: 'partners', value: 7, suffix: '', label: 'Partners' },
   { key: 'offices', value: 4, suffix: '', label: 'Office Locations' },
-  { key: 'services', value: 12, suffix: '+', label: 'Service Verticals' },
+  { key: 'services', value: 6, suffix: '', label: 'Service Verticals' },
 ];
 
 const testimonials = [
@@ -117,28 +131,26 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero" aria-label="Hero">
-        <div className="hero-bg">
+      <section className="hero" aria-labelledby="hero-heading">
+        <div className="hero-bg" aria-hidden="true">
           <div className="hero-bg-image" />
-          <div className="hero-overlay hero-overlay-base" />
-          <div className="hero-overlay hero-overlay-gradient" />
-          <div className="hero-vignette" />
+          <div className="hero-overlay" />
         </div>
         <div className="hero-content">
           <div className="container hero-container">
-            <div className="hero-slide hero-slide-active">
-              <div className="hero-main">
-                <p className="hero-tagline">{heroContent.tagline}</p>
-                <h1 className="hero-title">{heroContent.title}</h1>
-                <p className="hero-desc">{heroContent.desc}</p>
-                <div className="hero-cta">
-                  <Link to="/schedule-consultation" className="hero-btn hero-btn-primary">
-                    Schedule Consultation
-                  </Link>
-                  <Link to="/contact" className="hero-btn hero-btn-outline">
-                    Contact Us
-                  </Link>
-                </div>
+            <div className="hero-main">
+              <p className="hero-eyebrow hero-reveal hero-reveal-1">
+                {heroContent.tagline}
+              </p>
+              <h1 id="hero-heading" className="hero-title hero-reveal hero-reveal-2">
+                <span className="hero-title-line">{heroContent.titleLine1}</span>
+                <span className="hero-title-line">{heroContent.titleLine2}</span>
+                <span className="hero-title-line">{heroContent.titleLine3}</span>
+              </h1>
+              <div className="hero-cta hero-reveal hero-reveal-3">
+                <Link to="/services" className="hero-btn hero-btn-secondary">
+                  Explore Services
+                </Link>
               </div>
             </div>
           </div>
@@ -178,8 +190,8 @@ export default function Home() {
             </div>
             <div className="home-simple-about-media">
               <img
-                src="/about-office.png"
-                alt="Chartered accountancy office workspace"
+                src="/images/gallery/office-varanasi.png"
+                alt="Dwivedi Gupta & Co. head office in Varanasi"
                 loading="lazy"
               />
             </div>
@@ -194,23 +206,30 @@ export default function Home() {
               <span className="services-eyebrow">What We Offer</span>
             </span>
             <h2 className="services-title">Our Core Services</h2>
-            <p className="services-intro">Tax, audit, company law, and advisory for businesses and institutions.</p>
+            <p className="services-intro">Six service verticals spanning audit, tax, corporate law, finance, subsidies, and startups.</p>
           </div>
           <div className="home-services-grid home-services-grid-simple">
-            {coreServices.map((s, i) => (
+            {coreServices.map((s) => {
+              const Icon = SERVICE_ICONS[s.slug];
+              return (
               <Link key={s.slug} to={`/services/${s.slug}`} className="home-service-card home-service-card-link">
                 <div className="service-card-media">
                   <img src={s.image} alt="" loading="lazy" />
                   <div className="service-card-media-overlay" aria-hidden="true" />
                 </div>
-                <span className="service-number">{String(i + 1).padStart(2, '0')}</span>
+                {Icon && (
+                  <span className="service-icon" aria-hidden="true">
+                    <Icon />
+                  </span>
+                )}
                 <div className="service-card-body">
                   <h3>{s.title}</h3>
                   <p>{s.description}</p>
                   <span className="home-service-card-read-more">Learn more</span>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
           <div className="services-cta">
             <Link to="/services" className="btn btn-primary">
@@ -397,16 +416,24 @@ export default function Home() {
           inset: 0;
           background: linear-gradient(180deg, rgba(2, 6, 23, 0.1) 0%, rgba(2, 6, 23, 0.28) 100%);
         }
-        .service-number {
+        .service-icon {
           position: absolute;
-          top: 0.65rem;
-          right: 0.85rem;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: rgba(255, 255, 255, 0.88);
-          text-shadow: 0 1px 10px rgba(2, 6, 23, 0.35);
-          line-height: 1;
+          top: 0.7rem;
+          left: 0.75rem;
           z-index: 2;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 3.15rem;
+          height: 3.15rem;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.94);
+          color: var(--purple-700);
+          box-shadow: 0 6px 16px rgba(2, 6, 23, 0.18);
+        }
+        .service-icon svg {
+          width: 1.6rem;
+          height: 1.6rem;
         }
         .service-card-body {
           padding: 1rem 1rem 1.05rem;

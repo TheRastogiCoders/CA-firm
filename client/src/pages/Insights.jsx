@@ -21,14 +21,6 @@ export default function Insights() {
           <p className="page-subtitle">
             Practical notes on GST, tax, company law, audit, and compliance.
           </p>
-          <div className="page-hero-actions">
-            <Link to="/schedule-consultation" className="btn btn-primary">
-              Schedule Consultation
-            </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              Contact Us
-            </Link>
-          </div>
         </div>
       </section>
 

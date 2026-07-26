@@ -21,11 +21,8 @@ export default function SupportTeam() {
             Dedicated manpower across audit, tax, advisory, and execution support.
           </p>
           <div className="page-hero-actions">
-            <Link to="/team" className="btn btn-secondary">
+            <Link to="/team" className="btn btn-primary">
               Partners
-            </Link>
-            <Link to="/team-members" className="btn btn-primary">
-              Team Members
             </Link>
           </div>
         </div>

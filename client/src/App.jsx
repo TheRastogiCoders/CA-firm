@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -9,9 +9,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Industries from './pages/Industries';
 import Team from './pages/Team';
-import TeamMembers from './pages/TeamMembers';
 import SupportTeam from './pages/SupportTeam';
-import Clients from './pages/Clients';
 import Insights from './pages/Insights';
 import InsightDetail from './pages/InsightDetail';
 import ScheduleConsultation from './pages/ScheduleConsultation';
@@ -23,6 +21,7 @@ import Sitemap from './pages/Sitemap';
 import Disclaimer from './pages/Disclaimer';
 import Compliance from './pages/Compliance';
 import SeoHead from './components/SeoHead';
+import ZoomAdapt from './components/ZoomAdapt';
 
 function App() {
   const location = useLocation();
@@ -49,15 +48,35 @@ function App() {
         });
       },
       {
-        threshold: 0.14,
-        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.08,
+        rootMargin: '0px 0px 12% 0px',
       }
     );
 
     targets.forEach((target, index) => {
-      target.classList.remove('is-revealed');
+      const alwaysVisible = target.classList.contains('reveal-always');
+      if (!alwaysVisible) {
+        target.classList.remove('is-revealed');
+      } else {
+        target.classList.add('is-revealed');
+      }
       target.style.setProperty('--reveal-delay', `${Math.min(index * 35, 260)}ms`);
-      observer.observe(target);
+      if (!alwaysVisible) {
+        observer.observe(target);
+      }
+    });
+
+    // Ensure above-the-fold sections don't stay invisible
+    requestAnimationFrame(() => {
+      targets.forEach((target) => {
+        if (target.classList.contains('is-revealed')) return;
+        const rect = target.getBoundingClientRect();
+        const vh = window.innerHeight || 0;
+        if (rect.top < vh * 0.92 && rect.bottom > 0) {
+          target.classList.add('is-revealed');
+          observer.unobserve(target);
+        }
+      });
     });
 
     return () => {
@@ -71,6 +90,7 @@ function App() {
         Skip to main content
       </a>
       <ScrollToTop />
+      <ZoomAdapt />
       <SeoHead />
       <Header />
       <main id="main-content" tabIndex={-1}>
@@ -80,10 +100,10 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/industries" element={<Industries />} />
+          <Route path="/clients" element={<Navigate to="/industries" replace />} />
           <Route path="/team" element={<Team />} />
-          <Route path="/team-members" element={<TeamMembers />} />
+          <Route path="/team-members" element={<Navigate to="/team" replace />} />
           <Route path="/support-team" element={<SupportTeam />} />
-          <Route path="/clients" element={<Clients />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/insights/:slug" element={<InsightDetail />} />
           <Route path="/careers" element={<Careers />} />

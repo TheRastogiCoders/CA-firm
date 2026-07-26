@@ -33,7 +33,7 @@ function getMetaByPath(pathname) {
     return {
       title: 'About Dwivedi Gupta & Co. | CA Firm Since 2003',
       description:
-        'About Dwivedi Gupta & Co.: tax, audit, and advisory practice since 2003. Vision, values, team, and offices across four cities.',
+        'About Dwivedi Gupta & Co.: tax, audit, and advisory practice since 2003. Purpose, team, and offices across four cities.',
       keywords: 'about CA firm, chartered accountants team, audit and tax experts',
     };
   }
@@ -58,10 +58,10 @@ function getMetaByPath(pathname) {
   }
   if (pathname === '/industries') {
     return {
-      title: 'Industries We Serve | Sector-Focused CA Advisory',
+      title: 'Industries & Clients | Dwivedi Gupta & Co.',
       description:
-        'Tax, audit, and compliance services for manufacturing, banking, real estate, government, SMEs, and other sectors.',
-      keywords: 'industry advisory, sector specific CA services, compliance by industry',
+        'Sector-focused CA services plus the organizations we work with — corporates, MSMEs, startups, and institutions across India.',
+      keywords: 'industry advisory, sector specific CA services, client network, compliance by industry',
     };
   }
   if (pathname === '/team') {
@@ -73,11 +73,12 @@ function getMetaByPath(pathname) {
     };
   }
   if (pathname === '/clients') {
+    // Redirected to /industries — keep SEO fallback if crawled briefly
     return {
-      title: 'Clients & Engagement Approach | Dwivedi Gupta & Co.',
+      title: 'Industries & Clients | Dwivedi Gupta & Co.',
       description:
-        'How Dwivedi Gupta & Co. works with clients on audit, tax, and compliance engagements.',
-      keywords: 'client services CA firm, advisory engagement, audit and compliance support',
+        'Sector-focused CA services plus the organizations we work with across India.',
+      keywords: 'industry advisory, client network, CA firm clients',
     };
   }
   if (pathname === '/insights') {

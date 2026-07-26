@@ -1,6 +1,6 @@
 /**
  * Client logo images from public/images/clients/
- * Used on Home and Clients pages.
+ * Used on Industries (merged Clients section) and related surfaces.
  */
 export const CLIENT_LOGOS = [
   { src: '/images/clients/union-bank-of-india-logo-png_seeklogo-248528.png', name: 'Union Bank of India' },

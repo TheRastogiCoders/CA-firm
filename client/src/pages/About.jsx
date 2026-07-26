@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import PageCtaBand from '../components/PageCtaBand';
 
 const facts = [
@@ -10,24 +9,47 @@ const facts = [
 
 const offices = [
   {
-    city: 'Varanasi',
+    city: 'VARANASI',
     kind: 'Head Office',
     mapUrl: 'https://tinyurl.com/kz2y9bax',
   },
   {
-    city: 'Delhi',
+    city: 'DELHI',
     kind: 'Branch',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=62+Shrestha+Vihar+Vikas+Marg+Extension+Delhi+110092',
   },
   {
-    city: 'Kolkata',
+    city: 'KOLKATA',
     kind: 'Branch',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=Brijdham+Housing+Complex+637+Dakshin+Dari+Road+Kolkata',
   },
   {
-    city: 'Bokaro',
+    city: 'BOKARO',
     kind: 'Branch',
     mapUrl: 'https://www.google.com/maps/search/?api=1&query=C-1+21A+City+Centre+Sector+4+Bokaro+Steel+City',
+  },
+];
+
+const galleryImages = [
+  {
+    src: '/images/gallery/team-office-front.jpeg',
+    alt: 'Firm team gathered outside the office',
+    caption: 'Our Team',
+  },
+  {
+    src: '/images/gallery/team-celebration.jpeg',
+    alt: 'Firm team celebration at the office',
+    caption: 'Team Celebration',
+  },
+  {
+    src: '/images/gallery/team-independence-day.jpeg',
+    alt: 'Firm team Independence Day gathering',
+    caption: 'Independence Day',
+  },
+  {
+    src: '/images/gallery/team-flag-ceremony.jpeg',
+    alt: 'Firm team at flag ceremony',
+    caption: 'Together at Work',
   },
 ];
 
@@ -41,14 +63,6 @@ export default function About() {
           <p className="page-subtitle">
             Chartered Accountants for tax, audit, and advisory since 2003.
           </p>
-          <div className="page-hero-actions">
-            <Link to="/schedule-consultation" className="btn btn-primary">
-              Schedule Consultation
-            </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              Contact Us
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -74,19 +88,11 @@ export default function About() {
                   </article>
                 ))}
               </div>
-              <div className="about-simple-links">
-                <Link to="/team" className="btn btn-secondary">
-                  Meet Our Team
-                </Link>
-                <Link to="/services" className="btn btn-primary">
-                  Our Services
-                </Link>
-              </div>
             </div>
             <div className="about-simple-media">
               <img
-                src="/about-office.png"
-                alt="Chartered accountancy office workspace"
+                src="/images/gallery/office-varanasi.png"
+                alt="Dwivedi Gupta & Co. head office in Varanasi"
                 loading="lazy"
               />
             </div>
@@ -94,23 +100,31 @@ export default function About() {
         </div>
       </section>
 
-      <section className="home-section about-simple-vm">
+      <section className="home-section about-purpose" aria-labelledby="about-purpose-title">
         <div className="container">
-          <div className="about-simple-vm-grid">
-            <article>
-              <h2>Vision</h2>
-              <p>
-                To be a trusted Chartered Accountants firm known for sound advice and consistent
-                professional service.
-              </p>
-            </article>
-            <article>
-              <h2>Mission</h2>
-              <p>
-                To provide practical tax, audit, and advisory support that helps clients stay
-                compliant and manage financial matters with confidence.
-              </p>
-            </article>
+          <div className="about-purpose-panel">
+            <p className="about-purpose-eyebrow">Our Purpose</p>
+            <h2 id="about-purpose-title" className="about-purpose-title">
+              Help businesses stay compliant and grow with clarity
+            </h2>
+            <p className="about-purpose-lead">
+              We exist to give clients practical tax, audit, and advisory support they can trust —
+              clear advice, steady execution, and partners who stay accountable through every engagement.
+            </p>
+            <ul className="about-purpose-pillars">
+              <li>
+                <strong>Compliance</strong>
+                <span>Timely filings and regulatory discipline without unnecessary complexity.</span>
+              </li>
+              <li>
+                <strong>Clarity</strong>
+                <span>Plain explanations, defined scope, and decisions you can act on.</span>
+              </li>
+              <li>
+                <strong>Continuity</strong>
+                <span>Long-term partnership across offices, seasons, and business stages.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -135,7 +149,26 @@ export default function About() {
         </div>
       </section>
 
-      <section className="home-section about-simple-cta">
+      <section className="home-section about-gallery" aria-labelledby="about-gallery-title">
+        <div className="container">
+          <h2 id="about-gallery-title" className="about-simple-section-title">
+            Office &amp; Team Moments
+          </h2>
+          <p className="about-gallery-intro">
+            A look at our Varanasi office and the people behind Dwivedi Gupta &amp; Co.
+          </p>
+          <div className="about-gallery-grid">
+            {galleryImages.map((item) => (
+              <figure key={item.src} className="about-gallery-item">
+                <img src={item.src} alt={item.alt} loading="lazy" />
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section about-simple-cta reveal-always is-revealed">
         <div className="container">
           <PageCtaBand
             title="Need help with tax, audit, or compliance?"
@@ -222,11 +255,6 @@ export default function About() {
           font-weight: 600;
           color: var(--slate-600);
         }
-        .about-simple-links {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.65rem;
-        }
         .about-simple-media {
           border-radius: 14px;
           overflow: hidden;
@@ -241,39 +269,85 @@ export default function About() {
           display: block;
         }
 
-        .about-simple-vm {
-          padding-top: 0.5rem;
-          padding-bottom: 2.25rem;
-          background: linear-gradient(180deg, var(--slate-50) 0%, var(--white) 100%);
+        .about-purpose {
+          padding-top: 0.25rem;
+          padding-bottom: 2.5rem;
         }
-        .about-simple-vm-grid {
+        .about-purpose-panel {
+          position: relative;
+          overflow: hidden;
+          padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.25rem, 3.5vw, 2.5rem);
+          border-radius: 18px;
+          border: 1px solid rgba(31, 93, 150, 0.18);
+          background:
+            radial-gradient(720px 280px at 12% 0%, rgba(110, 162, 208, 0.28), transparent 58%),
+            radial-gradient(640px 260px at 100% 100%, rgba(23, 59, 104, 0.18), transparent 55%),
+            linear-gradient(145deg, #0f2747 0%, #173b68 48%, #1f5d96 100%);
+          color: #f8fbff;
+          box-shadow: 0 18px 40px rgba(15, 39, 71, 0.18);
+        }
+        .about-purpose-panel::before {
+          content: '';
+          position: absolute;
+          inset: 0 auto 0 0;
+          width: 5px;
+          background: linear-gradient(180deg, #8cb7dc, #4a86bd 50%, #2f6ea8);
+        }
+        .about-purpose-eyebrow {
+          margin: 0 0 0.7rem;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(226, 236, 248, 0.78);
+        }
+        .about-purpose-title {
+          margin: 0 0 0.85rem;
+          max-width: 18ch;
+          font-size: clamp(1.55rem, 1.1rem + 1.8vw, 2.35rem);
+          font-weight: 700;
+          line-height: 1.18;
+          letter-spacing: -0.03em;
+          color: #ffffff;
+        }
+        .about-purpose-lead {
+          margin: 0;
+          max-width: 42rem;
+          font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1rem);
+          line-height: 1.7;
+          color: rgba(236, 244, 253, 0.9);
+        }
+        .about-purpose-pillars {
+          list-style: none;
+          margin: 1.6rem 0 0;
+          padding: 1.35rem 0 0;
+          border-top: 1px solid rgba(191, 219, 254, 0.22);
           display: grid;
           gap: 1rem;
         }
         @media (min-width: 768px) {
-          .about-simple-vm-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
+          .about-purpose-pillars {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.35rem;
           }
         }
-        .about-simple-vm-grid article {
-          padding: 1.15rem 1.1rem;
-          border: 1px solid rgba(148, 163, 184, 0.22);
-          border-radius: 12px;
-          background: #fff;
+        .about-purpose-pillars li {
+          min-width: 0;
         }
-        .about-simple-vm-grid h2 {
-          margin: 0 0 0.45rem;
-          font-size: 1.05rem;
-          color: var(--purple-700);
-          letter-spacing: 0.04em;
+        .about-purpose-pillars strong {
+          display: block;
+          margin-bottom: 0.35rem;
+          font-size: 0.92rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
+          color: #dbeafe;
         }
-        .about-simple-vm-grid p {
-          margin: 0;
-          color: var(--slate-600);
-          line-height: 1.6;
-          font-size: 0.98rem;
+        .about-purpose-pillars span {
+          display: block;
+          font-size: 0.94rem;
+          line-height: 1.55;
+          color: rgba(226, 236, 248, 0.82);
         }
 
         .about-simple-offices {
@@ -316,6 +390,7 @@ export default function About() {
         .about-simple-offices-grid strong {
           display: block;
           font-size: 1rem;
+          letter-spacing: 0.06em;
           color: var(--slate-900);
         }
         .about-simple-offices-grid span {
@@ -331,9 +406,62 @@ export default function About() {
           color: var(--purple-700);
         }
 
-        .about-simple-cta {
+        .about-gallery {
           padding-top: 0.5rem;
+          padding-bottom: 2rem;
+        }
+        .about-gallery-intro {
+          margin: -0.35rem auto 1.25rem;
+          max-width: 36rem;
+          text-align: center;
+          font-size: 0.98rem;
+          line-height: 1.55;
+          color: var(--slate-600);
+        }
+        .about-gallery-grid {
+          display: grid;
+          gap: 0.85rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 640px) {
+          .about-gallery-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+        @media (min-width: 1024px) {
+          .about-gallery-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
+        }
+        .about-gallery-item {
+          margin: 0;
+          overflow: hidden;
+          border-radius: 14px;
+          border: 1px solid rgba(148, 163, 184, 0.22);
+          background: #fff;
+          box-shadow: 0 8px 22px rgba(15, 39, 71, 0.06);
+        }
+        .about-gallery-item img {
+          display: block;
+          width: 100%;
+          height: 220px;
+          object-fit: cover;
+          object-position: center;
+        }
+        .about-gallery-item figcaption {
+          padding: 0.7rem 0.9rem;
+          font-size: 0.86rem;
+          font-weight: 600;
+          color: var(--slate-700);
+          border-top: 1px solid rgba(148, 163, 184, 0.16);
+        }
+
+        .about-simple-cta {
+          padding-top: 1rem;
           padding-bottom: 2.5rem;
+        }
+        .about-simple-cta .page-cta-band {
+          margin-top: 0;
         }
       `}</style>
     </>

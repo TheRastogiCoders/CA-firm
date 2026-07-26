@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { apiUrl } from '../config';
 
 const serviceOptions = [
-  'Tax Planning & Compliance',
   'Audit & Assurance',
-  'Accounting & Bookkeeping',
-  'GST Advisory',
-  'Company Formation & Compliance',
-  'Financial Advisory',
+  'Tax & Regulatory Services',
+  'Corporate Law & Compliance',
+  'Project Finance & Consultancy Services',
+  'Government Subsidies',
+  'Startup Advisory',
   'Other',
 ];
 
@@ -102,10 +102,6 @@ export default function ScheduleConsultation() {
             Reserve a focused 30-minute advisory call with our CA team. Share your preferred slot and service area,
             and we will confirm the engagement mode within 1-2 business days.
           </p>
-          <div className="page-hero-actions sched-hero-actions">
-            <Link to="/services" className="btn btn-primary">Explore Services</Link>
-            <Link to="/contact" className="btn btn-secondary">Talk to Our Team</Link>
-          </div>
           <div className="sched-hero-trust">
             <span>Free 30-minute discussion</span>
             <span aria-hidden="true">•</span>

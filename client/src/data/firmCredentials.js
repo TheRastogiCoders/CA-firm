@@ -7,9 +7,9 @@ export const FIRM_CREDENTIALS = [
   { label: 'Year of Establishment', value: FIRM_ESTABLISHED_YEAR },
   { label: 'Firm Registration No.', value: ICAI_FIRM_REGISTRATION_NO },
   { label: 'Category of Firm (ICAI)', value: ICAI_FIRM_CATEGORY },
-  { label: 'Official Email', value: 'shikhar.dwivedi@dgc.ind.in' },
-  { label: 'Head Office', value: 'Varanasi' },
-  { label: 'Branch Offices', value: 'Kolkata, Delhi & Bokaro' },
+  { label: 'Official Email', value: 'vivek.gupta@dgc.ind.in' },
+  { label: 'Head Office', value: 'VARANASI' },
+  { label: 'Branch Offices', value: 'KOLKATA, DELHI & BOKARO' },
 ];
 
 export const ICAI_FIRM_REGISTRATION_LABEL = 'ICAI Firm Registration No.';

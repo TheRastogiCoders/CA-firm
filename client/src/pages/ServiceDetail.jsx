@@ -1,9 +1,14 @@
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { getServiceBySlug, getRelatedServices } from '../data/servicesData';
+import { getServiceBySlug, getRelatedServices, SERVICE_SLUG_REDIRECTS } from '../data/servicesData';
 import PageCtaBand from '../components/PageCtaBand';
 
 export default function ServiceDetail() {
   const { slug } = useParams();
+  const redirectedSlug = slug ? SERVICE_SLUG_REDIRECTS[slug] : null;
+  if (redirectedSlug) {
+    return <Navigate to={`/services/${redirectedSlug}`} replace />;
+  }
+
   const service = slug ? getServiceBySlug(slug) : null;
 
   if (!service) {
@@ -25,14 +30,6 @@ export default function ServiceDetail() {
             {service.title}
           </h1>
           <p className="page-subtitle">{service.shortDescription}</p>
-          <div className="page-hero-actions">
-            <Link to="/schedule-consultation" className="btn btn-primary">
-              Schedule Consultation
-            </Link>
-            <Link to="/contact" className="btn btn-secondary">
-              Contact Us
-            </Link>
-          </div>
         </div>
       </section>
 

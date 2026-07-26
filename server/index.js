@@ -11,12 +11,12 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const isProduction = NODE_ENV === 'production';
 
 const services = [
-  { id: 1, title: 'Tax Planning & Compliance', description: 'Strategic tax planning and timely compliance with direct and indirect tax laws.' },
-  { id: 2, title: 'Audit & Assurance', description: 'Statutory audits, internal audits, and assurance services for businesses.' },
-  { id: 3, title: 'Accounting & Bookkeeping', description: 'Maintenance of books of accounts and financial statements.' },
-  { id: 4, title: 'GST Advisory', description: 'Registration, returns, refunds, and litigation support for GST.' },
-  { id: 5, title: 'Company Formation & Compliance', description: 'Incorporation, ROC filings, and corporate compliance.' },
-  { id: 6, title: 'Financial Advisory', description: 'Business valuation, due diligence, and restructuring advisory.' },
+  { id: 1, title: 'Audit & Assurance', description: 'Statutory, internal, tax, and assurance services for businesses.' },
+  { id: 2, title: 'Tax & Regulatory Services', description: 'Tax planning, GST, TDS, and regulatory compliance.' },
+  { id: 3, title: 'Corporate Law & Compliance', description: 'Incorporation, company law, secretarial, and ROC filings.' },
+  { id: 4, title: 'Project Finance & Consultancy Services', description: 'Financial structuring, syndication, valuation, and advisory.' },
+  { id: 5, title: 'Government Subsidies', description: 'Scheme selection, applications, and incentive compliance support.' },
+  { id: 6, title: 'Startup Advisory', description: 'Setup, compliance, tax, and funding-readiness for startups.' },
 ];
 
 // In-memory store for contact submissions. Replace with a database in production.
